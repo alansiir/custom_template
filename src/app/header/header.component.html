@@ -1,0 +1,24 @@
+
+<mat-toolbar class="nav-container">
+  <!-- Logo ou titre -->
+<!--     <span class="logo">Mon Application</span>
+    <mat-icon>menu</mat-icon>
+  </button>
+<!-- Espaceur pour aligner le menu utilisateur à droite -->
+<span class="spacer"></span>
+<!-- Menu utilisateur -->
+<div class="user-menu" >
+  <img src="assets/p1.jpg" alt="User Profile" class="profile-image" />
+  <span class="user">Ala Nsir</span>
+  <button mat-button [matMenuTriggerFor]="menu">  
+    <mat-icon aria-hidden="false" (click)="toggleDropdown()" role="button">expand_more</mat-icon> 
+    </button>
+    <div class="mat-menu">
+    <mat-menu #menu="matMenu">
+
+     <div><button mat-button (click)="onSetting()">Paramètres</button></div>
+    <div><button mat-button (click)="onLogout()">Déconnexion</button></div> 
+    </mat-menu>
+  </div>  
+</div>
+</mat-toolbar>

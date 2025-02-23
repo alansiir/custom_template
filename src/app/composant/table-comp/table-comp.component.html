@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="toolbar">
+    <div class="selected-buttons">
+      <span class="iconify" data-icon="mdi:trash-can-empty"></span>
+    </div>
+
+    <div class="selected-columns">
+      <span>Vue :</span>
+
+      <ng-multiselect-dropdown id="coach" [placeholder]="'Sélectionner un coach'" [settings]="dropdownSettings"
+        [data]="dropdownList" [(ngModel)]="selectedItems">
+      </ng-multiselect-dropdown>
+    </div>
+
+    <input type="text" placeholder="Rechercher..." [(ngModel)]="searchText" (input)="applyFilter()" />
+
+    <div class="table-buttons">
+      <button mat-raised-button color="primary">Bouton Material</button>
+      <button mat-flat-button color="accent">Bouton Plat</button>
+      <button mat-stroked-button color="warn">Bouton Contour</button>
+    </div>
+
+    <div class="icons">
+      <button>
+        <span class="iconify" data-icon="mdi:add-bold"></span>
+      </button>
+      <button>
+        <span class="iconify" data-icon="mdi:file-download-outline"></span>
+      </button>
+      <button>
+        <span class="iconify" data-icon="mdi:file-excel-outline"></span>
+      </button>
+      <button>
+        <span class="iconify" data-icon="material-symbols-light:csv-outline-rounded"></span>
+      </button>
+    </div>
+    <button (click)="addRow()">Ajouter ligne</button>
+  </div>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Carte Angular Material</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      Ceci est une carte Angular Material.
+    </mat-card-content>
+  </mat-card>
+
+
+
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let col of settings.columns | keyvalue: keepOrder">{{ col.value.title }}</th>
+        <th *ngIf="settings.actions.active">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="paginatedData.length > 0; else emptyTable">
+      <tr *ngFor="let element of paginatedData">
+        <td><input [(ngModel)]="element.col1" *ngIf="element.editing" /><span *ngIf="!element.editing">{{ element.col1
+            }}</span></td>
+        <td><input [(ngModel)]="element.col2" *ngIf="element.editing" /><span *ngIf="!element.editing">{{ element.col2
+            }}</span></td>
+        <td><input [(ngModel)]="element.col3" *ngIf="element.editing" /><span *ngIf="!element.editing">{{ element.col3
+            }}</span></td>
+        <td><input [(ngModel)]="element.col4" *ngIf="element.editing" /><span *ngIf="!element.editing">{{ element.col4
+            }}</span></td>
+        <td>
+          <input [(ngModel)]="element.col5" *ngIf="element.editing" />
+          <span *ngIf="!element.editing">{{ element.col5 }}</span>
+          <span *ngIf="element.col5 === '' && !element.editing">---</span>
+        </td>
+        <td>
+          <button (click)="editRow(element)">
+            <span class="iconify" data-icon="mdi:square-edit-outline"></span>
+          </button>
+          <button (click)="deleteRow(element)">
+            <span class="iconify" data-icon="mdi:trash-can-empty"></span>
+          </button>
+          <button (click)="openDetails(element)">
+            <span class="iconify" data-icon="mdi:eye"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- Message lorsque le tableau est vide -->
+    <ng-template #emptyTable>
+      <tr>
+        <td colspan="6" class="empty-message">Tableau vide</td>
+      </tr>
+    </ng-template>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <div class="pagination-left">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">◀</button>
+      <span>Page {{ currentPage }} / {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">▶</button>
+    </div>
+
+    <div class="pagination-right">
+      <label>Éléments par page : </label>
+      <select [(ngModel)]="itemsPerPage" (change)="updatePagination()">
+        <option *ngFor="let size of [5, 10, 15, 20]" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- Popup pour les détails de la ligne -->
+<div class="popup" *ngIf="selectedRow">
+  <div class="popup-content">
+    <h3>Détails</h3>
+    <p><strong>N°OP:</strong> {{ selectedRow.col1 }}</p>
+    <p><strong>Centre:</strong> {{ selectedRow.col2 }}</p>
+    <p><strong>Date:</strong> {{ selectedRow.col3 }}</p>
+    <p><strong>Matricule:</strong> {{ selectedRow.col4 }}</p>
+    <p><strong>Temps:</strong> {{ selectedRow.col5 }}</p>
+    <button (click)="closeDetails()">Fermer</button>
+  </div>
+</div>

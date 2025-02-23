@@ -1,0 +1,58 @@
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color:#263238;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
+  .spacer {
+    flex: 1; /* Pousse le menu utilisateur à droite */
+  }
+  .user-menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  .profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 8px;
+  }
+  .user {
+    color: white;
+    size: 5px;
+  }
+  .dropdown-menu {
+    position: absolute;
+    top: 40px; /* Position verticale du menu */
+    left: 0; /* Aligné à droite */
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 8px;
+    z-index: 10;
+  }
+  .dropdown-menu button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  .dropdown-menu button:hover {
+    background-color: #f0f0f0;
+  }
+  .mat-menu {
+  margin-top: 4px;
+  }
