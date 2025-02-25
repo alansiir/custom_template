@@ -16,11 +16,16 @@ body {
     display: flex;
     flex-direction: column;
     border-radius: .5rem;
-    background-color: #fff;
     margin: 1.25rem 0 1.25rem 0;
-    box-shadow: 0 .25rem .5rem #e6edef;
+    height: 150px !important;
+    width: 220px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
 
-    .card-head {
+
+    .card-header {
         padding: 1rem 1.5rem;
         border-bottom: 1px solid #edf1f7;
         font-size: 1rem;
@@ -30,4 +35,34 @@ body {
     .card-body {
         padding: 1rem 1.5rem; 
     }
+   
+}
+
+.titre-style{
+    
+        margin: 0px;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: inherit;
+        font-weight: 500;
+        color: rgb(255, 255, 255);
+        text-transform: inherit;
+
+}
+
+.text-card{
+    margin: 0px;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    text-align: center;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    text-transform: inherit;
+}
+
+.icon-card{
+    font-size: 50px; 
+    color: #ffffff; 
+    
 }

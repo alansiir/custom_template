@@ -1,0 +1,182 @@
+.conteneur-projects{
+    display: flex ;
+    flex-direction: column;
+
+    .project-start {
+        justify-content: start;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .card {
+          margin: 0 !important;
+        }
+      }
+
+     .card-gradient-noir{
+      background: linear-gradient(135deg, #000000, #1a1a1a, #333333);
+     }
+     .card-gradient-blue{
+      background: linear-gradient(135deg, #061a2b, #122c44);     }
+     
+    
+    
+    
+/* Style général */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+
+/* Style du titre */
+
+
+.badge {
+  background-color: rgb(18, 18, 18);;
+  color: white;
+ 
+  padding: 2px 6px;
+  border-radius: 12px;
+  margin-left: 5px;
+}
+
+/* Barre de recherche */
+.search-container {
+  display: flex;
+  align-items: center;
+  background: #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search-container input {
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 8px 12px;
+  outline: none;
+}
+
+.search-container button {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Menu déroulant */
+.sort-container select {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+
+}
+
+//*********************** Css Card ancien Project
+.card-footer {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #333;
+  text-align: left;
+}
+.card-title {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.card-date {
+    font-size: 12px;
+  color: gray;
+}
+  
+//Xxxxxxxxxxxxxxxxxxxxxxxxxx Menu
+.menu {
+  position: absolute; /* Position absolue par rapport à .card */
+  top: 10px; /* Distance du bord supérieur */
+  right: 10px; /* Distance du bord droit */
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(255, 255, 255); /* Couleur des icônes */
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+.menu-btn:hover {
+  color: #57081c; /* Changement de couleur au survol */
+}
+
+/* Dropdown du menu */
+.dropdown {
+  display: none; /* Caché par défaut */
+  position: absolute;
+  top: 30px; /* Position sous le bouton */
+  right: 0; /* Aligné avec le bouton */
+  background-color: rgb(18, 18, 18);;
+  border-radius: 4px;
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+
+.menu-btn:focus + .dropdown,
+.menu-btn:hover + .dropdown {
+  display: block; /* Affiche le dropdown au survol ou clic */
+}
+
+.dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown li {
+    padding: 1px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.dopdown li:hover {
+  background-color:  rgb(18, 18, 18);;
+}
+
+.dropdown li i {
+  margin-right: 8px;
+  color: white;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list li {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: white;
+}
+
+.menu-list li i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.menu-list .delete {
+  color: red;
+}
+
+
+

@@ -24,7 +24,7 @@
 .body {
     height: 100vh;
     transition: all 0.3s ease;
-    background: #f4f7fa;
+    background-color: rgb(33 33 33);    
     padding: 3rem;
 }
 

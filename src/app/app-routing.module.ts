@@ -10,7 +10,7 @@ import { TemplatesComponent } from './templates/templates.component';
 import { HowtouserComponent } from './howtouser/howtouser.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'Projects', pathMatch: 'full' },
 
   { path: 'home', component: HomeComponent },
   { path: 'dashbord', component: DashboardComponent },

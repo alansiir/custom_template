@@ -27,7 +27,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { HowtouserComponent } from './howtouser/howtouser.component';
-import { HeaderComponent } from './header/header.component'; 
+import { HeaderComponent } from './header/header.component';
+import { PrototypeUiComponent } from './prototype-ui/prototype-ui.component'; 
 
 
 
@@ -48,7 +49,8 @@ import { HeaderComponent } from './header/header.component';
     ProjectsComponent,
     TemplatesComponent,
     HowtouserComponent,
-    HeaderComponent
+    HeaderComponent,
+    PrototypeUiComponent
    
    
    
