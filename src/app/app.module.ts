@@ -28,7 +28,12 @@ import { ProjectsComponent } from './projects/projects.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { HowtouserComponent } from './howtouser/howtouser.component';
 import { HeaderComponent } from './header/header.component';
-import { PrototypeUiComponent } from './prototype-ui/prototype-ui.component'; 
+import { PrototypeUiComponent } from './prototype-ui/prototype-ui.component';
+import { WithSidenavLayoutComponent } from './with-sidenav-layout/with-sidenav-layout.component';
+import { FullscreenLayoutComponent } from './fullscreen-layout/fullscreen-layout.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { WorkspaceComponent } from './workspace/workspace.component'; 
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 
 
@@ -50,7 +55,11 @@ import { PrototypeUiComponent } from './prototype-ui/prototype-ui.component';
     TemplatesComponent,
     HowtouserComponent,
     HeaderComponent,
-    PrototypeUiComponent
+    PrototypeUiComponent,
+    WithSidenavLayoutComponent,
+    FullscreenLayoutComponent,
+    NavbarComponent,
+    WorkspaceComponent
    
    
    
@@ -71,7 +80,8 @@ import { PrototypeUiComponent } from './prototype-ui/prototype-ui.component';
     MatButtonToggleModule,
     MatMenuModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTooltipModule,
   
   ],
   providers: [],

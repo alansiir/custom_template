@@ -1,84 +1,119 @@
-.conteneur-projects{
-    display: flex ;
-    flex-direction: column;
+.conteneur-projects {
+  display: flex;
+  flex-direction: column;
 
-    .project-start {
-        justify-content: start;
-        flex-wrap: wrap;
-        gap: 20px;
+  .project-start {
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 20px;
 
-        .card {
-          margin: 0 !important;
-        }
+    .card {
+      margin: 0 !important;
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+
+      .card-body {
+        z-index: 1;
       }
 
-     .card-gradient-noir{
-      background: linear-gradient(135deg, #000000, #1a1a1a, #333333);
-     }
-     .card-gradient-blue{
-      background: linear-gradient(135deg, #061a2b, #122c44);     }
-     
-    
-    
-    
-/* Style général */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+      .overlay {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 800px;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 5%,
+          rgba(0, 0, 0, 1) 100%
+        );
+        background-size: 100% 20%; /* Initialement, le dégradé est invisible */
+        transition: background-size 0.3s ease-out; /* La transition se fait en 0.6s */
+      }
+    }
 
-}
+    .card:hover .overlay {
+      background-size: 100% 30%;
+    }
 
-/* Style du titre */
+    .project-settings-btn {
+      border: none;
+      background-color: unset !important;
+      .iconify {
+        color: black;
+      }
+    }
+  }
 
+  .card-gradient-noir {
+    background: linear-gradient(135deg, #000000, #1a1a1a, #333333);
+  }
+  .card-gradient-blue {
+    background: linear-gradient(135deg, #0a2742, #142d31);
+  }
 
-.badge {
-  background-color: rgb(18, 18, 18);;
-  color: white;
- 
-  padding: 2px 6px;
-  border-radius: 12px;
-  margin-left: 5px;
-}
+  /* Style général */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
-/* Barre de recherche */
-.search-container {
-  display: flex;
-  align-items: center;
-  background: #333;
-  border-radius: 8px;
-  overflow: hidden;
-}
+    .title {
+      gap: 15px;
+    }
+  }
 
-.search-container input {
-  border: none;
-  background: transparent;
-  color: white;
-  padding: 8px 12px;
-  outline: none;
-}
+  /* Style du titre */
 
-.search-container button {
-  background: transparent;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  color: white;
-}
+  .badge {
+    background-color: rgb(18, 18, 18);
+    color: white;
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-/* Menu déroulant */
-.sort-container select {
-  background: #333;
-  color: white;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
-  outline: none;
-  cursor: pointer;
-}
+  /* Barre de recherche */
+  .search-container {
+    display: flex;
+    align-items: center;
+    background: #333;
+    border-radius: 8px;
+    overflow: hidden;
+  }
 
+  .search-container input {
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 8px 12px;
+    outline: none;
+  }
 
+  .search-container button {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: white;
+  }
+
+  /* Menu déroulant */
+  .sort-container select {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+  }
 }
 
 //*********************** Css Card ancien Project
@@ -94,10 +129,10 @@
 }
 
 .card-date {
-    font-size: 12px;
+  font-size: 12px;
   color: gray;
 }
-  
+
 //Xxxxxxxxxxxxxxxxxxxxxxxxxx Menu
 .menu {
   position: absolute; /* Position absolue par rapport à .card */
@@ -117,18 +152,32 @@
   color: #57081c; /* Changement de couleur au survol */
 }
 
-/* Dropdown du menu */
-.dropdown {
-  display: none; /* Caché par défaut */
-  position: absolute;
-  top: 30px; /* Position sous le bouton */
-  right: 0; /* Aligné avec le bouton */
-  background-color: rgb(18, 18, 18);;
-  border-radius: 4px;
-  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  z-index: 10;
+.project {
+  position: relative;
+
+  .menu {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    .dropdown {
+      display: none; /* Caché par défaut */
+      position: absolute;
+      top: 10px; /* Position sous le bouton */
+      right: 15px; /* Aligné avec le bouton */
+      background-color: rgb(18, 18, 18);
+      border-radius: 4px;
+      // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    
+      &.active {
+        display: block;
+      }
+    }
+  }
 }
 
+/* Dropdown du menu */
 
 .menu-btn:focus + .dropdown,
 .menu-btn:hover + .dropdown {
@@ -136,18 +185,18 @@
 }
 
 .dropdown ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .dropdown li {
-    padding: 1px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 1px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 .dopdown li:hover {
-  background-color:  rgb(18, 18, 18);;
+  background-color: rgb(18, 18, 18);
 }
 
 .dropdown li i {
@@ -179,4 +228,6 @@
 }
 
 
-
+.search-container .iconify {
+  font-size: 21px;
+}

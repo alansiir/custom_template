@@ -1,0 +1,54 @@
+<nav class="navbar">
+    <!-- Boutons d'action déplacés à gauche -->
+
+    <!-- Bouton Home -->
+    <button class="action-btn" (click)="goHome()">
+        <i class="iconify" data-icon="mdi:home"></i> <!-- Icône "Home" -->
+    </button>
+
+   <!-- Titre du projet -->
+   <span class="title">Titre du Projet</span>
+
+    <!-- Flèches "Retour" et "Suivant" regroupées -->
+    <div class="nav-btn d-flex" style="gap: 10px;">
+        <button (click)="goBack()" [disabled]="!canGoBack" class="nav-btn">
+            <i class="iconify" data-icon="mdi:undo"></i> <!-- Icône "Retour" -->
+        
+        </button>
+        <button (click)="goForward()" [disabled]="!canGoForward" class="nav-btn">
+            <i class="iconify" data-icon="mdi:redo"></i> <!-- Icône "Suivant" -->
+        </button>
+    </div>
+
+    
+
+    <!-- Contrôles de zoom -->
+    <div class="zoom-controls">
+        <button (click)="zoomOut()" class="action-btn">
+            <i class="iconify" data-icon="mdi:minus"></i> <!-- Icône "-" -->
+        </button>
+        <span class="zoom-level">{{ zoomLevel }}%</span>
+        <button (click)="zoomIn()" class="action-btn">
+            <i class="iconify" data-icon="mdi:plus"></i> <!-- Icône "+" -->
+        </button>
+    </div>
+
+    <div class="action-group ">
+        <button (click)="preview()" class="action-btn"
+        matTooltip="Commenter">
+            <i class="iconify" data-icon="mdi:comment-outline"></i> <!-- Icône "Preview" -->
+        </button>
+        <button (click)="share()" class="action-btn"  matTooltip="Partager">
+            <i class="iconify" data-icon="mdi:share-variant"></i> <!-- Icône "Share" -->
+        </button>
+        <button (click)="export()" class="action-btn" matTooltip="Exporter">
+            <i class="iconify" data-icon="mdi:export"></i> <!-- Icône "Export" -->
+        </button>
+        <button (click)="preview()" class="action-btn" matTooltip="Prévisualiser">
+            <i class="iconify" data-icon="mdi:eye"></i> <!-- Icône "Preview" -->
+        </button>
+    </div>
+
+
+    
+</nav>
