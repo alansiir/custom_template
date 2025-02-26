@@ -12,8 +12,8 @@ export class ProjectsComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  navigateToPrototypeUI(): void {
-    this.router.navigate(['/prototype-ui']); // Naviguez vers /prototype-ui
+  navigateToNewProject(): void {
+    this.router.navigate(['/projet']); // Naviguez vers /prototype-ui
   }
 
 

@@ -2,7 +2,7 @@
     <!-- Boutons d'action déplacés à gauche -->
 
     <!-- Bouton Home -->
-    <button class="action-btn" (click)="goHome()">
+    <button class="action-btn" (click)="GoToPageProjects()">
         <i class="iconify" data-icon="mdi:home"></i> <!-- Icône "Home" -->
     </button>
 
@@ -11,7 +11,7 @@
 
     <!-- Flèches "Retour" et "Suivant" regroupées -->
     <div class="nav-btn d-flex" style="gap: 10px;">
-        <button (click)="goBack()" [disabled]="!canGoBack" class="nav-btn">
+        <button  [disabled]="!canGoBack" class="nav-btn">
             <i class="iconify" data-icon="mdi:undo"></i> <!-- Icône "Retour" -->
         
         </button>

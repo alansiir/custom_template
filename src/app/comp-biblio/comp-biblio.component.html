@@ -1,0 +1,24 @@
+<div class="content d-flex">
+
+    <nav class="sidebar">
+        <ul>
+            <li *ngFor="let item of menuItems" class="menu-item">
+                <button (click)="openModal(item)" class="menu-link">
+                    <i class="iconify" [attr.data-icon]="item.icon"></i>
+                </button>
+                <span class="menu-label">{{ item.label }}</span>
+            </li>
+        </ul>
+</nav>
+
+<!-- Fenêtre modale -->
+<div class="card-content" [ngClass]="{ 'is-open': isModalOpen }">
+    <div class="modal-header">
+        <h2>{{ selectedItem?.label }}</h2>
+        <button class="close-btn" (click)="closeModal()">×</button>
+    </div>
+    <div class="card-body">
+        <p>Détails de {{ selectedItem?.label }} :</p>
+    </div>
+</div>
+</div>

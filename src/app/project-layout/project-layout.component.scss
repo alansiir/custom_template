@@ -1,0 +1,21 @@
+.fullscreen-container{
+    height: 100vh;
+    overflow: hidden;
+
+
+    app-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        z-index: 10;
+    }
+    
+    app-comp-biblio {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        height: calc(100vh - 64px);
+        z-index: 10;
+    }
+}

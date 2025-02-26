@@ -1,0 +1,69 @@
+// Variables globales
+$sidebar-width: 64px;
+$sidebar-bg: #1e1e1e;
+$text-color: #ffffff;
+$modal-bg: #ffffff;
+$modal-border: #cccccc;
+
+// Sidebar
+.sidebar {
+  width: $sidebar-width;
+  background-color: $sidebar-bg;
+  color: $text-color;
+  height: 100vh;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .menu-item {
+    width: 100%;
+    text-align: center;
+    margin: 15px 0;
+
+    .menu-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: $text-color;
+      font-size: 12px;
+      padding: 10px 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: lighten($sidebar-bg, 10%);
+        border-radius: 50%;
+      }
+
+      .iconify {
+        font-size: 28px;
+        margin-bottom: 5px;
+      }
+
+      .menu-label {
+        display: block;
+        font-size: 10px;
+      }
+    }
+  }
+
+  .card-content {
+    position: absolute;
+    top: 64px;
+    left: 64px;
+    height: 100%;
+    width: 250px;
+    background-color: #cccccc;
+  }
+}

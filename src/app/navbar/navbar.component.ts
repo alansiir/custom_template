@@ -1,4 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -6,14 +9,18 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+
+  constructor(private router: Router) {}
+  
   canGoBack = false;
   canGoForward = false;
   zoomLevel = 100; // Niveau de zoom initial
 
-  goHome() {
-    console.log('Retour à l’accueil');
+ 
+  GoToPageProjects(): void {
+    this.router.navigate(['/projects']); // Naviguez vers /prototype-ui
   }
-
+    
   goBack() {
     console.log('Retour en arrière');
     this.canGoBack = false; // Simuler une action

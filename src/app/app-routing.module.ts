@@ -10,9 +10,8 @@ import { TemplatesComponent } from './templates/templates.component';
 import { HowtouserComponent } from './howtouser/howtouser.component';
 import { LoginComponent } from './login/login.component';
 import { Error404Component } from './error404/error404.component';
-import { PrototypeUiComponent } from './prototype-ui/prototype-ui.component';
 import { WithSidenavLayoutComponent } from './with-sidenav-layout/with-sidenav-layout.component';
-import { FullscreenLayoutComponent } from './fullscreen-layout/fullscreen-layout.component';
+import { ProjectLayoutComponent } from './project-layout/project-layout.component';
 
 
 const routes: Routes = [
@@ -29,18 +28,22 @@ const routes: Routes = [
       { path: 'projects', component: ProjectsComponent },
       { path: 'templates', component: TemplatesComponent },
       { path: 'how-to-use', component: HowtouserComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
     ]
   },
 
   // Route sans side nav (pour prototype-ui)
-  {
-    path: 'prototype-ui',
-    component: FullscreenLayoutComponent,
-    children: [
-      { path: '', component: PrototypeUiComponent }
-    ]
-  },
+  // {
+  //   path: '/projet/id',
+  //   /* component: ProjectLayoutComponent, */
+  //   children: [
+  //     { path: '', component: ProjectLayoutComponent }
+  //   ]
+  // },
+
+  
+  { path: 'projet', component: ProjectLayoutComponent },
+
 
   // Route générique pour les erreurs 404
   { path: '**', component: Error404Component }

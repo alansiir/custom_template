@@ -30,10 +30,12 @@ import { HowtouserComponent } from './howtouser/howtouser.component';
 import { HeaderComponent } from './header/header.component';
 import { PrototypeUiComponent } from './prototype-ui/prototype-ui.component';
 import { WithSidenavLayoutComponent } from './with-sidenav-layout/with-sidenav-layout.component';
-import { FullscreenLayoutComponent } from './fullscreen-layout/fullscreen-layout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { WorkspaceComponent } from './workspace/workspace.component'; 
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { ProjectLayoutComponent } from './project-layout/project-layout.component';
+import { CompBiblioComponent } from './comp-biblio/comp-biblio.component';
+import { CompSettingComponent } from './comp-setting/comp-setting.component';
 
 
 
@@ -45,21 +47,23 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     AppComponent,
     TableCompComponent,
     HomeComponent,
-    LoginComponent,
+    LoginComponent, 
     Error404Component,
     Sidenav2Component,
     BodyComponent,
     UsersComponent,
     DashboardComponent,
-    ProjectsComponent,
     TemplatesComponent,
     HowtouserComponent,
     HeaderComponent,
     PrototypeUiComponent,
     WithSidenavLayoutComponent,
-    FullscreenLayoutComponent,
+    ProjectsComponent,
     NavbarComponent,
-    WorkspaceComponent
+    WorkspaceComponent,
+    ProjectLayoutComponent,
+    CompBiblioComponent,
+    CompSettingComponent
    
    
    

@@ -1,2 +1,23 @@
+<!-- Sidebar -->
+<nav class="sidebar">
+  <ul>
+    <li *ngFor="let item of menuItems" class="menu-item">
+      <button (click)="openModal(item)" class="menu-link">
+        <i class="iconify" [attr.data-icon]="item.icon"></i>
+        <span class="menu-label">{{ item.label }}</span>
+      </button>
+    </li>
+  </ul>
 
-  
+    <div class="card-content">
+      <div class="modal-header">
+        <h2>{{ selectedItem?.label }}</h2>
+        <button class="close-btn" (click)="closeModal()">×</button>
+      </div>
+      <div class="card-body">
+        <!-- Contenu de la fenêtre modale -->
+        <p>Détails de {{ selectedItem?.label }} :</p>
+        <!-- Ajoute ici d'autres informations si nécessaire -->
+      </div>
+    </div>
+</nav>

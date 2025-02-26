@@ -11,6 +11,7 @@ $disabled-opacity: 0.5;
   justify-content: space-between;
   background-color: $background-color;
   padding-inline: 20px;
+  position: relative;
 
   .menu-btn,
   .nav-btn,
@@ -52,6 +53,7 @@ $disabled-opacity: 0.5;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: #fff;
   }
 
   .zoom-controls {
