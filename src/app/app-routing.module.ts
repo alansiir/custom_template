@@ -12,6 +12,9 @@ import { LoginComponent } from './login/login.component';
 import { Error404Component } from './error404/error404.component';
 import { WithSidenavLayoutComponent } from './with-sidenav-layout/with-sidenav-layout.component';
 import { ProjectLayoutComponent } from './project-layout/project-layout.component';
+import { DragdropComponent } from './dragdrop/dragdrop.component';
+import { TableCompComponent } from './composant/table-comp/table-comp.component';
+import { Test00Component } from './test00/test00.component';
 
 
 const routes: Routes = [
@@ -43,6 +46,9 @@ const routes: Routes = [
 
   
   { path: 'projet', component: ProjectLayoutComponent },
+  { path: 'comp', component: DragdropComponent },
+  { path: 't', component: TableCompComponent },
+  { path: 'test', component: Test00Component },
 
 
   // Route générique pour les erreurs 404

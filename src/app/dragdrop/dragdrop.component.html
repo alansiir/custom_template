@@ -1,0 +1,19 @@
+<div class="container">
+  <!-- Zone contenant les boutons draggables -->
+  <div
+    class="draggable-area"
+    (mousedown)="startDrag($event)"
+    (mousemove)="onDrag($event)"
+    (mouseup)="stopDrag()"
+  >
+    <!-- Liste de boutons -->
+    <button
+      *ngFor="let button of buttons; let i = index"
+      #draggableButton
+      [id]="'button-' + i"
+      class="draggable-button"
+    >
+      Bouton {{ i + 1 }}
+    </button>
+  </div>
+</div>

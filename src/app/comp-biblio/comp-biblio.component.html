@@ -1,24 +1,40 @@
-<div class="content d-flex">
+<div class="container">
+  <nav class="sidebar">
+    <ul>
+      <li *ngFor="let item of menuItems" class="menu-item">
+        <button (click)="openModal(item)" class="menu-link">
+          <i class="iconify" [attr.data-icon]="item.icon"></i>
+        </button>
+        <span class="menu-label">{{ item.label }}</span>
+      </li>
+    </ul>
+  </nav>
 
-    <nav class="sidebar">
-        <ul>
-            <li *ngFor="let item of menuItems" class="menu-item">
-                <button (click)="openModal(item)" class="menu-link">
-                    <i class="iconify" [attr.data-icon]="item.icon"></i>
-                </button>
-                <span class="menu-label">{{ item.label }}</span>
-            </li>
-        </ul>
-</nav>
-
-<!-- Fenêtre modale -->
-<div class="card-content" [ngClass]="{ 'is-open': isModalOpen }">
+  <!-- Fenêtre modale -->
+  <div class="card-content" [ngClass]="{ 'is-open': isModalOpen }">
     <div class="modal-header">
-        <h2>{{ selectedItem?.label }}</h2>
-        <button class="close-btn" (click)="closeModal()">×</button>
+      <h2>{{ selectedItem?.label }}</h2>
+      <button class="close-btn" (click)="closeModal()">×</button>
     </div>
     <div class="card-body">
-        <p>Détails de {{ selectedItem?.label }} :</p>
+      <p *ngIf="!selectedItem">Sélectionnez un élément.</p>
+
+      <!-- Affiche le tableau si "Template" est sélectionné -->
+      <app-table-comp class="draggable" style="zoom: 0.3;" *ngIf="selectedItem?.label === 'Template'"
+        (dragstart)="startDrag($event)" draggable="true"></app-table-comp>
+
+      <button style="width: 400px;" id="button" draggable="true" class="draggable" *ngIf="selectedItem?.label === 'Template'"
+        (dragstart)="startDrag($event)" draggable="true">Text</button>
+
+      <!-- Message générique pour les autres éléments -->
+      <p *ngIf="selectedItem?.label !== 'Template'">
+        Détails de {{ selectedItem?.label }} :
+      </p>
     </div>
+  </div>
 </div>
+
+<!-- Zone cible pour le drag-and-drop -->
+<div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+  <p *ngIf="!hasClonedTable">Zone cible : Déposez le tableau ici !</p>
 </div>

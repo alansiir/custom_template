@@ -36,6 +36,10 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { ProjectLayoutComponent } from './project-layout/project-layout.component';
 import { CompBiblioComponent } from './comp-biblio/comp-biblio.component';
 import { CompSettingComponent } from './comp-setting/comp-setting.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
+import { Test00Component } from './test00/test00.component';
+// import { MatDialogActions } from '@angular/material/dialog';
 
 
 
@@ -63,7 +67,8 @@ import { CompSettingComponent } from './comp-setting/comp-setting.component';
     WorkspaceComponent,
     ProjectLayoutComponent,
     CompBiblioComponent,
-    CompSettingComponent
+    CompSettingComponent,
+    Test00Component
    
    
    
@@ -86,6 +91,9 @@ import { CompSettingComponent } from './comp-setting/comp-setting.component';
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,
+    DragDropModule,
+    // MatDialogActions,
+    MatDialogModule
   
   ],
   providers: [],
