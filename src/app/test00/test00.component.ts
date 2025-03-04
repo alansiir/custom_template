@@ -1,24 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-test00',
   templateUrl: './test00.component.html',
   styleUrls: ['./test00.component.scss']
 })
-export class Test00Component implements OnInit {
+export class Test00Component {
+  isModalOpen = false; // État du modal
 
-  constructor() { }
+  // Propriétés du bouton
+  buttonStyle = {
+    backgroundColor: '#4caf50', // Couleur de fond par défaut
+    color: '#ffffff', // Couleur du texte par défaut
+    fontSize: '16px' // Taille du texte par défaut
+  };
 
-  isModalOpen = false;
-  bgColor = '#3498db'; // Couleur par défaut du fond
-  textColor = '#ffffff'; // Couleur par défaut du texte
-
-  // Ouvre/Ferme la modal
-  toggleModal() {
-    this.isModalOpen = !this.isModalOpen;
+  openModal(): void {
+    this.isModalOpen = true; // Ouvrir le modal
   }
 
-  ngOnInit(): void {
+  closeModal(): void {
+    this.isModalOpen = false; // Fermer le modal
   }
 
+  // Gestion du changement de taille du texte
+  onFontSizeChange(event: Event): void {
+    const target = event.target as HTMLInputElement; // Caster explicitement en HTMLInputElement
+    this.buttonStyle.fontSize = target.value + 'px'; // Mettre à jour la taille du texte
+  }
 }

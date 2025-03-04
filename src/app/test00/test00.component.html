@@ -1,199 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Angular CSS Grid Generator</title>
-  <style>
-    :root {
-      --grid-cols: 12;
-      --grid-rows: 10;
-    }
+<div class="container">
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
+  <div class="circle"></div>
+  <div class="rectangle"></div>
+  <div class="rounded-rectangle"></div>
+  <div class="horizontal-line"></div>
+  <div class="vertical-line"></div>
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(var(--grid-cols), 1fr);
-      grid-template-rows: repeat(var(--grid-rows), 60px);
-      gap: 10px;
-      padding: 10px;
-      background: #f0f0f0;
-      resize: both;
-      overflow: auto;
-      height: calc(60px * var(--grid-rows) + (var(--grid-rows) - 1) * 10px + 20px);
-    }
 
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 150px;
-      height: 100vh;
-      background: #333;
-      color: white;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+  <!-- Bouton principal -->
+  <button
+    class="configurable-button"
+    [style.background-color]="buttonStyle.backgroundColor"
+    [style.color]="buttonStyle.color"
+    [style.font-size]="buttonStyle.fontSize"
+    (click)="openModal()"
+  >
+    Configurer Moi !
+  </button>
 
-    .sidebar .component {
-      margin: 10px 0;
-      padding: 10px;
-      background: #444;
-      cursor: move;
-      text-align: center;
-      border-radius: 5px;
-    }
+  <!-- Modal de configuration -->
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <h2>Configurer le Bouton</h2>
+      <button class="close-btn" (click)="closeModal()">Fermer</button>
 
-    .item {
-      background: #8bc34a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px dashed #fff;
-      position: relative;
-      user-select: none;
-    }
+      <!-- Sélecteur de couleur de fond -->
+      <h3>Couleur de Fond</h3>
+      <input
+        type="color"
+        [(ngModel)]="buttonStyle.backgroundColor"
+        class="color-picker"
+      />
 
-    .item.resizing {
-      opacity: 0.7;
-    }
+      <!-- Sélecteur de couleur du texte -->
+      <h3>Couleur du Texte</h3>
+      <input
+        type="color"
+        [(ngModel)]="buttonStyle.color"
+        class="color-picker"
+      />
 
-    .resizer {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: red;
-      border-radius: 50%;
-      cursor: nwse-resize;
-    }
-
-    .resizer.top-left {
-      top: -5px;
-      left: -5px;
-    }
-
-    .resizer.bottom-right {
-      bottom: -5px;
-      right: -5px;
-    }
-  </style>
-</head>
-<body>
-  <div class="sidebar">
-    <div class="component" data-type="button">Button</div>
-    <div class="component" data-type="text">Text</div>
-    <div class="component" data-type="input">Input</div>
+      <!-- Sélecteur de taille du texte -->
+      <h3>Taille du Texte</h3>
+      <input
+        type="range"
+        min="12"
+        max="32"
+        step="2"
+        (input)="onFontSizeChange($event)" 
+        class="size-picker"
+      />
+      <span>{{ buttonStyle.fontSize }}</span>
+    </div>
   </div>
-  <div class="container" id="gridContainer"></div>
-
-  <script>
-    const gridContainer = document.getElementById('gridContainer');
-    let draggedItem = null;
-
-    // Drag and Drop functionality
-    function makeDraggable(el) {
-      el.setAttribute('draggable', true);
-
-      el.addEventListener('dragstart', () => {
-        draggedItem = el.cloneNode(true);
-        draggedItem.style.opacity = '0.5';
-      });
-
-      el.addEventListener('dragend', () => {
-        draggedItem = null;
-      });
-    }
-
-    document.querySelectorAll('.sidebar .component').forEach(makeDraggable);
-
-    gridContainer.addEventListener('dragover', (e) => e.preventDefault());
-    gridContainer.addEventListener('drop', (e) => {
-      if (!draggedItem) return;
-
-      const rect = e.target.getBoundingClientRect();
-      const col = Math.floor((e.clientX - rect.left) / (rect.width / 12));
-      const row = Math.floor((e.clientY - rect.top) / 60);
-
-      const newItem = document.createElement('div');
-      newItem.classList.add('item');
-      newItem.dataset.type = draggedItem.dataset.type;
-      newItem.textContent = draggedItem.textContent;
-      newItem.style.gridColumn = `${col + 1} / span 2`;
-      newItem.style.gridRow = `${row + 1} / span 1`;
-
-      newItem.draggable = true;
-      newItem.addEventListener('dragstart', () => draggedItem = newItem);
-      newItem.addEventListener('dragend', () => draggedItem = null);
-
-      newItem.addEventListener('click', () => alert('Edit me!'));
-
-      gridContainer.appendChild(newItem);
-      makeResizable(newItem);
-    });
-
-    // Resize functionality
-    function makeResizable(el) {
-      const resizers = document.createElement('div');
-      resizers.classList.add('resizer', 'top-left');
-      el.appendChild(resizers);
-
-      const resizersBR = document.createElement('div');
-      resizersBR.classList.add('resizer', 'bottom-right');
-      el.appendChild(resizersBR);
-
-      let offsetX, offsetY, originalWidth, originalHeight, originalX, originalY;
-
-      resizers.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
-        const bounds = el.getBoundingClientRect();
-        offsetX = e.clientX - bounds.left;
-        offsetY = e.clientY - bounds.top;
-        originalWidth = bounds.width;
-        originalHeight = bounds.height;
-        originalX = bounds.left;
-        originalY = bounds.top;
-
-        document.addEventListener('mousemove', resize);
-        document.addEventListener('mouseup', stopResize);
-      });
-
-      resizersBR.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
-        const bounds = el.getBoundingClientRect();
-        offsetX = e.clientX - bounds.right;
-        offsetY = e.clientY - bounds.bottom;
-        originalWidth = bounds.width;
-        originalHeight = bounds.height;
-
-        document.addEventListener('mousemove', resizeBR);
-        document.addEventListener('mouseup', stopResize);
-      });
-
-      function resize(e) {
-        const newWidth = originalWidth + (originalX - e.clientX);
-        const newHeight = originalHeight + (originalY - e.clientY);
-        el.style.gridColumnEnd = `span ${Math.max(1, Math.ceil(newWidth / (gridContainer.offsetWidth / 12)))}`;
-        el.style.gridRowEnd = `span ${Math.max(1, Math.ceil(newHeight / 60))}`;
-      }
-
-      function resizeBR(e) {
-        const newWidth = originalWidth - offsetX + (e.clientX - originalX - originalWidth);
-        const newHeight = originalHeight - offsetY + (e.clientY - originalY - originalHeight);
-        el.style.gridColumnEnd = `span ${Math.max(1, Math.ceil(newWidth / (gridContainer.offsetWidth / 12)))}`;
-        el.style.gridRowEnd = `span ${Math.max(1, Math.ceil(newHeight / 60))}`;
-      }
-
-      function stopResize() {
-        document.removeEventListener('mousemove', resize);
-        document.removeEventListener('mousemove', resizeBR);
-        document.removeEventListener('mouseup', stopResize);
-        
-      }
-    }
-  </script>
-</body>
-</html>
+</div>

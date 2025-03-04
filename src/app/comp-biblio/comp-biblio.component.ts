@@ -51,23 +51,26 @@ export class CompBiblioComponent {
 
   onDrop(event: DragEvent): void {
     event.preventDefault();
-
+  
     if (event.dataTransfer) {
       const itemId = event.dataTransfer.getData('text/plain');
       const draggedElement = document.getElementById(itemId);
-
+  
       if (!draggedElement) {
         console.error(`Élément avec l'ID "${itemId}" introuvable.`);
         return;
       }
-
+  
       // Clone l'élément
       const clonedElement = draggedElement.cloneNode(true) as HTMLElement;
       clonedElement.id = `cloned-${Date.now()}`; // ID unique
       clonedElement.classList.add('cloned-table');
       clonedElement.style.position = 'absolute';
       clonedElement.style.pointerEvents = 'auto';
-
+  
+      // Appliquer la même largeur que l'élément d'origine
+      clonedElement.style.width = `${draggedElement.offsetWidth}px`;
+  
       // Ajouter un bouton "Supprimer"
       const removeButton = document.createElement('button');
       removeButton.className = 'remove-btn';
@@ -81,58 +84,58 @@ export class CompBiblioComponent {
       removeButton.style.border = 'none';
       removeButton.style.padding = '5px 10px';
       removeButton.style.borderRadius = '50%';
-
+  
       removeButton.addEventListener('click', () => {
-        clonedElement.remove(); // Supprimer l'élément
+        clonedElement.remove();
         this.hasClonedTable = Array.from(clonedElement.parentElement?.children || []).some(
           child => child.classList.contains('cloned-table')
         );
       });
-
+  
       clonedElement.appendChild(removeButton);
-
+  
       // Gestion du déplacement interne
       let isDraggingInternally = false;
       let offsetX = 0;
       let offsetY = 0;
-
+  
       clonedElement.addEventListener('mousedown', (e: MouseEvent) => {
         isDraggingInternally = true;
         const rect = clonedElement.getBoundingClientRect();
         offsetX = e.clientX - rect.left;
         offsetY = e.clientY - rect.top;
-
+  
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
       });
-
+  
       const onMouseMove = (e: MouseEvent) => {
         if (!isDraggingInternally) return;
-
+  
         const dropZone = document.querySelector('.drop-zone') as HTMLElement;
         if (!dropZone) return;
-
+  
         const dropZoneRect = dropZone.getBoundingClientRect();
-
+  
         // Calculer les nouvelles coordonnées par rapport à la drop-zone
         let x = e.clientX - dropZoneRect.left - offsetX;
         let y = e.clientY - dropZoneRect.top - offsetY;
-
+  
         // Limiter les coordonnées pour rester dans la drop-zone
         x = Math.max(0, Math.min(x, dropZoneRect.width - clonedElement.offsetWidth));
         y = Math.max(0, Math.min(y, dropZoneRect.height - clonedElement.offsetHeight));
-
+  
         // Appliquer les nouvelles coordonnées
         clonedElement.style.left = `${x}px`;
         clonedElement.style.top = `${y}px`;
       };
-
+  
       const onMouseUp = () => {
         isDraggingInternally = false;
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('mouseup', onMouseUp);
       };
-
+  
       // Ajouter le clone à la zone cible
       const dropZone = document.querySelector('.drop-zone');
       if (dropZone && dropZone instanceof HTMLElement) {

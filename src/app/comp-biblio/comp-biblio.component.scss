@@ -5,7 +5,7 @@
   margin: 0;
   overflow: hidden;
   padding: 0;
-  width: 280px;
+  width: fit-content;
   position: fixed;
   top: 64px;
   left: 0;
@@ -110,12 +110,58 @@
   }
 }
 
+
+  /* Barre de recherche */
+  .search-container {
+    display: flex;
+    align-items: center;
+    background: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 30px;
+  }
+
+  .search-container input {
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 8px 24px;
+    outline: none;
+  }
+
+  .search-container button {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: white;
+  }
+
+  /* Menu déroulant */
+  .sort-container select {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+  }
+
+
+.search-container .iconify {
+    font-size: 15px;
+  }
+
+
+
+
 /* Zone cible pour le drag-and-drop */
 .drop-zone {
   position: relative; // Changé à relative
-  border: 2px dashed #ccc;
+  border: 1px solid#ccc;
   padding: 20px;
-  width: 80vw;
+  width: 60vw;
   min-height: 200px;
   background-color: #f9f9f9;
   height: 50vh;
@@ -126,8 +172,8 @@
 
   &:hover,
   &.dragging-over {
-    background-color: #e6f7ff;
-    border-color: green;
+   
+    border-color: rgb(0, 0, 0);
   }
 
   /* Style pour le tableau cloné */
@@ -155,9 +201,54 @@
     }
   }
 }
-
 /* Effet visuel lors du drag */
 .dragging {
   opacity: 0.5;
-  border: 2px dashed #007bff;
+  border: 0.5px solid #000000;
 }
+
+.msg{
+    font-size: 2.5rem;          /* Taille du texte */
+    font-weight: bold;          /* Texte en gras */
+    color: #333333;             /* Couleur du texte */
+    text-align: center;         /* Centrage du texte */
+    margin: 20px 0;             /* Marges en haut et en bas */
+    padding: 10px;              /* Espacement interne */
+    background-color: #f0f0f0;  /* Couleur de fond */
+    border-radius: 8px;         /* Coins arrondis */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Ombre portée */
+    text-transform: uppercase;  /* Texte en majuscules */
+    letter-spacing: 2px;        /* Espacement entre les lettres */
+  
+}
+
+
+//*****************************style components 
+//styleshape
+.circle {
+  width: 70px;
+  height: 70px;
+  background-color:black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rectangle {
+  width: 100px;
+  height: 50px;
+  background-color:black;}
+.rounded-rectangle {
+  width: 100px;
+  height: 50px;
+  background-color:black;  border-radius: 15px; /* Coins arrondis */
+}
+.horizontal-line {
+  width: 100px;
+  height: 2px; /* Épaisseur de la ligne */
+  background-color:black;}
+.vertical-line {
+  width: 2px; /* Épaisseur de la ligne */
+  height: 100px;
+  background-color:black;}
+
