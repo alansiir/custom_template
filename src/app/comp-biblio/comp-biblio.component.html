@@ -19,88 +19,70 @@
       </button>
     </div>
     <div class="card-body">
-
       <div class="categories-content">
+        <!-- Barre de recherche -->
         <div class="search-container">
-          <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="filterItems()">
+          <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="filterComponents()">
           <button><i class="iconify" data-icon="mdi:magnify"></i></button>
         </div>
 
         <div class="categories-wrapper">
           <button class="nav left" (click)="scrollLeft()">❮</button>
-
           <div class="categories-container" #menuContainer>
-            <button *ngFor="let item of filteredItems; let i = index" class="menu-items"
+            <button *ngFor="let item of menuItems; let i = index" class="menu-items"
               [class.active]="selectedItem === item" (click)="openModal(item)" [id]="'menu-item-' + i">
               {{ item.label }}
             </button>
           </div>
-
           <button class="nav right" (click)="scrollRight()">❯</button>
         </div>
       </div>
 
+      <!-- Section dynamique pour les composants -->
       <div class="category-content">
-        <!-- Affiche le tableau si "Template" est sélectionné -->
-        <div *ngIf="selectedItem?.label === 'Template'">
-          <app-table-comp class="draggable" style="zoom: 0.3;" (dragstart)="startDrag($event)"
-            draggable="true"></app-table-comp>
-          <span class="shape-name">table</span>
-        </div>
-        <!-- Affiche le tableau si "Button" est sélectionné -->
-        <div *ngIf="selectedItem?.label === 'Button'">
-          <button style="width: 150px;" id="draggable-button" draggable="true" class="draggable"
-            (dragstart)="startDrag($event)">Text</button>
-          <span class="shape-name">button</span>
-        </div>
+        <!-- Utiliser filteredComponentsData pour afficher uniquement les composants filtrés -->
+        <div *ngFor="let component of filteredComponentsData; let i = index">
+          <ng-container *ngIf="selectedItem?.label === component.type">
+            <div class="category-style">
+              <ng-container [ngSwitch]="component.component">
+                <app-table-comp *ngSwitchCase="'app-table-comp'"
+                                [id]="'draggable-' + i"
+                                class="draggable"
+                                [ngStyle]="component.styles"
+                                (dragstart)="startDrag($event)"
+                                draggable="true">
+                </app-table-comp>
 
-        <div *ngIf="selectedItem?.label === 'Shape'">
-          <div class="circle draggable" id="draggable-circle" draggable="true" (dragstart)="startDrag($event)"></div>
-          <span class="shape-name">circle</span>
-        </div>
+                <button *ngSwitchCase="'button'"
+                        [id]="'draggable-' + i"
+                        class="draggable"
+                        [ngStyle]="component.styles"
+                        (dragstart)="startDrag($event)"
+                        draggable="true">
+                  Text
+                </button>
 
-        <div *ngIf="selectedItem?.label === 'Shape'">
-          <div class="rectangle draggable" id="draggable-rectangle" draggable="true" (dragstart)="startDrag($event)">
-          </div>
-          <span class="shape-name">rectangle</span>
-        </div>
+                <div *ngSwitchCase="'div'"
+                     [id]="'draggable-' + i"
+                     class="draggable"
+                     [ngStyle]="component.styles"
+                     (dragstart)="startDrag($event)"
+                     draggable="true">
+                </div>
 
+                <p *ngSwitchCase="'p'"
+                   [id]="'draggable-' + i"
+                   class="draggable"
+                   [ngStyle]="component.styles"
+                   (dragstart)="startDrag($event)"
+                   draggable="true">
+                  text
+                </p>
+              </ng-container>
 
-        <div *ngIf="selectedItem?.label === 'Shape'">
-          <div class="rounded-rectangle draggable" id="draggable-rounded-rectangle" draggable="true"
-            (dragstart)="startDrag($event)"></div>
-
-          <span class="shape-name">rounded rectangle</span>
-        </div>
-        <div *ngIf="selectedItem?.label === 'Shape'">
-          <div class="rounded-rectangle draggable" id="draggable-rounded-rectangle" draggable="true"
-            (dragstart)="startDrag($event)"></div>
-
-          <span class="shape-name">rounded rectangle</span>
-        </div>
-        <div *ngIf="selectedItem?.label === 'Shape'">
-          <div class="rounded-rectangle draggable" id="draggable-rounded-rectangle" draggable="true"
-            (dragstart)="startDrag($event)"></div>
-
-          <span class="shape-name">rounded rectangle</span>
-        </div>
-
-        <div *ngIf="selectedItem?.label === 'Shape'">
-          <div class="horizontal-line draggable" id="draggable-horizontal-line" draggable="true"
-            (dragstart)="startDrag($event)"></div>
-          <span class="shape-name">horizontal line</span>
-        </div>
-
-        <div *ngIf="selectedItem?.label === 'Shape'">
-          <div class="vertical-line draggable" id="draggable-vertical-line" draggable="true"
-            (dragstart)="startDrag($event)"></div>
-          <span class="shape-name">vertical line</span>
-        </div>
-
-        <div *ngIf="selectedItem?.label === 'Text'">
-          <p class="text draggable" id="draggable-text" draggable="true" (dragstart)="startDrag($event)">
-            text</p>
-          <span class="shape-name">text</span>
+              <span class="style-name">{{ component.label }}</span>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -108,6 +90,4 @@
 </div>
 
 <!-- Zone cible pour le drag-and-drop -->
-<div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
-  <p class="msg" *ngIf="!hasClonedTable"> Déposez ici !</p>
-</div>
+<div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)"></div>

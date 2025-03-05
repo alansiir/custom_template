@@ -114,6 +114,7 @@
     height: calc(100% - 64px);
     display: flex;
     flex-direction: column;
+   
     
     .categories-content {
       padding: 15px;
@@ -132,6 +133,16 @@
       padding: 15px;
       flex: 1;
       overflow-y: auto;
+      
+    }
+    .category-style{
+      display: flex; 
+      flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       margin-bottom: 20px;
+       gap: 5px
+
 
     }
 
@@ -317,21 +328,6 @@
   border: 0.5px solid #000000;
 }
 
-.msg{
-    font-size: 2.5rem;          /* Taille du texte */
-    font-weight: bold;          /* Texte en gras */
-    color: #333333;             /* Couleur du texte */
-    text-align: center;         /* Centrage du texte */
-    margin: 20px 0;             /* Marges en haut et en bas */
-    padding: 10px;              /* Espacement interne */
-    background-color: #f0f0f0;  /* Couleur de fond */
-    border-radius: 8px;         /* Coins arrondis */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Ombre portée */
-    text-transform: uppercase;  /* Texte en majuscules */
-    letter-spacing: 2px;        /* Espacement entre les lettres */
-  
-}
-
 
 //*****************************style components 
 //styleshape
@@ -361,3 +357,31 @@
   height: 50px;
   background-color:rgb(146, 146, 146);}
 
+  .style-name{
+    color: #ffffff;
+  }
+
+  //**********************resultat de rechercher 
+  .search-results {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    max-height: 150px;
+    overflow-y: auto;
+  
+    .search-result-item {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+  
+      &:hover {
+        background-color: #e0e0e0;
+      }
+  
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  //========================================================

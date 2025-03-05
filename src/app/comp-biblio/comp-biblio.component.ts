@@ -18,32 +18,86 @@ export class CompBiblioComponent {
     { label: 'Button', icon: 'mdi:gesture-tap-button' },
     { label: 'Form', icon: 'mdi:form-select' }
   ];
+  
+ componentsData = [
+  { type: 'Template', label: 'table',component: 'app-table-comp',
+    styles: { zoom: '0.3' }},
 
-  // Mots clés pour la recherche
-  keywords = ['circle', 'text', 'button', 'table'];
+  { type: 'Button', label: 'button',component: 'button',
+    styles: { width: '150px' } },
+
+  {  type: 'Shape', label: 'circle',component: 'div',
+    styles: { width: '70px', height: '70px', borderRadius: '50%', backgroundColor: 'rgb(146, 146, 146)' }
+  },
+
+  {type: 'Shape', label: 'rectangle', component: 'div',
+  styles: { width: '100px', height: '50px', backgroundColor: 'rgb(146, 146, 146)' }
+  },
+
+  { type: 'Shape', label: 'rounded rectangle',component: 'div',
+    styles: { width: '100px', height: '50px', borderRadius: '15px', backgroundColor: 'rgb(146, 146, 146)' }
+  },
+
+  { type: 'Shape',  label: 'horizontal line', component: 'div',
+    styles: { width: '100px', height: '2px', backgroundColor: 'rgb(146, 146, 146)' }
+  },
+
+  { type: 'Shape', label: 'vertical line', component: 'div',
+    styles: { width: '2px', height: '50px', backgroundColor: 'rgb(146, 146, 146)' }
+  },
+
+  { type: 'Text', label: 'text', component: 'p',
+    styles: { fontSize: '16px', color: 'black' }  }];
+
+
 
   isModalOpen = false;
   selectedItem: any = null;
   hasClonedTable = false;
-  searchQuery: string = '';
-  filteredItems: any[] = [];
-
+  searchQuery: string = ''; // Propriété pour stocker la requête de recherche
+  filteredComponentsData: any[] = []; // Liste des composants filtrés
+  //searchResults: any[] = []; // Résultats de la recherche
   constructor() {
-    this.filteredItems = this.menuItems; // Initialiser avec tous les éléments
+    this.filteredComponentsData = this.componentsData; // Initialiser avec tous les éléments
   }
 
-  // Filtrer les éléments en fonction de la requête de recherche
-  filterItems(): void {
-    if (!this.searchQuery) {
-      this.filteredItems = this.menuItems;
-    } else {
-      const lowerCaseQuery = this.searchQuery.toLowerCase();
-      this.filteredItems = this.menuItems.filter(item =>
-        item.label.toLowerCase().includes(lowerCaseQuery) || // Recherche dans le label
-        this.keywords.some(keyword => keyword.includes(lowerCaseQuery)) // Recherche dans les mots clés
+  // Filtrer les éléments en fonction de la requête de recherche  // Méthode pour filtrer les composants en fonction de la recherche
+  filterComponents(): void {
+    const lowerCaseQuery = this.searchQuery.toLowerCase();
+  
+    // Filtrer d'abord par texte de recherche
+    let filteredBySearch = this.componentsData;
+    if (this.searchQuery) {
+      filteredBySearch = this.componentsData.filter(component =>
+        component.label.toLowerCase().includes(lowerCaseQuery)
       );
+  
+      // Vérifier si un élément correspondant est trouvé dans une autre catégorie
+      const matchingItem = this.componentsData.find(component =>
+        component.label.toLowerCase().includes(lowerCaseQuery)
+      );
+  
+      if (matchingItem && this.selectedItem?.label !== matchingItem.type) {
+        // Mettre à jour la catégorie sélectionnée
+        this.selectedItem = this.menuItems.find(item => item.label === matchingItem.type);
+      }
     }
+  
+    // Ensuite, filtrer par catégorie sélectionnée (si applicable)
+    if (this.selectedItem) {
+      this.filteredComponentsData = filteredBySearch.filter(component =>
+        component.type === this.selectedItem.label
+      );
+    } else {
+      this.filteredComponentsData = filteredBySearch;
+    }
+  
+    console.log('Selected Item:', this.selectedItem);
+    console.log('Search Query:', this.searchQuery);
+    console.log('Filtered Components:', this.filteredComponentsData);
   }
+
+
 
   // Faire défiler vers la gauche
   scrollLeft() {
@@ -75,18 +129,24 @@ export class CompBiblioComponent {
   }
 
   // Ouvrir la modale
-  openModal(item: any): void {
-    if (this.isModalOpen) {
-      this.selectedItem = item;
-    } else {
-      this.selectedItem = item;
-      this.isModalOpen = true;
-    }
-    console.log('Modal ouvert ?', this.isModalOpen, 'Item sélectionné :', this.selectedItem);
+  // openModal(item: any): void {
+  //   if (this.isModalOpen) {
+  //     this.selectedItem = item;
+  //   } else {
+  //     this.selectedItem = item;
+  //     this.isModalOpen = true;
+  //   }
+  //   console.log('Modal ouvert ?', this.isModalOpen, 'Item sélectionné :', this.selectedItem);
 
-    // Faire défiler jusqu'à l'élément sélectionné
+  //   // Faire défiler jusqu'à l'élément sélectionné
+  //   this.scrollToSelectedItem();
+  //   this.filterComponents(); // Appliquer le filtre lors de l'ouverture de la modale
+  // }
+  openModal(item: any): void {
+    this.selectedItem = item;
+    this.isModalOpen = true;
+    this.filterComponents(); // Appliquer le filtre après la sélection
     this.scrollToSelectedItem();
-    this.filterItems(); // Appliquer le filtre lors de l'ouverture de la modale
   }
 
   // Fermer la modale
@@ -94,7 +154,7 @@ export class CompBiblioComponent {
     this.isModalOpen = false;
     this.selectedItem = null;
     this.searchQuery = ''; // Réinitialiser la recherche
-    this.filterItems(); // Réinitialiser les éléments filtrés
+    this.filterComponents(); // Réinitialiser les éléments filtrés
   }
 
   // Démarrer le glisser-déposer
