@@ -33,7 +33,7 @@ interface Column {
 })
 
 export class TableCompComponent implements OnInit {
-  id = `table-${Math.random().toString(36).slice(2, 11)}`;
+ id = 'table-component'
 
 
   @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;

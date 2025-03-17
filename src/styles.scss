@@ -1,68 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    position: relative;
-    font-family: 'Roboto', sans-serif;
+  position: relative;
+  font-family: "Roboto", sans-serif;
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-    border-radius: .5rem;
-    margin: 1.25rem 0 1.25rem 0;
-    height: 150px !important;
-    width: 220px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  margin: 1.25rem 0 1.25rem 0;
+  height: 150px !important;
+  width: 220px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
+  .card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #edf1f7;
+    font-size: 1rem;
+    font-weight: 600;
+  }
 
-    .card-header {
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid #edf1f7;
-        font-size: 1rem;
-        font-weight: 600;
+  .card-body {
+    padding: 1rem 1.5rem;
+  }
+}
+
+.titre-style {
+  margin: 0px;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: inherit;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  text-transform: inherit;
+}
+
+.text-card {
+  margin: 0px;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.1px;
+  text-align: center;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  text-transform: inherit;
+}
+
+.icon-card {
+  font-size: 50px;
+  color: #ffffff;
+}
+
+.remove-btn {
+  background-color: transparent !important;
+  border: none !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  cursor: pointer !important;
+  font-size: 12px !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: none;
+}
+
+.draggable:hover {
+    .remove-btn {
+        display: block !important;
     }
+}
 
-    .card-body {
-        padding: 1rem 1.5rem; 
-    }
+
+.clone-container.selected-component {
    
-}
-
-.titre-style{
-    
-        margin: 0px;
-        font-size: 18px;
-        line-height: 22px;
-        text-align: inherit;
-        font-weight: 500;
-        color: rgb(255, 255, 255);
-        text-transform: inherit;
-
-}
-
-.text-card{
-    margin: 0px;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: -0.1px;
-    text-align: center;
-    font-weight: 500;
-    color: rgb(255, 255, 255);
-    text-transform: inherit;
-}
-
-.icon-card{
-    font-size: 50px; 
-    color: #ffffff; 
-    
+        outline: 0.5px solid #258eff !important;
+        // box-shadow: 0 0 10px  rgb(23, 176, 236) !important;
+        // outline-offset: 5px;
+      
 }

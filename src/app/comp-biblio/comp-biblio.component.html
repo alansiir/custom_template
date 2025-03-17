@@ -40,18 +40,22 @@
 
       <!-- Section dynamique pour les composants -->
       <div class="category-content">
-        <!-- Utiliser filteredComponentsData pour afficher uniquement les composants filtrés -->
         <div *ngFor="let component of filteredComponentsData; let i = index">
           <ng-container *ngIf="selectedItem?.label === component.type">
             <div class="category-style">
               <ng-container [ngSwitch]="component.component">
-                <app-table-comp *ngSwitchCase="'app-table-comp'"
-                                [id]="'draggable-' + i"
-                                class="draggable"
-                                [ngStyle]="component.styles"
-                                (dragstart)="startDrag($event)"
-                                draggable="true">
-                </app-table-comp>
+                  <app-table-comp *ngSwitchCase="'app-table-comp'"
+                  [id]="'draggable-' + i"
+                  class="draggable"
+                  [ngStyle]="component.styles"
+                  (dragstart)="startDrag($event)"
+                  draggable="true">
+  </app-table-comp>
+
+
+  
+                
+               
 
                 <button *ngSwitchCase="'button'"
                         [id]="'draggable-' + i"
@@ -62,13 +66,13 @@
                   Text
                 </button>
 
-                <div *ngSwitchCase="'div'"
-                     [id]="'draggable-' + i"
-                     class="draggable"
-                     [ngStyle]="component.styles"
-                     (dragstart)="startDrag($event)"
-                     draggable="true">
-                </div>
+                  <div *ngSwitchCase="'div'"
+                      [id]="'draggable-' + i"
+                      class="draggable"
+                      [ngStyle]="component.styles"
+                      (dragstart)="startDrag($event)"
+                      draggable="true">
+                  </div>
 
                 <p *ngSwitchCase="'p'"
                    [id]="'draggable-' + i"
@@ -78,6 +82,162 @@
                    draggable="true">
                   text
                 </p>
+
+                <img *ngSwitchCase="'img'"
+                     [id]="'draggable-' + i"
+                     class="draggable"
+                     [ngStyle]="component.styles"
+                     [src]="component.src"
+                     (dragstart)="startDrag($event)"
+                     draggable="true">
+
+                <div *ngSwitchCase="'i'"
+                     [id]="'draggable-' + i"
+                     class="draggable icon-container"
+                     [ngStyle]="component.styles"
+                     (dragstart)="startDrag($event)"
+                     draggable="true">
+                  <i class="iconify" [attr.data-icon]="component.icon"></i>
+                </div>
+
+                <input *ngSwitchCase="'input-text'"
+                       [id]="'draggable-' + i"
+                       class="draggable"
+                       [ngStyle]="component.styles"
+                       [type]="component.attributes?.type || 'text'"
+                       [attr.min]="component.attributes?.min"
+                       [attr.max]="component.attributes?.max"
+                       [attr.step]="component.attributes?.step"
+                       (dragstart)="startDrag($event)"
+                       draggable="true">
+
+                <input *ngSwitchCase="'input-stepper'"
+                       [id]="'draggable-' + i"
+                       class="draggable"
+                       [ngStyle]="component.styles"
+                       [type]="component.attributes?.type"
+                       [attr.min]="component.attributes?.min"
+                       [attr.max]="component.attributes?.max"
+                       [attr.step]="component.attributes?.step"
+                       (dragstart)="startDrag($event)"
+                       draggable="true">
+
+                <input *ngSwitchCase="'input-checkbox'"
+                       [id]="'draggable-' + i"
+                       class="draggable"
+                       [ngStyle]="component.styles"
+                       [type]="component.attributes?.type"
+                       (dragstart)="startDrag($event)"
+                       draggable="true">
+
+                <input *ngSwitchCase="'input-radio'"
+                       [id]="'draggable-' + i"
+                       class="draggable"
+                       [ngStyle]="component.styles"
+                       [type]="component.attributes?.type"
+                       [name]="component.attributes?.name"
+                       (dragstart)="startDrag($event)"
+                       draggable="true">
+
+                <label *ngSwitchCase="'input-switch'"
+                       [id]="'draggable-' + i"
+                       class="draggable"
+                       [ngStyle]="component.styles"
+                       (dragstart)="startDrag($event)"
+                       draggable="true">
+                  <input [type]="component.children[0].attributes?.type"
+                         [class]="component.children[0].attributes?.class">
+                  <span>{{ component.children[1].text }}</span>
+                </label>
+
+                <input *ngSwitchCase="'input-slider'"
+                       [id]="'draggable-' + i"
+                       class="draggable"
+                       [ngStyle]="component.styles"
+                       [type]="component.attributes?.type"
+                       [attr.min]="component.attributes?.min"
+                       [attr.max]="component.attributes?.max"
+                       [attr.step]="component.attributes?.step"
+                       (dragstart)="startDrag($event)"
+                       draggable="true">
+
+ 
+
+                        <!-- Navbar -->
+    <nav *ngSwitchCase="'nav'"
+    [ngStyle]="component.styles"
+    [id]="'draggable-' + i"
+    class="draggable"
+    (dragstart)="startDrag($event)"
+    draggable="true">
+ <ng-container *ngFor="let item of component.content">
+   <div *ngIf="item.component === 'div'"
+        [ngStyle]="item.styles">
+     {{ item.content }}
+   </div>
+   <ul *ngIf="item.component === 'ul'"
+       [ngStyle]="item.styles">
+     <li *ngFor="let li of item.content"
+         [ngStyle]="li.styles">
+       <a *ngFor="let a of li.content"
+          [ngStyle]="a.styles"
+          [attr.href]="a.attributes?.href">
+         {{ a.content }}
+       </a>
+     </li>
+   </ul>
+   <button *ngIf="item.component === 'button'"
+           [ngStyle]="item.styles">
+     {{ item.content }}
+   </button>
+ </ng-container>
+   </nav>
+
+     <!-- Sidebar -->
+     <aside *ngSwitchCase="'aside'"
+     [ngStyle]="component.styles"
+    [id]="'draggable-' + i"
+    class="draggable"
+    (dragstart)="startDrag($event)"
+    draggable="true"> 
+<div *ngFor="let contentItem of component.content">
+  <div *ngIf="contentItem.component === 'div'"
+       [ngStyle]="contentItem.styles">
+    {{ contentItem.content }}
+  </div>
+  <ul *ngIf="contentItem.component === 'ul'"
+      [ngStyle]="contentItem.styles">
+    <li *ngFor="let liItem of contentItem.content"
+        [ngStyle]="liItem.styles">
+      <a *ngFor="let aItem of liItem.content"
+         [ngStyle]="aItem.styles"
+         [attr.href]="aItem.attributes?.href">
+        {{ aItem.content }}
+      </a>
+    </li>
+  </ul>
+</div>
+</aside>
+
+<!-- Footer -->
+<footer *ngSwitchCase="'footer'"
+        [id]="'draggable-' + i"
+        class="draggable"
+        (dragstart)="startDrag($event)"
+        draggable="true">
+  <ng-container *ngFor="let contentItem of component.content">
+    <div *ngIf="contentItem.component === 'div'" [ngStyle]="contentItem.styles">
+      {{ contentItem.content }}
+    </div>
+   
+  </ng-container>
+</footer>
+
+
+
+
+
+                         
               </ng-container>
 
               <span class="style-name">{{ component.label }}</span>
@@ -89,5 +249,25 @@
   </div>
 </div>
 
-<!-- Zone cible pour le drag-and-drop -->
 <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)"></div>
+
+<nav class="setting">
+  <div class="modal-header">
+    Setting
+  </div>
+  <div *ngIf="selectedStyles && getObjectKeys(selectedStyles).length > 0; else noSelection">
+    <div *ngFor="let style of getObjectKeys(selectedStyles)">
+      <label>{{ style }}:</label>
+      <ng-container *ngIf="style === 'backgroundColor' || style === 'color'; else textInput">
+        <input type="color" [(ngModel)]="selectedStyles[style]" (input)="onInputChange(style, $event)">
+      </ng-container>
+      <!-- Afficher un champ de type "text" pour les autres styles -->
+      <ng-template #textInput>
+        <input type="text" [(ngModel)]="selectedStyles[style]" (input)="onInputChange(style, $event)">
+      </ng-template>
+    </div>
+  </div>
+  <ng-template #noSelection>
+    <p></p>
+  </ng-template>
+</nav>

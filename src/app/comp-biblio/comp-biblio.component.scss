@@ -156,6 +156,7 @@
 }
 
 
+
   /* Barre de recherche */
   .search-container {
     display: flex;
@@ -282,11 +283,11 @@
   position: relative; // Changé à relative
   border: 1px solid#ccc;
   padding: 20px;
-  width: 60vw;
+  width:  752px;
   min-height: 200px;
   background-color: #f9f9f9;
-  height: 50vh;
-  overflow: auto;
+  height: 407px;
+ // overflow: auto;
   left: 50%;
   translate: -50%;
   top: 100PX;
@@ -303,30 +304,38 @@
     position: absolute;
     pointer-events: auto;
 
-    /* Bouton "Supprimer" */
-    .remove-btn {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      cursor: pointer;
-      background-color: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 50%;
-      font-size: 5;
-
-      &:hover {
-        background-color: darkred;
-      }
+    
     }
   }
-}
+  //  .remove-btn {
+  //   position: absolute;
+  //   top: -21px;
+  //   right: -19px;
+  //   cursor: pointer;
+  //   background-color: transparent; /* Fond transparent */
+  //   color: red; /* Couleur rouge pour le "❌" */
+  //   border: none; /* Pas de bordure */
+  //   padding: 0; /* Pas de padding */
+  //   font-size: 12px; /* Taille plus petite */
+  //   width: 20px; /* Largeur fixe */
+  //   height: 20px; /* Hauteur fixe */
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   border-radius: 50%; /* Bouton rond */
+  //   transition: opacity 0.2s ease; /* Animation de l'opacité */
+  //   opacity: 0; /* Invisible par défaut */
+  
+  //   &:hover {
+  //     background-color: rgba(255, 0, 0, 0.1); /* Fond rouge très léger au survol */
+  //   }
+  // }
+
 /* Effet visuel lors du drag */
-.dragging {
-  opacity: 0.5;
-  border: 0.5px solid #000000;
-}
+// .dragging {
+//   opacity: 0.5;
+//   border: 0.5px solid #000000;
+// }
 
 
 //*****************************style components 
@@ -385,3 +394,65 @@
     }
   }
   //========================================================
+
+ 
+
+  .setting {
+    width: 200px;
+    background-color: #121212;
+    color: white;
+    padding: 10px;
+    height: 100vh;
+    overflow-y: auto;
+    margin: 0;
+    border: 1px solid #333333;
+    position: fixed;
+    right: 0;
+    top: 64px;
+    z-index: 100;
+  }
+  //===========================
+  // poignées de redimensionnement
+  /* Activer le redimensionnement pour les éléments clonés */
+.cloned-table {
+  resize: both; /* Permet le redimensionnement horizontal et vertical */
+  overflow: auto; /* Nécessaire pour que resize fonctionne */
+  position: absolute;
+  border: 1px solid #ccc; /* Ajouter une bordure pour mieux voir les limites */
+}
+
+
+
+
+/* Style pour les poignées personnalisées */
+.resize-handle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #258eff;
+  z-index: 1000;
+}
+
+.resize-handle.bottom-right {
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+}
+
+.resize-handle.bottom-left {
+  bottom: 0;
+  left: 0;
+  cursor: sw-resize;
+}
+
+.resize-handle.top-right {
+  top: 0;
+  right: 0;
+  cursor: ne-resize;
+}
+
+.resize-handle.top-left {
+  top: 0;
+  left: 0;
+  cursor: nw-resize;
+}
