@@ -81,10 +81,18 @@ body {
 }
 
 
-.clone-container.selected-component {
+.clone-container{
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  .selected-component {
    
-        outline: 0.5px solid #258eff !important;
-        // box-shadow: 0 0 10px  rgb(23, 176, 236) !important;
-        // outline-offset: 5px;
-      
+    outline: 0.5px solid #258eff !important;
+    // box-shadow: 0 0 10px  rgb(23, 176, 236) !important;
+    // outline-offset: 5px;
+  
 }
+}
+
+

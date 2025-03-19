@@ -13,11 +13,17 @@ export const componentsData = [
     { type: 'Shape', label: 'vertical line', component: 'div', styles: { width: '2px', height: '50px', backgroundColor: 'rgb(146, 146, 146)' } },
 
 
-    { type: 'Text', label: 'text', component: 'p', styles: { fontSize: '20px', color: 'rgb(0, 0, 0)' } },
+    { type: 'Text', label: 'text', component: 'p', styles: {  fontSize: '20px',
+       color: 'rgb(0, 0, 0)',
+       
+      textAlign: 'left', 
+      fontFamily: 'Roboto', 
+      fontWeight: 'normal', 
+      fontStyle: 'normal'  } },
 
 
     { type: 'Image', label: 'image', component: 'img', styles: { width: '250px', height: '50px' }, src: 'assets/safran.png' },
-    { type: 'Image', label: 'circle image', component: 'img', styles: { width: '100px', height: '100px' }, src: 'assets/image2.jpg' },
+    { type: 'Image', label: 'circle image', component: 'img', styles: { width: '35px', height: '35px' }, src: 'assets/image2.jpg' },
 
 
     { type: 'Icon', label: 'Home', component: 'i', styles: { fontSize: '24px', color: 'rgb(146, 146, 146)' }, icon: 'mdi:home' },
@@ -27,11 +33,11 @@ export const componentsData = [
     { type: 'Icon', label: 'Sms', component: 'i', styles: { fontSize: '24px', color: 'rgb(146, 146, 146)'}, icon: 'mdi:sms' },
 
 
-    { type: 'Form', label: 'Input Field', component: 'input-text', styles: { width: '120px', height: '36px', padding: '8px', borderRadius: '8px', cursor: 'default' } },
-    { type: 'Form', label: 'Input Stepper', component: 'input-stepper', styles: { width: '120px', height: '36px', padding: '8px', borderRadius: '8px', cursor: 'default' }, attributes: { type: 'number', min: '0', max: '10', step: '1' } },
-    { type: 'Form', label: 'Checkbox', component: 'input-checkbox', styles: { width: '20px', height: '20px' }, attributes: { type: 'checkbox' } },
-    { type: 'Form', label: 'Radio Button', component: 'input-radio', styles: { width: '20px', height: '20px' }, attributes: { type: 'radio', name: 'radio-group' } },
-    { type: 'Form', label: 'Slider', component: 'input-slider', styles: { width: '95px', height: '16px' }, attributes: { type: 'range', min: '0', max: '100', step: '1' } },
+    { type: 'Form', label: 'Input Field', component: 'input-text', styles: { width: '100px', height: '30px', padding: '8px', borderRadius: '8px', cursor: 'default' } },
+    { type: 'Form', label: 'Input Stepper', component: 'input-stepper', styles: { width: '100px', height: '30px', padding: '8px', borderRadius: '8px', cursor: 'default' }, attributes: { type: 'number', min: '0', max: '10', step: '1' } },
+    { type: 'Form', label: 'Checkbox', component: 'input-checkbox', styles: { width: '15px', height: '15px' }, attributes: { type: 'checkbox' } },
+    { type: 'Form', label: 'Radio Button', component: 'input-radio', styles: { width: '15px', height: '15px' }, attributes: { type: 'radio', name: 'radio-group' } },
+    { type: 'Form', label: 'Slider', component: 'input-slider', styles: { width: '50px', height: '15px' }, attributes: { type: 'range', min: '0', max: '100', step: '1' } },
   
     // Navbar Template
     {
@@ -189,6 +195,4 @@ export const componentsData = [
    ]
   }
   
-  
-
   ];
