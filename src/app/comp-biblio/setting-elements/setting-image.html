@@ -1,0 +1,66 @@
+<div class="image-settings">
+    <div class="design-buttons">
+        <button (click)="moveForward()">Forward</button>
+        <button (click)="moveToFront()">To Front</button>
+        <button (click)="moveBackward()">Backward</button>
+        <button (click)="moveToBack()">To Back</button>
+      </div>
+      <!-- Prévisualisation de l'image -->
+  <div class="image-preview">
+    <img [src]="selectedComponent.src || 'assets/placeholder.png'" 
+         class="preview-img"
+         [ngStyle]="{
+           'border-radius': selectedStyles.borderRadius,
+           'box-shadow': selectedStyles.boxShadow,
+           'opacity': selectedStyles.opacity
+         }">
+  </div>
+    <!-- Upload d'image -->
+    <div class="upload-section">
+      <input type="file" 
+             #fileInput
+             accept="image/*" 
+             (change)="onFileSelected($event)"
+             style="display: none;">
+      <button (click)="fileInput.click()" class="upload-btn">
+        <i class="upload-icon" data-icon="mdi:upload"></i>
+        Upload New Image
+      </button>
+      <div *ngIf="selectedFile" class="file-info">
+        {{ selectedFile.name }} ({{ selectedFile.size / 1024 | number:'1.0-2' }} KB)
+      </div>
+    </div>  
+    <div class="opacity-control">
+      <label>Opacity: {{opacityValue}}%</label>
+      <input type="range" 
+             min="0" 
+             max="100" 
+             step="1" 
+             [value]="opacityValue"
+             (input)="onOpacityChange($any($event.target).value)">
+    </div>
+      <!-- Corners -->
+      <div class="design-section">
+        <label>Corners</label>
+        <div class="corner-options">
+          <button (click)="setCorner('sharp')" [class.active]="selectedStyles.corner === 'sharp'">Sharp</button>
+          <button (click)="setCorner('hard')" [class.active]="selectedStyles.corner === 'hard'">Hard</button>
+          <button (click)="setCorner('rounded')" [class.active]="selectedStyles.corner === 'rounded'">Rounded</button>
+          <button (click)="setCorner('soft')" [class.active]="selectedStyles.corner === 'soft'">Soft</button>
+          <button (click)="setCorner('circular')"
+            [class.active]="selectedStyles.corner === 'circular'">Circular</button>
+        </div>
+      </div>
+
+      <!-- Shadow -->
+      <div class="design-section">
+        <label>Shadow</label>
+        <div class="shadow-options">
+          <button (click)="setShadow('none')" [class.active]="selectedStyles.shadow === 'none'">None</button>
+          <button (click)="setShadow('soft')" [class.active]="selectedStyles.shadow === 'soft'">Soft</button>
+          <button (click)="setShadow('regular')" [class.active]="selectedStyles.shadow === 'regular'">Regular</button>
+          <button (click)="setShadow('hard')" [class.active]="selectedStyles.shadow === 'hard'">Hard</button>
+          <button (click)="setShadow('retro')" [class.active]="selectedStyles.shadow === 'retro'">Retro</button>
+        </div>
+      </div>
+ </div>   

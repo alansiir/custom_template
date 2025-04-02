@@ -1,0 +1,35 @@
+<div class="icon-settings">
+  <div class="design-buttons">
+    <button (click)="moveForward()">Forward</button>
+    <button (click)="moveToFront()">To Front</button>
+    <button (click)="moveBackward()">Backward</button>
+    <button (click)="moveToBack()">To Back</button>
+  </div>
+  <div class="opacity-control">
+    <label>Opacity: {{opacityValue}}%</label>
+    <input type="range" 
+           min="0" 
+           max="100" 
+           step="1" 
+           [value]="opacityValue"
+           (input)="onOpacityChange($any($event.target).value)">
+  </div>
+
+  <div>
+    <label>Color</label>
+    <input type="color" [(ngModel)]="selectedStyles.color" (input)="onChangeColor($event, 'color')"
+      placeholder="Text Color">
+  </div>
+
+  <div class="size-control" *ngIf="isIconComponent()">
+    <label>Icon Size:</label>
+    <div class="size-options">
+      <!-- Utilisez iconSizes au lieu du tableau littéral -->
+      <button *ngFor="let size of iconSizes" 
+              (click)="onSizeChange(size)"
+              [class.active]="selectedStyles?.iconSize === size">
+        {{ size }}
+      </button>
+    </div>
+  </div>
+  </div>

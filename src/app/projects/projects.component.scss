@@ -3,15 +3,13 @@
   flex-direction: column;
 
   .project-start {
-    justify-content: start;
-    flex-wrap: wrap;
-    gap: 20px;
 
     .card {
       margin: 0 !important;
       position: relative;
       overflow: hidden;
-      border-radius: 15px;
+      border-radius: 10px;
+      width: 100%;
 
       .card-body {
         z-index: 1;
@@ -22,15 +20,15 @@
         z-index: 0;
         top: 0;
         left: 0;
-        width: 300px;
+        width: 100%;
         height: 800px;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0) 5%,
-          rgba(0, 0, 0, 1) 100%
-        );
-        background-size: 100% 20%; /* Initialement, le dégradé est invisible */
-        transition: background-size 0.3s ease-out; /* La transition se fait en 0.6s */
+        background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 100%);
+        background-size: 100% 20%;
+        /* Initialement, le dégradé est invisible */
+        transition: background-size 0.3s ease-out;
+        /* La transition se fait en 0.6s */
       }
     }
 
@@ -41,6 +39,7 @@
     .project-settings-btn {
       border: none;
       background-color: unset !important;
+
       .iconify {
         color: black;
       }
@@ -48,10 +47,11 @@
   }
 
   .card-gradient-noir {
-    background: linear-gradient(135deg, #000000, #1a1a1a, #333333);
+    background: linear-gradient(135deg, #3c3939, #1a1a1a, #504949);
   }
+
   .card-gradient-blue {
-    background: linear-gradient(135deg, #0a2742, #142d31);
+    background: linear-gradient(135deg, #133656, #315d64);
   }
 
   /* Style général */
@@ -123,65 +123,106 @@
   border-top: 1px solid #333;
   text-align: left;
 }
+
 .card-title {
-  font-size: 14px;
-  color: #ffffff;
+  font-size: 12px;
+  color: #d9d9d9;
 }
 
 .card-date {
-  font-size: 12px;
-  color: gray;
+  font-size: 11px;
+  color: rgb(183, 183, 183);
 }
 
 //Xxxxxxxxxxxxxxxxxxxxxxxxxx Menu
 .menu {
-  position: absolute; /* Position absolue par rapport à .card */
-  top: 10px; /* Distance du bord supérieur */
-  right: 10px; /* Distance du bord droit */
+  position: absolute;
+  /* Position absolue par rapport à .card */
+  top: 10px;
+  /* Distance du bord supérieur */
+  right: 10px;
+  /* Distance du bord droit */
 }
 
 .menu-btn {
   background: none;
   border: none;
   cursor: pointer;
-  color: rgb(255, 255, 255); /* Couleur des icônes */
+  color: rgb(255, 255, 255);
+  /* Couleur des icônes */
   font-size: 18px;
   transition: color 0.3s ease;
 }
+
 .menu-btn:hover {
-  color: #57081c; /* Changement de couleur au survol */
+  color: #57081c;
+  /* Changement de couleur au survol */
 }
 
-.project {
+.project-preview {
   position: relative;
+  height: 170px;
+  background: white;
+  border-radius: 10px;
 
   .menu {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 8px;
+    right: 20px;
 
     .dropdown {
-      display: none; /* Caché par défaut */
+      display: none;
+      /* Caché par défaut */
       position: absolute;
-      top: 10px; /* Position sous le bouton */
-      right: 15px; /* Aligné avec le bouton */
-      background-color: rgb(18, 18, 18);
+      top: 10px;
+      /* Position sous le bouton */
+      right: 15px;
+      /* Aligné avec le bouton */
+      background-color: #333333;
       border-radius: 4px;
-      // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       z-index: 10;
-    
+      padding: 10px;
+
+
       &.active {
         display: block;
       }
+
+      li {
+        display: flex;
+        align-items: center;
+        padding: 4px 12px;
+        cursor: pointer;
+        color: white;
+        gap: 10px;
+
+        &:hover {
+          background-color: #1a1a1ac9;
+
+        }
+      }
     }
+  }
+
+  .project-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    background-color: #1a1a1ac9;
+    width: 100%;
+    display: flex;
+    align-items: start;
   }
 }
 
 /* Dropdown du menu */
 
-.menu-btn:focus + .dropdown,
-.menu-btn:hover + .dropdown {
-  display: block; /* Affiche le dropdown au survol ou clic */
+.menu-btn:focus+.dropdown,
+.menu-btn:hover+.dropdown {
+  display: block;
+  /* Affiche le dropdown au survol ou clic */
 }
 
 .dropdown ul {
@@ -195,6 +236,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .dopdown li:hover {
   background-color: rgb(18, 18, 18);
 }
@@ -208,15 +250,9 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  padding: 10px;
 }
 
-.menu-list li {
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  cursor: pointer;
-  color: white;
-}
 
 .menu-list li i {
   margin-right: 8px;
@@ -231,3 +267,4 @@
 .search-container .iconify {
   font-size: 21px;
 }
+

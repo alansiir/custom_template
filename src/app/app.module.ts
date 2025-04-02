@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +39,8 @@ import { CompSettingComponent } from './comp-setting/comp-setting.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Test00Component } from './test00/test00.component';
+//import { IconModule } from '@iconifsy/angular';
+
 // import { MatDialogActions } from '@angular/material/dialog';
 
 
@@ -93,9 +95,11 @@ import { Test00Component } from './test00/test00.component';
     MatTooltipModule,
     DragDropModule,
     // MatDialogActions,
-    MatDialogModule
+    MatDialogModule,
   
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Ajoutez CUSTOM_ELEMENTS_SCHEMA ici
+
   providers: [],
   bootstrap: [AppComponent],
   exports : [MatIconModule]

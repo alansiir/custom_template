@@ -1,0 +1,71 @@
+<ng-template #shapeSettings>
+
+<div class="shape-settings">
+    <div class="move-controls">
+        <button (click)="moveForward()" class="move-button">
+          <i class="move-icon" data-icon="fluent:arrow-forward-20-filled"></i>
+
+          <span class="move-label">Forward</span>
+        </button>
+        
+        <button (click)="moveToFront()" class="move-button">
+          <span class="move-icon">⬆</span>
+          <span class="move-label">To Front</span>
+        </button>
+        
+        <button (click)="moveBackward()" class="move-button">
+          <span class="move-icon">⮜</span>
+          <span class="move-label">Backward</span>
+        </button>
+        
+        <button (click)="moveToBack()" class="move-button">
+          <span class="move-icon">⬇</span>
+          <span class="move-label">To Back</span>
+        </button>
+      </div>
+
+      <div class="design-section">
+        <label>Background Color</label>
+        <input type="color" [value]="selectedStyles?.backgroundColor || '#ffffff'" (input)="onChangeBackground($event)">
+      </div>
+
+      <div class="design-section">
+        <label>Border</label>
+        <div class="border-options">
+
+          <button (click)="setBorder('none')" [class.active]="selectedStyles.border === 'none'">○</button>
+          <button (click)="setBorder('solid')" [class.active]="selectedStyles.border === 'solid'">▬</button>
+          <button (click)="setBorder('dashed')" [class.active]="selectedStyles.border === 'dashed'"> --</button>
+
+          <select (change)="setBorderWidth($event)">
+            <option value="1px">1px</option>
+            <option value="2px">2px</option>
+            <option value="3px">3px</option>
+            <option value="4px">4px</option>
+          </select>
+        </div>
+      </div>
+      <div class="design-section">
+        <label>Corners</label>
+        <div class="corner-options">
+          <button (click)="setCorner('sharp')" [class.active]="selectedStyles.corner === 'sharp'">Sharp</button>
+          <button (click)="setCorner('hard')" [class.active]="selectedStyles.corner === 'hard'">Hard</button>
+          <button (click)="setCorner('rounded')" [class.active]="selectedStyles.corner === 'rounded'">Rounded</button>
+          <button (click)="setCorner('soft')" [class.active]="selectedStyles.corner === 'soft'">Soft</button>
+          <button (click)="setCorner('circular')"
+            [class.active]="selectedStyles.corner === 'circular'">Circular</button>
+        </div>
+      </div>
+      <div class="design-section">
+        
+        <label>Shadow</label>
+        <div class="shadow-options">
+          <button (click)="setShadow('none')" [class.active]="selectedStyles.shadow === 'none'">None</button>
+          <button (click)="setShadow('soft')" [class.active]="selectedStyles.shadow === 'soft'">Soft</button>
+          <button (click)="setShadow('regular')" [class.active]="selectedStyles.shadow === 'regular'">Regular</button>
+          <button (click)="setShadow('hard')" [class.active]="selectedStyles.shadow === 'hard'">Hard</button>
+          <button (click)="setShadow('retro')" [class.active]="selectedStyles.shadow === 'retro'">Retro</button>
+        </div>
+      </div>
+</div>
+</ng-template>

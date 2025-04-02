@@ -29,13 +29,12 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
   }
 
   .menu-item {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     justify-content: center;
     align-items: center;
 
@@ -50,7 +49,7 @@
     color: white;
     width: 100%;
     text-align: center;
-    padding: 10px;
+    padding: 0 10px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -69,7 +68,7 @@
   box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
   height: 100vh;
   display: none;
-  overflow-y: auto;
+  // overflow-y: auto;
   width: 300px;
 
   &.is-open {
@@ -82,7 +81,7 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: 10px;
-    padding: 15px;
+    padding: 16px;
     border: 1px solid #333333;
 
     h2 {
@@ -115,8 +114,7 @@
     height: calc(100% - 64px);
     display: flex;
     flex-direction: column;
-   
-    
+
     .categories-content {
       padding: 15px;
       height: fit-content;
@@ -128,26 +126,25 @@
         align-items: center;
       }
     }
-    
+
     .category-content {
       padding: 15px;
-      flex: 1;
+      // flex: 1;
       overflow-y: auto;
-      
     }
-    .category-style{
-      display: flex; 
+
+    .category-style {
+      display: flex;
       flex-direction: column;
-       justify-content: center;
-       align-items: center;
-       margin-bottom: 20px;
-       gap: 5px
-
-
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 5px;
     }
 
     app-table-comp {
       width: 100%;
+
       table {
         font-size: 14px;
       }
@@ -155,49 +152,46 @@
   }
 }
 
+/* Barre de recherche */
+.search-container {
+  display: flex;
+  align-items: center;
+  background: #333;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 35px;
+}
 
+.search-container input {
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 8px 24px;
+  outline: none;
+}
 
-  /* Barre de recherche */
-  .search-container {
-    display: flex;
-    align-items: center;
-    background: #333;
-    border-radius: 5px;
-    overflow: hidden;
-    height: 35px;
-  }
+.search-container button {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: white;
+}
 
-  .search-container input {
-    border: none;
-    background: transparent;
-    color: white;
-    padding: 8px 24px;
-    outline: none;
-  }
-
-  .search-container button {
-    background: transparent;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    color: white;
-  }
-
-  /* Menu déroulant */
-  .sort-container select {
-    background: #333;
-    color: white;
-    border: none;
-    padding: 8px;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-  }
-
+/* Menu déroulant */
+.sort-container select {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
 
 .search-container .iconify {
-    font-size: 15px;
-  }
+  font-size: 15px;
+}
 
 // style Menu Model
 .categories-wrapper {
@@ -216,11 +210,13 @@
   scroll-behavior: smooth;
   white-space: nowrap;
   width: 100%;
-  scrollbar-width: none; /* Cache la scrollbar sur Firefox */
+  scrollbar-width: none;
+  /* Cache la scrollbar sur Firefox */
 }
 
 .categories-container::-webkit-scrollbar {
-  display: none; /* Cache la scrollbar sur Chrome et Edge */
+  display: none;
+  /* Cache la scrollbar sur Chrome et Edge */
 }
 
 .menu-items {
@@ -245,11 +241,12 @@
 }
 
 .nav {
-  display: none; /* Masquer les flèches par défaut */
+  display: none;
+  /* Masquer les flèches par défaut */
   background-color: rgba(0, 0, 0, 0.5);
   border: none;
   color: white;
-  font-size: 20px ;
+  font-size: 20px;
   padding: 10px 15px;
   cursor: pointer;
   position: absolute;
@@ -266,13 +263,21 @@
 .nav.left {
   left: 0;
   font-size: 12px;
-  background: linear-gradient(to right, rgba(18, 18, 18, 1), rgba(18, 18, 18, 0));
+  background: linear-gradient(
+    to right,
+    rgba(18, 18, 18, 1),
+    rgba(18, 18, 18, 0)
+  );
 }
 
 .nav.right {
   right: 0;
   font-size: 12px;
-  background: linear-gradient(to left, rgba(18, 18, 18, 1), rgba(18, 18, 18, 0));
+  background: linear-gradient(
+    to left,
+    rgba(18, 18, 18, 1),
+    rgba(18, 18, 18, 0)
+  );
 }
 
 /* Afficher les flèches uniquement lors du survol de .categories-wrapper */
@@ -287,18 +292,17 @@
   position: relative; // Changé à relative
   border: 1px solid#ccc;
   padding: 20px;
-  width:  752px;
+  width: 752px;
   min-height: 200px;
   background-color: #f9f9f9;
   height: 407px;
- // overflow: auto;
+  // overflow: auto;
   left: 50%;
   translate: -50%;
-  top: 100PX;
+  top: 100px;
 
   &:hover,
   &.dragging-over {
-   
     border-color: rgb(0, 0, 0);
   }
 
@@ -307,126 +311,102 @@
     opacity: 1;
     position: absolute;
     pointer-events: auto;
-
-    
-    }
   }
-  //  .remove-btn {
-  //   position: absolute;
-  //   top: -21px;
-  //   right: -19px;
-  //   cursor: pointer;
-  //   background-color: transparent; /* Fond transparent */
-  //   color: red; /* Couleur rouge pour le "❌" */
-  //   border: none; /* Pas de bordure */
-  //   padding: 0; /* Pas de padding */
-  //   font-size: 12px; /* Taille plus petite */
-  //   width: 20px; /* Largeur fixe */
-  //   height: 20px; /* Hauteur fixe */
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   border-radius: 50%; /* Bouton rond */
-  //   transition: opacity 0.2s ease; /* Animation de l'opacité */
-  //   opacity: 0; /* Invisible par défaut */
-  
-  //   &:hover {
-  //     background-color: rgba(255, 0, 0, 0.1); /* Fond rouge très léger au survol */
-  //   }
-  // }
+}
 
-/* Effet visuel lors du drag */
-// .dragging {
-//   opacity: 0.5;
-//   border: 0.5px solid #000000;
-// }
-
-
-//*****************************style components 
+//*****************************style components
 //styleshape
 .circle {
   width: 70px;
   height: 70px;
-  background-color:rgb(146, 146, 146);
-    border-radius: 50%;
+  background-color: rgb(146, 146, 146);
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .rectangle {
   width: 100px;
   height: 50px;
-  background-color:rgb(146, 146, 146);}.rounded-rectangle {
+  background-color: rgb(146, 146, 146);
+}
+
+.rounded-rectangle {
   width: 100px;
   height: 50px;
-  background-color:rgb(146, 146, 146);
-  border-radius: 15px; /* Coins arrondis */
+  background-color: rgb(146, 146, 146);
+  border-radius: 15px;
+  /* Coins arrondis */
 }
+
 .horizontal-line {
   width: 100px;
-  height: 2px; /* Épaisseur de la ligne */
-  background-color:rgb(146, 146, 146);}.vertical-line {
-  width: 2px; /* Épaisseur de la ligne */
-  height: 50px;
-  background-color:rgb(146, 146, 146);}
-
-  .style-name{
-    color: #ffffff;
-  }
-
-  //**********************resultat de rechercher 
-  .search-results {
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    max-height: 150px;
-    overflow-y: auto;
-  
-    .search-result-item {
-      padding: 10px;
-      cursor: pointer;
-      border-bottom: 1px solid #eee;
-  
-      &:hover {
-        background-color: #e0e0e0;
-      }
-  
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-  }
-  //========================================================
-
- 
-
-  .setting {
-    width: 300px;
-    background-color: #121212;
-    color: white;
-    padding: 10px;
-    height: 100vh;
-    overflow-y: auto;
-    margin: 0;
-    border: 1px solid #333333;
-    position: fixed;
-    right: 0;
-    top: 64px;
-    z-index: 100;
-  }
-  //===========================
-  // poignées de redimensionnement
-  /* Activer le redimensionnement pour les éléments clonés */
-.cloned-table {
-  resize: both; /* Permet le redimensionnement horizontal et vertical */
-  overflow: auto; /* Nécessaire pour que resize fonctionne */
-  position: absolute;
-  border: 1px solid #ccc; /* Ajouter une bordure pour mieux voir les limites */
+  height: 2px;
+  /* Épaisseur de la ligne */
+  background-color: rgb(146, 146, 146);
 }
 
+.vertical-line {
+  width: 2px;
+  /* Épaisseur de la ligne */
+  height: 50px;
+  background-color: rgb(146, 146, 146);
+}
 
+//**********************resultat de rechercher
+.search-results {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  max-height: 150px;
+  overflow-y: auto;
 
+  .search-result-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+//========================================================
+
+.setting {
+  width: 300px;
+  background-color: #121212;
+  color: white;
+  padding: 10px;
+  height: 100vh;
+  overflow-y: auto;
+  margin: 0;
+  border: 1px solid #333333;
+  position: fixed;
+  right: 0;
+  top: 64px;
+  z-index: 100;
+}
+
+//===========================
+// poignées de redimensionnement
+/* Activer le redimensionnement pour les éléments clonés */
+.cloned-table {
+  resize: both;
+  /* Permet le redimensionnement horizontal et vertical */
+  overflow: auto;
+  /* Nécessaire pour que resize fonctionne */
+  position: absolute;
+  border: 1px solid #ccc;
+  /* Ajouter une bordure pour mieux voir les limites */
+}
 
 /* Style pour les poignées personnalisées */
 .resize-handle {
@@ -463,20 +443,143 @@
 
 .icon-container {
   position: relative;
-  width: 50px; /* Taille initiale */
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ccc; /* Pour visualiser le conteneur */
+  /* Pour visualiser le conteneur */
 }
 
 .icon-container i {
-  font-size: 24px; /* Taille initiale de l'icône */
+  font-size: 24px;
+  /* Taille initiale de l'icône */
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: font-size 0.3s ease; /* Animation fluide */
+  transition: font-size 0.3s ease;
+  /* Animation fluide */
 }
+
+.menu-link {
+  svg {
+    width: 2em !important;
+    height: 2em !important;
+  }
+}
+
+.category-content {
+  .col-4 {
+    height: fit-content;
+    overflow: hidden;
+  }
+
+  .category-style {
+    .component-preview {
+      padding: 15px;
+      height: 80px;
+      width: 80px;
+      border: 1px solid #363636;
+      border-radius: 5px;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        border-color: #707070;
+      }
+
+      .draggable {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .component-name {
+      text-wrap: nowrap;
+      color: rgb(236, 236, 236);
+      font-size: 11px;
+    }
+  }
+ 
+  .image-settings {
+    padding: 15px;
+    border-top: 1px solid #eee;
+  }
+  
+  .image-preview {
+    margin: 15px 0;
+    text-align: center;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 4px;
+  }
+  
+  .preview-img {
+    max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .upload-section {
+    margin: 20px 0;
+  }
+  
+  .upload-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .file-info {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .style-options {
+    display: grid;
+    gap: 15px;
+  }
+  
+  .option {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .option label {
+    font-weight: 500;
+  }
+
+
+  
+
+}
+
+.icon-selection{
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espace entre l'icône et le texte */
+    padding: 5px 10px; /* Ajuster les marges internes */
+  }
+  
+  button i {
+    font-size: 16px; /* Taille de l'icône */
+  }
+  
+
+}
+ 

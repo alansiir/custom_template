@@ -1,22 +1,28 @@
 <div class="conteneur-projects">
     <div class="titre-style mb-4">Start creating</div>
 
-    <div class="project-start d-flex mb-5">
-        <div class="card card-gradient-noir" (click)="navigateToNewProject()">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center" style="cursor: pointer;">
-                <span class="iconify icon-card" data-icon="mdi:plus-circle"></span>
-                <h5 class="text-card mt-3">New Project</h5>
-            </div>
+    <div class="project-start row mb-5">
+        <div class="col-md-3">
+            <div class="card card-gradient-noir" (click)="navigateToNewProject()">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center"
+                    style="cursor: pointer;">
+                    <span class="iconify icon-card" data-icon="mdi:plus-circle"></span>
+                    <h5 class="text-card mt-3">New Project</h5>
+                </div>
 
-            <div class="overlay"></div>
+                <div class="overlay"></div>
+            </div>
         </div>
 
-        <div class="card card-gradient-blue">
-            <div class="card-body  d-flex flex-column align-items-center justify-content-center">
-                <span class="iconify icon-card" data-icon="mdi:folder-file"></span>
-                <h5 class=" text-card mt-3">Start from template</h5>
+        <div class="col-md-3">
+
+            <div class="card card-gradient-blue">
+                <div class="card-body  d-flex flex-column align-items-center justify-content-center">
+                    <span class="iconify icon-card" data-icon="mdi:folder-file"></span>
+                    <h5 class=" text-card mt-3">Start from template</h5>
+                </div>
+                <div class="overlay"></div>
             </div>
-            <div class="overlay"></div>
         </div>
 
     </div>
@@ -44,31 +50,34 @@
         </div>
     </div>
 
-    <div class="project-start d-flex mb-5">
-        <div class="project">
-            <div class="card d-flex">
-                <!-- Contenu central -->
-                <!-- <div class="card-content d-flex flex-column align-items-center justify-content-center">
-                    <h5 class="card-title">Titre du projet</h5>
-                    <span class="card-date">Modifié il y a 20 jours</span>
-                </div> -->
-            </div>
-
-            <div class="menu">
-                <button class="project-settings-btn" (click)="settingsBar()">
-                    <i class="iconify" data-icon="mdi:dots-vertical"></i>
-                </button>
-
-                <div class="dropdown" [ngClass]="{'active': activeBar}">
-                    <ul class="menu-list">
-                        <li><i class="iconify" data-icon="mdi:pencil"></i> Edit</li>
-                        <li><i class="iconify" data-icon="mdi:share-variant"></i>Share</li>
-
-                        <li><i class="iconify" data-icon="mdi:play"></i> Preview</li>
-                        <li class="delete"><i class="iconify" data-icon="mdi:trash-can"></i> Delete</li>
-                    </ul>
+    <div class="project-start mb-5 row">
+        <div class="col-md-3">
+            <div class="project-preview">
+                <div class="project-info">
+                    <!-- Contenu central -->
+                    <div class="card-content d-flex flex-column">
+                        <h5 class="card-title">Titre du projet</h5>
+                        <span class="card-date">Modifié il y a 20 jours</span>
+                    </div>
+                </div>
+                
+                <div class="menu">
+                    <button class="project-settings-btn" (click)="settingsBar()">
+                        <i class="iconify" data-icon="mdi:dots-vertical"></i>
+                    </button>
+    
+                    <div class="dropdown" [ngClass]="{'active': activeBar}">
+                        <ul class="menu-list">
+                            <li><i class="iconify" data-icon="mdi:pencil"></i> Edit</li>
+                            <li><i class="iconify" data-icon="mdi:share-variant"></i>Share</li>
+    
+                            <li><i class="iconify" data-icon="mdi:play"></i> Preview</li>
+                            <li class="delete"><i class="iconify" data-icon="mdi:trash-can"></i> Delete</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

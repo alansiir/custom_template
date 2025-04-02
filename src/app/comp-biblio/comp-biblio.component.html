@@ -18,6 +18,7 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
+
     <div class="card-body">
       <div class="categories-content">
         <!-- Barre de recherche -->
@@ -38,119 +39,127 @@
         </div>
       </div>
 
-      <!-- Section dynamique pour les composants -->
       <div class="category-content row">
         <div *ngFor="let component of filteredComponentsData; let i = index" class="col-4">
           <ng-container *ngIf="selectedItem?.label === component.type">
             <div class="category-style">
-              <ng-container [ngSwitch]="component.component">
-                <app-table-comp *ngSwitchCase="'app-table-comp'" [id]="'draggable-' + i" class="draggable"
-                  [ngStyle]="component.styles" (dragstart)="startDrag($event)" draggable="true">
-                </app-table-comp>
+              <div class="component-preview">
+                <ng-container [ngSwitch]="component.component">
+                  <app-table-comp *ngSwitchCase="'app-table-comp'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="component.styles" (dragstart)="startDrag($event)" draggable="true">
+                  </app-table-comp>
 
-                <button *ngSwitchCase="'button'" [id]="'draggable-' + i" class="draggable" [ngStyle]="component.styles"
-                  (dragstart)="startDrag($event)" draggable="true">
-                  Text
-                </button>
+                  <button *ngSwitchCase="'button'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="getDynamicStyles(component)" (dragstart)="startDrag($event)" draggable="true">
+                    Button
+                  </button>
 
-                <div *ngSwitchCase="'div'" [id]="'draggable-' + i" class="draggable" [ngStyle]="component.styles"
-                  (dragstart)="startDrag($event)" draggable="true">
-                </div>
-
-                <p *ngSwitchCase="'p'" [id]="'draggable-' + i" class="draggable" [ngStyle]="component.styles"
-                  (dragstart)="startDrag($event)" draggable="true">
-                  text
-                </p>
-
-                <img *ngSwitchCase="'img'" [id]="'draggable-' + i" class="draggable" [ngStyle]="component.styles"
-                  [src]="component.src" (dragstart)="startDrag($event)" draggable="true">
-
-                <div *ngSwitchCase="'i'" [id]="'draggable-' + i" class="draggable icon-container"
-                  [ngStyle]="component.styles" (dragstart)="startDrag($event)" draggable="true">
-                  <i class="iconify" [attr.data-icon]="component.icon"></i>
-                </div>
-
-                <input *ngSwitchCase="'input-text'" [id]="'draggable-' + i" class="draggable"
-                  [ngStyle]="component.styles" [type]="component.attributes?.type || 'text'"
-                  [attr.min]="component.attributes?.min" [attr.max]="component.attributes?.max"
-                  [attr.step]="component.attributes?.step" (dragstart)="startDrag($event)" draggable="true">
-
-                <input *ngSwitchCase="'input-stepper'" [id]="'draggable-' + i" class="draggable"
-                  [ngStyle]="component.styles" [type]="component.attributes?.type"
-                  [attr.min]="component.attributes?.min" [attr.max]="component.attributes?.max"
-                  [attr.step]="component.attributes?.step" (dragstart)="startDrag($event)" draggable="true">
-
-                <input *ngSwitchCase="'input-checkbox'" [id]="'draggable-' + i" class="draggable"
-                  [ngStyle]="component.styles" [type]="component.attributes?.type" (dragstart)="startDrag($event)"
-                  draggable="true">
-
-                <input *ngSwitchCase="'input-radio'" [id]="'draggable-' + i" class="draggable"
-                  [ngStyle]="component.styles" [type]="component.attributes?.type" [name]="component.attributes?.name"
-                  (dragstart)="startDrag($event)" draggable="true">
-
-                <label *ngSwitchCase="'input-switch'" [id]="'draggable-' + i" class="draggable"
-                  [ngStyle]="component.styles" (dragstart)="startDrag($event)" draggable="true">
-                  <input [type]="component.children[0].attributes?.type"
-                    [class]="component.children[0].attributes?.class">
-                  <span>{{ component.children[1].text }}</span>
-                </label>
-
-                <input *ngSwitchCase="'input-slider'" [id]="'draggable-' + i" class="draggable"
-                  [ngStyle]="component.styles" [type]="component.attributes?.type"
-                  [attr.min]="component.attributes?.min" [attr.max]="component.attributes?.max"
-                  [attr.step]="component.attributes?.step" (dragstart)="startDrag($event)" draggable="true">
-
-                <!-- Navbar -->
-                <nav *ngSwitchCase="'nav'" [ngStyle]="component.styles" [id]="'draggable-' + i" class="draggable"
-                  (dragstart)="startDrag($event)" draggable="true">
-                  <ng-container *ngFor="let item of component.content">
-                    <div *ngIf="item.component === 'div'" [ngStyle]="item.styles">
-                      {{ item.content }}
-                    </div>
-                    <ul *ngIf="item.component === 'ul'" [ngStyle]="item.styles">
-                      <li *ngFor="let li of item.content" [ngStyle]="li.styles">
-                        <a *ngFor="let a of li.content" [ngStyle]="a.styles" [attr.href]="a.attributes?.href">
-                          {{ a.content }}
-                        </a>
-                      </li>
-                    </ul>
-                    <button *ngIf="item.component === 'button'" [ngStyle]="item.styles">
-                      {{ item.content }}
-                    </button>
-                  </ng-container>
-                </nav>
-
-                <!-- Sidebar -->
-                <aside *ngSwitchCase="'aside'" [ngStyle]="component.styles" [id]="'draggable-' + i" class="draggable"
-                  (dragstart)="startDrag($event)" draggable="true">
-                  <div *ngFor="let contentItem of component.content">
-                    <div *ngIf="contentItem.component === 'div'" [ngStyle]="contentItem.styles">
-                      {{ contentItem.content }}
-                    </div>
-                    <ul *ngIf="contentItem.component === 'ul'" [ngStyle]="contentItem.styles">
-                      <li *ngFor="let liItem of contentItem.content" [ngStyle]="liItem.styles">
-                        <a *ngFor="let aItem of liItem.content" [ngStyle]="aItem.styles"
-                          [attr.href]="aItem.attributes?.href">
-                          {{ aItem.content }}
-                        </a>
-                      </li>
-                    </ul>
+                  <div *ngSwitchCase="'div'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="getDynamicStyles(component)" (dragstart)="startDrag($event)" draggable="true">
                   </div>
-                </aside>
 
-                <!-- Footer -->
-                <footer *ngSwitchCase="'footer'" [id]="'draggable-' + i" class="draggable"
-                  (dragstart)="startDrag($event)" draggable="true">
-                  <ng-container *ngFor="let contentItem of component.content">
-                    <div *ngIf="contentItem.component === 'div'" [ngStyle]="contentItem.styles">
-                      {{ contentItem.content }}
+                  <p *ngSwitchCase="'p'" [id]="'draggable-' + i" class="draggable" [ngStyle]="component.styles"
+                    [attr.data-component-type]="component.type" [attr.data-component-label]="component.label"
+                    (dragstart)="startDrag($event)" draggable="true">
+                    <i *ngIf="component.icon" [attr.data-icon]="component.icon"></i>
+                    {{ component.label }} 
+                  </p>
+
+                  <img *ngSwitchCase="'img'" 
+               [id]="'draggable-' + i" 
+               class="draggable"
+               [ngStyle]="getDynamicStyles(component)" 
+               [src]="component.src" 
+               (dragstart)="startDrag($event)"
+               draggable="true">
+
+                  <div *ngSwitchCase="'i'" [id]="'draggable-' + i" class="draggable icon-container"
+                    [ngStyle]="component.styles" (dragstart)="startDrag($event)" draggable="true">
+                    <i class="iconify" [attr.data-icon]="component.icon"></i>
+                  </div>
+
+                  <input *ngSwitchCase="'input-text'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="getDynamicStyles(component)" [type]="component.attributes?.type || 'text'"
+                    [attr.min]="component.attributes?.min" [attr.max]="component.attributes?.max"
+                    [attr.step]="component.attributes?.step" (dragstart)="startDrag($event)" draggable="true">
+
+                  <input *ngSwitchCase="'input-stepper'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="getDynamicStyles(component)" [type]="component.attributes?.type"
+                    [attr.min]="component.attributes?.min" [attr.max]="component.attributes?.max"
+                    [attr.step]="component.attributes?.step" (dragstart)="startDrag($event)" draggable="true">
+
+                  <input *ngSwitchCase="'input-checkbox'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="component.styles" [type]="component.attributes?.type" (dragstart)="startDrag($event)"
+                    draggable="true">
+
+                  <input *ngSwitchCase="'input-radio'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="component.styles" [type]="component.attributes?.type" [name]="component.attributes?.name"
+                    (dragstart)="startDrag($event)" draggable="true">
+
+                  <label *ngSwitchCase="'input-switch'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="component.styles" (dragstart)="startDrag($event)" draggable="true">
+                    <input [type]="component.children[0].attributes?.type"
+                      [class]="component.children[0].attributes?.class">
+                    <span>{{ component.children[1].text }}</span>
+                  </label>
+
+                  <input *ngSwitchCase="'input-slider'" [id]="'draggable-' + i" class="draggable"
+                    [ngStyle]="component.styles" [type]="component.attributes?.type"
+                    [attr.min]="component.attributes?.min" [attr.max]="component.attributes?.max"
+                    [attr.step]="component.attributes?.step" (dragstart)="startDrag($event)" draggable="true">
+
+                  <!-- Navbar -->
+                  <nav *ngSwitchCase="'nav'" [ngStyle]="component.styles" [id]="'draggable-' + i" class="draggable"
+                    (dragstart)="startDrag($event)" draggable="true">
+                    <ng-container *ngFor="let item of component.content">
+                      <div *ngIf="item.component === 'div'" [ngStyle]="item.styles">
+                        {{ item.content }}
+                      </div>
+                      <ul *ngIf="item.component === 'ul'" [ngStyle]="item.styles">
+                        <li *ngFor="let li of item.content" [ngStyle]="li.styles">
+                          <a *ngFor="let a of li.content" [ngStyle]="a.styles" [attr.href]="a.attributes?.href">
+                            {{ a.content }}
+                          </a>
+                        </li>
+                      </ul>
+                  
+                      
+                    </ng-container>
+                  </nav>
+
+                  <!-- Sidebar -->
+                  <aside *ngSwitchCase="'aside'" [ngStyle]="component.styles" [id]="'draggable-' + i" class="draggable"
+                    (dragstart)="startDrag($event)" draggable="true">
+                    <div *ngFor="let contentItem of component.content">
+                      <div *ngIf="contentItem.component === 'div'" [ngStyle]="contentItem.styles">
+                        {{ contentItem.content }}
+                      </div>
+                      <ul *ngIf="contentItem.component === 'ul'" [ngStyle]="contentItem.styles">
+                        <li *ngFor="let liItem of contentItem.content" [ngStyle]="liItem.styles">
+                          <a *ngFor="let aItem of liItem.content" [ngStyle]="aItem.styles"
+                            [attr.href]="aItem.attributes?.href">
+                            {{ aItem.content }}
+                          </a>
+                        </li>
+                      </ul>
                     </div>
+                  </aside>
 
-                  </ng-container>
-                </footer>
-              </ng-container>
+                  <!-- Footer -->
+                  <footer *ngSwitchCase="'footer'" [id]="'draggable-' + i" class="draggable"
+                    (dragstart)="startDrag($event)" draggable="true">
+                    <ng-container *ngFor="let contentItem of component.content">
+                      <div *ngIf="contentItem.component === 'div'" [ngStyle]="contentItem.styles">
+                        {{ contentItem.content }}
+                      </div>
 
-              <span class="style-name">{{ component.label }}</span>
+                    </ng-container>
+                  </footer>
+                </ng-container>
+              </div>
+              <span class="component-name">
+                {{ component.label | slice:0:10 }} {{component.label?.length > 10 ? '...' : '' }}
+              </span>
             </div>
           </ng-container>
         </div>
@@ -167,19 +176,14 @@
   </div>
 
   <div *ngIf="selectedComponent; else noSelection">
-    <!-- Afficher les sections uniquement si le type est 'Text' -->
     <div *ngIf="selectedComponent.type === 'Text'">
-      <!-- Design -->
-      <h3>Design</h3>
-      <div class="design-buttons">
+
+      <!-- <div class="design-buttons">
         <button (click)="moveForward()">Forward</button>
         <button (click)="moveToFront()">To Front</button>
         <button (click)="moveBackward()">Backward</button>
         <button (click)="moveToBack()">To Back</button>
       </div>
-
-      <!-- Layout -->
-      <h3>Layout</h3>
       <div class="layout-options">
         <label>Align:</label>
         <select [(ngModel)]="selectedStyles.textAlign" (change)="onTextAlignChange($event)">
@@ -189,8 +193,6 @@
         </select>
       </div>
 
-      <!-- Text -->
-      <h3>Text</h3>
       <div class="text-options">
         <label>Font Family:</label>
         <select [(ngModel)]="selectedStyles.fontFamily" (change)="onFontFamilyChange($event)">
@@ -200,42 +202,323 @@
         </select>
 
         <label>Font Size:</label>
-        <input 
-          type="number" 
-          [(ngModel)]="selectedStyles.fontSize" 
-          (change)="onFontSizeChange($event)">
+        <input type="number" [(ngModel)]="selectedStyles.fontSize" (change)="onFontSizeChange($event)">
 
         <div class="text-style-buttons">
           <button (click)="toggleBold()"><b>B</b></button>
           <button (click)="toggleItalic()"><i>I</i></button>
         </div>
-
         <div>
           <label>Color</label>
           <input type="color" [(ngModel)]="selectedStyles.color" (input)="onChangeColor($event, 'color')"
             placeholder="Text Color">
         </div>
+      </div> -->
+    </div>
 
+    <div *ngIf="selectedComponent.type === 'Shape'" class="design-panel">
+      <div class="design-buttons">
+        <button (click)="moveForward()">Forward</button>
+        <button (click)="moveToFront()">To Front</button>
+        <button (click)="moveBackward()">Backward</button>
+        <button (click)="moveToBack()">To Back</button>
+      </div>
 
+      <div class="design-section">
+        <label>Background Color</label>
+        <input type="color" [value]="selectedStyles?.backgroundColor || '#ffffff'" (input)="onChangeBackground($event)">
+      </div>
+
+      <div class="design-section">
+        <label>Border</label>
+        <div class="border-options">
+
+          <button (click)="setBorder('none')" [class.active]="selectedStyles.border === 'none'">○</button>
+          <button (click)="setBorder('solid')" [class.active]="selectedStyles.border === 'solid'">▬</button>
+          <button (click)="setBorder('dashed')" [class.active]="selectedStyles.border === 'dashed'"> --</button>
+
+          <select (change)="setBorderWidth($event)">
+            <option value="1px">1px</option>
+            <option value="2px">2px</option>
+            <option value="3px">3px</option>
+            <option value="4px">4px</option>
+          </select>
+        </div>
+      </div>
+      <div class="design-section">
+        <label>Corners</label>
+        <div class="corner-options">
+          <button (click)="setCorner('sharp')" [class.active]="selectedStyles.corner === 'sharp'">Sharp</button>
+          <button (click)="setCorner('hard')" [class.active]="selectedStyles.corner === 'hard'">Hard</button>
+          <button (click)="setCorner('rounded')" [class.active]="selectedStyles.corner === 'rounded'">Rounded</button>
+          <button (click)="setCorner('soft')" [class.active]="selectedStyles.corner === 'soft'">Soft</button>
+          <button (click)="setCorner('circular')"
+            [class.active]="selectedStyles.corner === 'circular'">Circular</button>
+        </div>
+      </div>
+      <div class="design-section">
+        <label>Shadow</label>
+        <div class="shadow-options">
+          <button (click)="setShadow('none')" [class.active]="selectedStyles.shadow === 'none'">None</button>
+          <button (click)="setShadow('soft')" [class.active]="selectedStyles.shadow === 'soft'">Soft</button>
+          <button (click)="setShadow('regular')" [class.active]="selectedStyles.shadow === 'regular'">Regular</button>
+          <button (click)="setShadow('hard')" [class.active]="selectedStyles.shadow === 'hard'">Hard</button>
+          <button (click)="setShadow('retro')" [class.active]="selectedStyles.shadow === 'retro'">Retro</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="selectedComponent.type === 'Image'">
+      <div class="design-buttons">
+        <button (click)="moveForward()">Forward</button>
+        <button (click)="moveToFront()">To Front</button>
+        <button (click)="moveBackward()">Backward</button>
+        <button (click)="moveToBack()">To Back</button>
+      </div>
+      <!-- Prévisualisation de l'image -->
+  <div class="image-preview">
+    <img [src]="selectedComponent.src || 'assets/placeholder.png'" 
+         class="preview-img"
+         [ngStyle]="{
+           'border-radius': selectedStyles.borderRadius,
+           'box-shadow': selectedStyles.boxShadow,
+           'opacity': selectedStyles.opacity
+         }">
+  </div>
+    <!-- Upload d'image -->
+    <div class="upload-section">
+      <input type="file" 
+             #fileInput
+             accept="image/*" 
+             (change)="onFileSelected($event)"
+             style="display: none;">
+      <button (click)="fileInput.click()" class="upload-btn">
+        <i class="upload-icon" data-icon="mdi:upload"></i>
+        Upload New Image
+      </button>
+      <div *ngIf="selectedFile" class="file-info">
+        {{ selectedFile.name }} ({{ selectedFile.size / 1024 | number:'1.0-2' }} KB)
+      </div>
+    </div>  
+    <div class="opacity-control">
+      <label>Opacity: {{opacityValue}}%</label>
+      <input type="range" 
+             min="0" 
+             max="100" 
+             step="1" 
+             [value]="opacityValue"
+             (input)="onOpacityChange($any($event.target).value)">
+    </div>
+      <!-- Corners -->
+      <div class="design-section">
+        <label>Corners</label>
+        <div class="corner-options">
+          <button (click)="setCorner('sharp')" [class.active]="selectedStyles.corner === 'sharp'">Sharp</button>
+          <button (click)="setCorner('hard')" [class.active]="selectedStyles.corner === 'hard'">Hard</button>
+          <button (click)="setCorner('rounded')" [class.active]="selectedStyles.corner === 'rounded'">Rounded</button>
+          <button (click)="setCorner('soft')" [class.active]="selectedStyles.corner === 'soft'">Soft</button>
+          <button (click)="setCorner('circular')"
+            [class.active]="selectedStyles.corner === 'circular'">Circular</button>
+        </div>
+      </div>
+
+      <!-- Shadow -->
+      <div class="design-section">
+        <label>Shadow</label>
+        <div class="shadow-options">
+          <button (click)="setShadow('none')" [class.active]="selectedStyles.shadow === 'none'">None</button>
+          <button (click)="setShadow('soft')" [class.active]="selectedStyles.shadow === 'soft'">Soft</button>
+          <button (click)="setShadow('regular')" [class.active]="selectedStyles.shadow === 'regular'">Regular</button>
+          <button (click)="setShadow('hard')" [class.active]="selectedStyles.shadow === 'hard'">Hard</button>
+          <button (click)="setShadow('retro')" [class.active]="selectedStyles.shadow === 'retro'">Retro</button>
+        </div>
       </div>
     </div>
 
-    <!-- Afficher cette partie uniquement si le type n'est PAS 'Text' -->
-    <div *ngIf="selectedComponent.type !== 'Text' && selectedStyles && getObjectKeys(selectedStyles).length > 0">
+    <div *ngIf="selectedComponent.type === 'Icon'" class="design-panel">
+      <div class="design-buttons">
+        <button (click)="moveForward()">Forward</button>
+        <button (click)="moveToFront()">To Front</button>
+        <button (click)="moveBackward()">Backward</button>
+        <button (click)="moveToBack()">To Back</button>
+      </div>
+      <div class="opacity-control">
+        <label>Opacity: {{opacityValue}}%</label>
+        <input type="range" 
+               min="0" 
+               max="100" 
+               step="1" 
+               [value]="opacityValue"
+               (input)="onOpacityChange($any($event.target).value)">
+      </div>
+
+      <div>
+        <label>Color</label>
+        <input type="color" [(ngModel)]="selectedStyles.color" (input)="onChangeColor($event, 'color')"
+          placeholder="Text Color">
+      </div>
+
+      <div class="size-control" *ngIf="isIconComponent()">
+        <label>Icon Size:</label>
+        <div class="size-options">
+          <!-- Utilisez iconSizes au lieu du tableau littéral -->
+          <button *ngFor="let size of iconSizes" 
+                  (click)="onSizeChange(size)"
+                  [class.active]="selectedStyles?.iconSize === size">
+            {{ size }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="selectedComponent.type === 'Button'" class="design-panel">
+      <div class="design-buttons">
+        <button (click)="moveForward()">Forward</button>
+        <button (click)="moveToFront()">To Front</button>
+        <button (click)="moveBackward()">Backward</button>
+        <button (click)="moveToBack()">To Back</button>
+      </div>
+      <div class="opacity-control">
+        <label>Opacity: {{opacityValue}}%</label>
+        <input type="range" 
+               min="0" 
+               max="100" 
+               step="1" 
+               [value]="opacityValue"
+               (input)="onOpacityChange($any($event.target).value)">
+      </div>
+        <!-- Corners -->
+        <div class="design-section">
+          <label>Corners</label>
+          <div class="corner-options">
+            <button (click)="setCorner('sharp')" [class.active]="selectedStyles.corner === 'sharp'">Sharp</button>
+            <button (click)="setCorner('hard')" [class.active]="selectedStyles.corner === 'hard'">Hard</button>
+            <button (click)="setCorner('rounded')" [class.active]="selectedStyles.corner === 'rounded'">Rounded</button>
+            <button (click)="setCorner('soft')" [class.active]="selectedStyles.corner === 'soft'">Soft</button>
+            <button (click)="setCorner('circular')"
+              [class.active]="selectedStyles.corner === 'circular'">Circular</button>
+          </div>
+        </div>
+  
+        <!-- Shadow -->
+        <div class="design-section">
+          <label>Shadow</label>
+          <div class="shadow-options">
+            <button (click)="setShadow('none')" [class.active]="selectedStyles.shadow === 'none'">None</button>
+            <button (click)="setShadow('soft')" [class.active]="selectedStyles.shadow === 'soft'">Soft</button>
+            <button (click)="setShadow('regular')" [class.active]="selectedStyles.shadow === 'regular'">Regular</button>
+            <button (click)="setShadow('hard')" [class.active]="selectedStyles.shadow === 'hard'">Hard</button>
+            <button (click)="setShadow('retro')" [class.active]="selectedStyles.shadow === 'retro'">Retro</button>
+          </div>
+        </div>
+
+        <div class="design-section">
+          <label>Border</label>
+          <div class="border-options">
+  
+            <button (click)="setBorder('none')" [class.active]="selectedStyles.border === 'none'">○</button>
+            <button (click)="setBorder('solid')" [class.active]="selectedStyles.border === 'solid'">▬</button>
+            <button (click)="setBorder('dashed')" [class.active]="selectedStyles.border === 'dashed'"> --</button>
+  
+            <select (change)="setBorderWidth($event)">
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="4px">4px</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="icon-selection">
+          <button (click)="addIconToSelected('mdi:magnify')">
+            Ajouter Icône
+          </button>
+        </div> -->
+        
+        
+        
+        
+
+
+    </div>
+      <div *ngIf="selectedComponent.type === 'Form'" class="design-panel">
+        <div class="design-buttons">
+          <button (click)="moveForward()">Forward</button>
+          <button (click)="moveToFront()">To Front</button>
+          <button (click)="moveBackward()">Backward</button>
+          <button (click)="moveToBack()">To Back</button>
+        </div>
+        <div class="opacity-control">
+          <label>Opacity: {{opacityValue}}%</label>
+          <input type="range" 
+                 min="0" 
+                 max="100" 
+                 step="1" 
+                 [value]="opacityValue"
+                 (input)="onOpacityChange($any($event.target).value)">
+        </div>
+          <!-- Corners -->
+          <div class="design-section">
+            <label>Corners</label>
+            <div class="corner-options">
+              <button (click)="setCorner('sharp')" [class.active]="selectedStyles.corner === 'sharp'">Sharp</button>
+              <button (click)="setCorner('hard')" [class.active]="selectedStyles.corner === 'hard'">Hard</button>
+              <button (click)="setCorner('rounded')" [class.active]="selectedStyles.corner === 'rounded'">Rounded</button>
+              <button (click)="setCorner('soft')" [class.active]="selectedStyles.corner === 'soft'">Soft</button>
+              <button (click)="setCorner('circular')"
+                [class.active]="selectedStyles.corner === 'circular'">Circular</button>
+            </div>
+          </div>
+    
+          <!-- Shadow -->
+          <div class="design-section">
+            <label>Shadow</label>
+            <div class="shadow-options">
+              <button (click)="setShadow('none')" [class.active]="selectedStyles.shadow === 'none'">None</button>
+              <button (click)="setShadow('soft')" [class.active]="selectedStyles.shadow === 'soft'">Soft</button>
+              <button (click)="setShadow('regular')" [class.active]="selectedStyles.shadow === 'regular'">Regular</button>
+              <button (click)="setShadow('hard')" [class.active]="selectedStyles.shadow === 'hard'">Hard</button>
+              <button (click)="setShadow('retro')" [class.active]="selectedStyles.shadow === 'retro'">Retro</button>
+            </div>
+          </div>
+  
+          <div class="design-section">
+            <label>Border</label>
+            <div class="border-options">
+    
+              <button (click)="setBorder('none')" [class.active]="selectedStyles.border === 'none'">○</button>
+              <button (click)="setBorder('solid')" [class.active]="selectedStyles.border === 'solid'">▬</button>
+              <button (click)="setBorder('dashed')" [class.active]="selectedStyles.border === 'dashed'"> --</button>
+    
+              <select (change)="setBorderWidth($event)">
+                <option value="1px">1px</option>
+                <option value="2px">2px</option>
+                <option value="3px">3px</option>
+                <option value="4px">4px</option>
+              </select>
+            </div>
+          </div>
+      </div>
+
+    
+
+    <div *ngIf="selectedComponent.type !== 'Text' && 
+    selectedComponent.type !== 'Shape' && 
+    selectedComponent.type !== 'Image' &&
+    selectedComponent.type !== 'Icon' &&
+    selectedComponent.type !== 'Button' &&
+    selectedComponent.type !== 'Form' &&
+
+    
+    selectedStyles && getObjectKeys(selectedStyles).length > 0">
       <div *ngFor="let style of getObjectKeys(selectedStyles)">
         <label>{{ style }}:</label>
         <ng-container *ngIf="style === 'backgroundColor' || style === 'color'; else textInput">
           <input type="color" [(ngModel)]="selectedStyles[style]" (input)="onInputChange(style, $event)">
         </ng-container>
-        <!-- Afficher un champ de type "text" pour les autres styles -->
         <ng-template #textInput>
           <input type="text" [(ngModel)]="selectedStyles[style]" (input)="onInputChange(style, $event)">
         </ng-template>
       </div>
     </div>
   </div>
-
-  <!-- Aucun composant sélectionné -->
   <ng-template #noSelection>
     <p></p>
   </ng-template>

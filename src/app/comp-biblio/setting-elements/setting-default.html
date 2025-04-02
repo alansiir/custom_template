@@ -1,0 +1,37 @@
+<div class="default-settings">
+    <div class="generic-controls">
+      <div class="design-buttons">
+        <button (click)="moveForward()">Forward</button>
+        <button (click)="moveToFront()">To Front</button>
+        <button (click)="moveBackward()">Backward</button>
+        <button (click)="moveToBack()">To Back</button>
+      </div>
+  
+      <div *ngIf="selectedStyles && getObjectKeys(selectedStyles).length > 0" class="style-properties">
+        <h3>Style Properties</h3>
+        <div *ngFor="let style of getObjectKeys(selectedStyles)" class="style-control">
+          <label>{{ style | titlecase }}:</label>
+          
+          <ng-container [ngSwitch]="style">
+            <!-- Input color pour les propriétés de couleur -->
+            <input *ngSwitchCase="'backgroundColor'" type="color" 
+                   [(ngModel)]="selectedStyles[style]" 
+                   (input)="onInputChange(style, $event)">
+  
+            <input *ngSwitchCase="'color'" type="color" 
+                   [(ngModel)]="selectedStyles[style]" 
+                   (input)="onInputChange(style, $event)">
+  
+            <!-- Input text pour les autres propriétés -->
+            <input *ngSwitchDefault type="text" 
+                   [(ngModel)]="selectedStyles[style]" 
+                   (input)="onInputChange(style, $event)">
+          </ng-container>
+        </div>
+      </div>
+  
+      <div *ngIf="getObjectKeys(selectedStyles).length === 0" class="no-properties">
+        <p>No style properties available for this component type</p>
+      </div>
+    </div>
+  </div>

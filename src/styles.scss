@@ -47,18 +47,18 @@ body {
 
 .text-card {
   margin: 0px;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.1px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   color: rgb(255, 255, 255);
   text-transform: inherit;
 }
 
 .icon-card {
-  font-size: 50px;
-  color: #ffffff;
+  font-size: 40px;
+  color: #dadada;
 }
 
 .remove-btn {
@@ -85,14 +85,17 @@ body {
 
   margin: 0 !important;
   padding: 0 !important;
+  
 
   .selected-component {
    
-    outline: 0.5px solid #258eff !important;
+    outline: 0.5px solid #000000 !important;
     // box-shadow: 0 0 10px  rgb(23, 176, 236) !important;
     // outline-offset: 5px;
-  
+    
 }
+
+
 }
 
 
