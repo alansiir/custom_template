@@ -40,6 +40,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Test00Component } from './test00/test00.component';
 import { HttpClientModule } from '@angular/common/http';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+//import { NbIconModule } from '@nebular/theme';
+
+
 //import { IconModule } from '@iconifsy/angular';
 
 // import { MatDialogActions } from '@angular/material/dialog';
@@ -98,6 +102,9 @@ import { HttpClientModule } from '@angular/common/http';
     DragDropModule,
     // MatDialogActions,
     MatDialogModule,
+    Ng2SmartTableModule,
+    //NbIconModule,
+
   
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], // Ajoutez CUSTOM_ELEMENTS_SCHEMA ici

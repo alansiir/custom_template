@@ -1,28 +1,26 @@
-<div class="login-container">
-    <mat-card>
-      <mat-card-title>Se connecter</mat-card-title>
-      <mat-card-content>    
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" required>
-            <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-              Veuillez entrer un email valide.
-            </mat-error>
-          </mat-form-field>
-  
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Mot de passe</mat-label>
-            <input matInput type="password" formControlName="password" required>
-            <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-              Le mot de passe est requis.
-            </mat-error>
-          </mat-form-field>
-  
-          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-            Se connecter
-          </button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+<div class="login-box">
+  <h2>Login</h2>
+
+<!-- Message d'erreur ici -->
+<div class="error-message" *ngIf="showError">
+  Nom d’utilisateur ou mot de passe incorrect
+</div>
+
+  <form (submit)="onLogin($event)">
+    <div class="user-box">
+      <input type="text" [(ngModel)]="username" name="username" required>
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input type="password" [(ngModel)]="password" name="password" required>
+      <label>Password</label>
+    </div>
+    <button type="submit" class="submit-button">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Submit
+    </button>
+  </form>
+</div>

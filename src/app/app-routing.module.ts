@@ -18,7 +18,9 @@ import { Test00Component } from './test00/test00.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'projects', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+
 
   // Routes avec side nav
   {
@@ -31,27 +33,16 @@ const routes: Routes = [
       { path: 'projects', component: ProjectsComponent },
       { path: 'templates', component: TemplatesComponent },
       { path: 'how-to-use', component: HowtouserComponent },
-      { path: 'login', component: LoginComponent },
     ]
   },
 
-  // Route sans side nav (pour prototype-ui)
-  // {
-  //   path: '/projet/id',
-  //   /* component: ProjectLayoutComponent, */
-  //   children: [
-  //     { path: '', component: ProjectLayoutComponent }
-  //   ]
-  // },
 
-  
   { path: 'projet', component: ProjectLayoutComponent },
   { path: 'comp', component: DragdropComponent },
   { path: 't', component: TableCompComponent },
   { path: 'test', component: Test00Component },
 
 
-  // Route générique pour les erreurs 404
   { path: '**', component: Error404Component }
 ];
 

@@ -1,41 +1,4 @@
-<!-- <<p>Tableau de user </p>
-<div class="container mt-4">
-   
-    <div class="d-flex justify-content-between mb-3">
-      <button class="btn btn-primary" (click)="saveUser()">Ajouter</button>
-      <input type="text" class="form-control w-25" [(ngModel)]="searchQuery" (input)="search()" placeholder="Rechercher">
-    </div>
-  
-    
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Département</th>
-          <th>Poste</th>
-          <th>Rôle</th>
-          <th>Actions</th>
-        </tr>
-        
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of filteredUsers">
-          <td>{{ user.nom }}</td>
-          <td>{{ user.prenom }}</td>
-          <td>{{ user.departement }}</td>
-          <td>{{ user.poste }}</td>
-          <td>{{ user.role }}</td>
-          <td>
-            <button class="btn btn-warning btn-sm" (click)="editUser(user)">Modifier</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteUser(user)">Supprimer</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  -->
+
   <div class="user-management">
     <!-- Barre de recherche -->
     <div class="search-bar">
@@ -44,43 +7,12 @@
              placeholder="Rechercher...">
     </div>
   
-    <!-- Formulaire -->
-   <!--  <div class="user-form">
-      <h2>{{ currentUser.id ? 'Modifier' : 'Créer' }} un utilisateur</h2>
-      <input [(ngModel)]="currentUser.nom" placeholder="Nom">
-      <input [(ngModel)]="currentUser.prenom" placeholder="Prénom">
-      <input [(ngModel)]="currentUser.departement" placeholder="Département">
-      <input [(ngModel)]="currentUser.poste" placeholder="Poste">
-      <select [(ngModel)]="currentUser.role">
-        <option value="DEVELOPPEUR">Développeur</option>
-        <option value="ADMINISTRATEUR">Administrateur</option>
-      </select>
-      <button (click)="saveUser()">Enregistrer</button>
-      <button *ngIf="currentUser.id" (click)="currentUser = {}">Annuler</button>
-    </div>
-   -->
-    <!-- Liste -->
-    <div class="user-list">
-      <table>
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Département</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of filteredUsers">
-            <td>{{ user.nom }}</td>
-            <td>{{ user.prenom }}</td>
-            <td>{{ user.departement }}</td>
-            <td>
-              <button (click)="editUser(user)">✏️</button>
-              <button (click)="deleteUser(user.id)">🗑️</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- Smart Table -->
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (createConfirm)="onCreateConfirm($event)"
+      (editConfirm)="onEditConfirm($event)"
+      (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
   </div>
