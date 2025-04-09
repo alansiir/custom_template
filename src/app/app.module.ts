@@ -39,6 +39,7 @@ import { CompSettingComponent } from './comp-setting/comp-setting.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Test00Component } from './test00/test00.component';
+import { HttpClientModule } from '@angular/common/http';
 //import { IconModule } from '@iconifsy/angular';
 
 // import { MatDialogActions } from '@angular/material/dialog';
@@ -49,7 +50,7 @@ import { Test00Component } from './test00/test00.component';
 
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     AppComponent,
     TableCompComponent,
     HomeComponent,
@@ -76,6 +77,7 @@ import { Test00Component } from './test00/test00.component';
    
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule, 
     AppRoutingModule,

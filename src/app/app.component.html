@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<div class="app-container">
+    <!-- Votre contenu existant -->
+    <router-outlet></router-outlet>
+  
+    <!-- Section de test API - Seulement en développement -->
+    <div *ngIf="isDevMode" class="api-test-container">
+      <button (click)="testApiConnection()">Tester la connexion API</button>
+      
+      <div *ngIf="apiResponse" class="api-response">
+        <h4>Réponse API :</h4>
+        <pre>{{ apiResponse | json }}</pre>
+      </div>
+      
+      <div *ngIf="apiError" class="api-error">
+        Erreur: {{ apiError }}
+      </div>
+    </div>
+  </div>

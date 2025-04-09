@@ -1,5 +1,4 @@
-$primary-color : #3f51b5;
-
+$primary-color: #3f51b5;
 
 table {
   width: 100%;
@@ -10,7 +9,6 @@ th,
 td {
   padding: 12px 8px;
   text-align: center;
-
 }
 
 th {
@@ -117,10 +115,10 @@ td:first-child {
     border-bottom: 2px solid #b9b9b9;
     border-radius: 6px;
     padding-inline: 10px;
-    
+
     &:focus {
       outline: none; /* Supprime l'effet de focus */
-      border: none;  /* Supprime la bordure */
+      border: none; /* Supprime la bordure */
       border-bottom: 2px solid #b9b9b9;
     }
   }
@@ -134,7 +132,6 @@ td:first-child {
   }
 
   &:hover {
-
     svg {
       color: $primary-color;
     }
@@ -159,9 +156,6 @@ td:first-child {
 }
 
 .customFilters {
-
-
-
   .iconify {
     color: #747474;
     &:hover {
@@ -182,15 +176,13 @@ td:first-child {
 }
 
 table {
-
   thead {
     height: 55px;
-    tr{
+    tr {
       background-color: #f4f4f4;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
       th {
-
         input {
           height: 35px;
           border-radius: 3px;
@@ -201,7 +193,6 @@ table {
   }
 
   tbody {
-
     td.actions {
       display: flex;
       align-items: center;
@@ -220,7 +211,8 @@ table {
         }
       }
 
-      .editing, .row-add {
+      .editing,
+      .row-add {
         display: flex;
         gap: 15px;
         align-items: center;
@@ -228,12 +220,11 @@ table {
       }
     }
 
-    tr:nth-child(even){
+    tr:nth-child(even) {
       background-color: #e9e9e9;
     }
 
     .input-container {
-
       input {
         border: 1px solid #aeaeae;
         border-radius: 25px;
@@ -280,6 +271,15 @@ table {
       height: 40px;
       padding: 10px 15px;
       border-radius: 5px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .toolbar {
+    
+    .table-actions {
+      display: none !important; 
     }
   }
 }

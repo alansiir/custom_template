@@ -41,17 +41,31 @@ readonly iconSizes: ('XS' | 'S' | 'M' | 'L' | 'XL')[] = ['XS', 'S', 'M', 'L', 'X
   }
 
   ngOnInit(): void {
-    // Écouter les clics sur le document entier
+ // this.loadFromLocalStorage();
+    // this.loadFromLocalStorage(); // Charger les éléments sauvegardés
     document.addEventListener('click', (event: MouseEvent) => {
       this.handleDocumentClick(event);
     });
+    this.testLocalStorageCapacity();
+
   }
 
+  private testLocalStorageCapacity(): void {
+    try {
+      const testData = new Array(1000).fill('test').join('');
+      localStorage.setItem('capacityTest', testData);
+      console.log('Test de capacité réussi');
+      localStorage.removeItem('capacityTest');
+    } catch (e) {
+      console.warn('Capacité limitée du localStorage:', e);
+    }
+  }
   ngOnChanges() {
     if (this.selectedComponent) {
       this.selectedStyles = this.selectedComponent.styles || {};
     }
   }
+
 
   getObjectKeys(obj: any): string[] {
     return Object.keys(obj);
@@ -84,6 +98,8 @@ readonly iconSizes: ('XS' | 'S' | 'M' | 'L' | 'XL')[] = ['XS', 'S', 'M', 'L', 'X
       this.selectedStyles = {}; // Réinitialiser les styles sélectionnés
       this.hasClonedTable = this.checkForClonedTables(); // Vérifier s'il reste des clones
     }
+    // this.saveToLocalStorage(); // Sauvegarder après la suppression
+
   }
 
   // Vérifier s'il reste des clones dans la drop-zone
@@ -340,6 +356,8 @@ readonly iconSizes: ('XS' | 'S' | 'M' | 'L' | 'XL')[] = ['XS', 'S', 'M', 'L', 'X
       } else {
       }
     }
+    // this.saveToLocalStorage(); // Sauvegarder après avoir ajouté un clone
+
   }
 
   selectComponent(container: HTMLElement): void {
@@ -386,23 +404,37 @@ readonly iconSizes: ('XS' | 'S' | 'M' | 'L' | 'XL')[] = ['XS', 'S', 'M', 'L', 'X
     const height = parseInt(component.styles.height, 10);
     const borderRadius = parseInt(component.styles.borderRadius, 10);
     const fontSize = parseInt(component.styles.fontSize, 10);
+    const backgroundColor = parseInt(component.styles.backgroundColor, 10);
+
     let newWidth,
       newHeight,
+      newZoom,
       newBorderRadius = borderRadius / 2;
+
     let newFontSize = fontSize / 2;
+    
+    let newBackgroundColor = '#FFF';
+    
+    
     if (width > height) {
       newWidth = 100;
       newHeight = (height / width) * 100;
+      //newZoom = 0.06 ;
+      
     } else {
       newHeight = 100;
       newWidth = (width / height) * 100;
+      //newZoom = 0.06;
     }
+
     return {
       ...component.styles,
       height: `${newHeight}%`,
       width: `${newWidth}%`,
       borderRadius: `${newBorderRadius}px`,
       fontSize: `${newFontSize}px`,
+    //  zoom: `${newZoom}`,
+      backgroundColor: `${newBackgroundColor}`,
     };
   }
   onInputChange(style: string, event: Event): void {
@@ -412,6 +444,8 @@ readonly iconSizes: ('XS' | 'S' | 'M' | 'L' | 'XL')[] = ['XS', 'S', 'M', 'L', 'X
       this.selectedStyles,
       this.selectedClone
     );
+    // this.saveToLocalStorage(); // Sauvegarder après avoir modifié un style
+
   }
   onTextAlignChange(event: Event): void {
     StyleManager.onTextAlignChange(
@@ -570,6 +604,327 @@ addIconToSelected(iconName: string): void {
     StyleManager.addIcon(iconName, this.selectedStyles, this.selectedClone);
   }
 }
+
+// saveToLocalStorage(): void {
+//   const dropZone = document.querySelector('.drop-zone');
+//   if (!dropZone) return;
+
+//   const clones = Array.from(dropZone.querySelectorAll('.clone-container')).map((clone) => {
+//     const element = clone as HTMLElement;
+//     const content = element.firstElementChild as HTMLElement;
+//     const original = (element as any).originalComponent || {};
+
+//     // Sauvegarder le type spécifique et les propriétés
+//     const savedItem: any = {
+//       id: element.id || `clone-${Date.now()}`,
+//       type: original.type,
+//       label: original.label,
+//       component: original.component,
+//       styles: {},
+//       position: {
+//         left: element.style.left,
+//         top: element.style.top
+//       },
+//       attributes: original.attributes || {},
+//       content: original.content || content.innerHTML
+//     };
+
+//     // Sauvegarder les styles selon le type
+//     switch (original.type) {
+//       case 'Template':
+//         savedItem.templateType = original.label.toLowerCase();
+//         savedItem.styles = this.cloneStyles(content.style);
+//         break;
+        
+//       case 'Image':
+//         savedItem.imgSrc = original.src || content.querySelector('img')?.src;
+//         savedItem.styles = this.cloneStyles(content.style);
+//         break;
+        
+//       case 'Icon':
+//         savedItem.icon = original.icon;
+//         savedItem.styles = { 
+//           fontSize: content.style.fontSize,
+//           color: content.style.color 
+//         };
+//         break;
+        
+//       default:
+//         savedItem.styles = this.cloneStyles(content.style);
+//     }
+
+//     return savedItem;
+//   });
+
+//   localStorage.setItem('savedComponents', JSON.stringify(clones));
+// }
+
+// private cloneStyles(style: CSSStyleDeclaration): any {
+//   const styles: any = {};
+//   for (let i = 0; i < style.length; i++) {
+//     const prop = style[i];
+//     styles[prop] = style.getPropertyValue(prop);
+//   }
+//   return styles;
+// }
+
+// loadFromLocalStorage(): void {
+//   const savedData = localStorage.getItem('savedComponents');
+//   if (!savedData) return;
+
+//   try {
+//     const savedComponents = JSON.parse(savedData);
+//     const dropZone = document.querySelector('.drop-zone');
+//     if (!dropZone) return;
+
+//     dropZone.innerHTML = '';
+
+//     savedComponents.forEach((comp: any) => {
+//       const container = document.createElement('div');
+//       container.className = 'clone-container';
+//       container.id = comp.id;
+//       container.style.position = 'absolute';
+//       container.style.left = comp.position.left || '0px';
+//       container.style.top = comp.position.top || '0px';
+
+//       // Créer le contenu selon le type
+//       let content: HTMLElement;
+//       switch (comp.type) {
+//         case 'Template':
+//           content = this.restoreTemplate(comp);
+//           break;
+          
+//         case 'Button':
+//           content = this.restoreButton(comp);
+//           break;
+          
+//         case 'Shape':
+//           content = this.restoreShape(comp);
+//           break;
+          
+//         case 'Text':
+//           content = this.restoreText(comp);
+//           break;
+          
+//         case 'Image':
+//           content = this.restoreImage(comp);
+//           break;
+          
+//         case 'Icon':
+//           content = this.restoreIcon(comp);
+//           break;
+          
+//         case 'Form':
+//           content = this.restoreFormElement(comp);
+//           break;
+          
+//         default:
+//           content = document.createElement('div');
+//           content.innerHTML = comp.content || '';
+//       }
+
+//       // Appliquer les styles
+//       Object.keys(comp.styles).forEach(prop => {
+//         content.style[prop as any] = comp.styles[prop];
+//       });
+
+//       container.appendChild(content);
+//       this.setupDragHandlers(container);
+//       this.addRemoveButton(container);
+//       dropZone.appendChild(container);
+//     });
+//   } catch (error) {
+//     console.error('Error loading from localStorage:', error);
+//   }
+// }
+// private restoreTemplate(comp: any): HTMLElement {
+//   const template = document.createElement(comp.component);
+  
+//   // Gestion spéciale pour les templates complexes
+//   switch (comp.templateType) {
+//     case 'navbar':
+//       return this.restoreNavbar(comp);
+//     case 'sidebar':
+//       return this.restoreSidebar(comp);
+//     case 'footer':
+//       return this.restoreFooter(comp);
+   
+//     default:
+//       if (comp.content) {
+//         template.innerHTML = comp.content;
+//       }
+//       return template;
+//   }
+// }
+
+// private restoreNavbar(comp: any): HTMLElement {
+//   const nav = document.createElement('nav');
+//   nav.innerHTML = `
+//     <div class="logo">SAFRAN</div>
+//     <ul class="nav-links">
+//       <li><a href="#">Services</a></li>
+//       <li><a href="#">Projects</a></li>
+//       <li><a href="#">Profile</a></li>
+//     </ul>
+//   `;
+//   return nav;
+// }
+
+// private restoreSidebar(comp: any): HTMLElement {
+//   const aside = document.createElement('aside');
+//   aside.innerHTML = `
+//     <ul class="sidebar-menu">
+//       <li><a href="#">Home</a></li>
+//       <li><a href="#">Dashboard</a></li>
+//       <li><a href="#">Settings</a></li>
+//     </ul>
+//   `;
+//   return aside;
+// }
+
+// private restoreButton(comp: any): HTMLButtonElement {
+//   const button = document.createElement('button');
+//   button.textContent = comp.label;
+//   button.className = 'restored-button';
+//   return button;
+// }
+
+// private restoreShape(comp: any): HTMLElement {
+//   const shape = document.createElement('div');
+//   shape.className = `shape ${comp.label.toLowerCase().replace(' ', '-')}`;
+//   return shape;
+// }
+
+// private restoreImage(comp: any): HTMLElement {
+//   const container = document.createElement('div');
+//   const img = document.createElement('img');
+//   img.src = comp.imgSrc || 'assets/default-image.png';
+//   img.alt = comp.label;
+//   container.appendChild(img);
+//   return container;
+// }
+
+// private restoreIcon(comp: any): HTMLElement {
+//   const icon = document.createElement('i');
+//   icon.className = 'iconify';
+//   icon.setAttribute('data-icon', comp.icon);
+//   return icon;
+// }
+
+// private restoreFormElement(comp: any): HTMLElement {
+//   let element: HTMLElement;
+  
+//   switch (comp.component) {
+//     case 'input-text':
+//       element = document.createElement('input');
+//       element.setAttribute('type', 'text');
+//       break;
+//     case 'input-checkbox':
+//       element = document.createElement('input');
+//       element.setAttribute('type', 'checkbox');
+//       break;
+//     case 'input-radio':
+//       element = document.createElement('input');
+//       element.setAttribute('type', 'radio');
+//       break;
+//     case 'input-slider':
+//       element = document.createElement('input');
+//       element.setAttribute('type', 'range');
+//       break;
+//     default:
+//       element = document.createElement('div');
+//   }
+
+//   // Appliquer les attributs
+//   Object.keys(comp.attributes || {}).forEach(attr => {
+//     element.setAttribute(attr, comp.attributes[attr]);
+//   });
+
+//   return element;
+// }
+
+
+// private addRemoveButton(container: HTMLElement): void {
+//   const removeBtn = document.createElement('button');
+//   removeBtn.className = 'remove-btn';
+//   removeBtn.textContent = '×';
+//   removeBtn.addEventListener('click', (e) => {
+//     e.stopPropagation();
+//     container.remove();
+//     this.saveToLocalStorage();
+//   });
+//   container.appendChild(removeBtn);
+// }
+
+// private setupDragHandlers(element: HTMLElement): void {
+//   let isDragging = false;
+//   let offsetX = 0;
+//   let offsetY = 0;
+
+//   // Mouse Down Handler
+//   element.addEventListener('mousedown', (e: MouseEvent) => {
+//     if (e.button !== 0) return; // Only left mouse button
+//     if ((e.target as HTMLElement).classList.contains('remove-btn')) return;
+
+//     isDragging = true;
+//     const rect = element.getBoundingClientRect();
+//     offsetX = e.clientX - rect.left;
+//     offsetY = e.clientY - rect.top;
+    
+//     element.style.cursor = 'grabbing';
+//     element.style.zIndex = '100'; // Bring to front when dragging
+    
+//     document.addEventListener('mousemove', onMouseMove);
+//     document.addEventListener('mouseup', onMouseUp);
+//   });
+
+//   const onMouseMove = (e: MouseEvent) => {
+//     if (!isDragging) return;
+    
+//     const dropZone = document.querySelector('.drop-zone');
+//     if (!dropZone) return;
+    
+//     const dropZoneRect = dropZone.getBoundingClientRect();
+//     let x = e.clientX - dropZoneRect.left - offsetX;
+//     let y = e.clientY - dropZoneRect.top - offsetY;
+    
+//     // Boundary checks
+//     x = Math.max(0, Math.min(x, dropZoneRect.width - element.offsetWidth));
+//     y = Math.max(0, Math.min(y, dropZoneRect.height - element.offsetHeight));
+    
+//     element.style.left = `${x}px`;
+//     element.style.top = `${y}px`;
+//   };
+
+//   const onMouseUp = () => {
+//     isDragging = false;
+//     element.style.cursor = 'move';
+//     document.removeEventListener('mousemove', onMouseMove);
+//     document.removeEventListener('mouseup', onMouseUp);
+    
+//     // Save new position
+//     this.saveToLocalStorage();
+//   };
+
+// }
+
+// private restoreText(comp: any): HTMLElement {
+//   const textElement = document.createElement(comp.component || 'p');
+//   textElement.textContent = comp.content || comp.label || '';
+//   textElement.className = 'restored-text';
+//   return textElement;
+// }
+// private restoreFooter(comp: any): HTMLElement {
+//   const footer = document.createElement('footer');
+//   footer.innerHTML = `
+//     <div class="footer-content">
+//       ${comp.content?.[0]?.content || '© 2025 Safran. Tous droits réservés.'}
+//     </div>
+//   `;
+//   footer.className = 'restored-footer';
+//   return footer;
+// }
+
 
 
 

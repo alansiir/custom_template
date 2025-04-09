@@ -3,7 +3,12 @@ export const componentsData = [
     type: 'Template',
     label: 'table',
     component: 'app-table-comp',
-    styles: { zoom: '0.3 ' },
+    styles: { 
+      width: '100%',
+      height: '100%',
+      zoom : '1',
+      backgroundColor: 'transparent',
+     },
   },
 
   {
@@ -199,8 +204,8 @@ export const componentsData = [
       padding: '10px 20px',
       margin: '0',
       fontFamily: 'Arial, sans-serif',
-      width: '752px',
-      height: '32px',
+      width: 'fit-content',
+      height: '50px',
     },
     content: [
       {

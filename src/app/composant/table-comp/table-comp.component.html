@@ -1,229 +1,225 @@
-<div
-  id="{{ id }}"
-  class="tableau draggable"
-  draggable="true" 
-  
->
-<div class="container-fluid">
-  <div class="toolbar">
-    <button mat-mini-fab color="primary" (click)="deleteSelectedRows()" [disabled]="!isAnyRowSelected()"
-      matTooltip="Suppression multiple">
-      <span class="iconify" data-icon="mdi:trash-can-empty"></span>
-    </button>
+<div id="{{ id }}" class="tableau draggable" draggable="true">
 
-    <div class="filtres">
-      <div class="search-bar">
-        <input class="" type="text" placeholder="Rechercher..." [(ngModel)]="searchText" (input)="applyFilter()" />
-        <span class="iconify" data-icon="line-md:search-twotone"></span>
-        <span *ngIf="searchText" class="clear-icon" (click)="clearInput()">✖</span>
+  <div class="container-fluid">
+    <div class="toolbar">
+      <button mat-mini-fab color="primary" (click)="deleteSelectedRows()" [disabled]="!isAnyRowSelected()"
+        matTooltip="Suppression multiple">
+        <span class="iconify" data-icon="mdi:trash-can-empty"></span>
+      </button>
+
+      <div class="filtres">
+        <div class="search-bar">
+          <input class="" type="text" placeholder="Rechercher..." [(ngModel)]="searchText" (input)="applyFilter()" />
+          <span class="iconify" data-icon="line-md:search-twotone"></span>
+          <span *ngIf="searchText" class="clear-icon" (click)="clearInput()">✖</span>
+        </div>
+
+        <button mat-icon-button class="customFilters" (click)="clearAllFilters()"
+          matTooltip="Désactivez tous les filtres">
+          <span class="iconify" data-icon="mdi:filter-remove-outline"></span>
+        </button>
       </div>
 
-      <button mat-icon-button class="customFilters" (click)="clearAllFilters()"
-        matTooltip="Désactivez tous les filtres">
-        <span class="iconify" data-icon="mdi:filter-remove-outline"></span>
-      </button>
+
+      <div class="table-actions">
+        <button mat-mini-fab color="primary" (click)="addRow()" matTooltip="Ajoutez une ligne"
+          *ngIf="settings.actions.add">
+          <span class="iconify" data-icon="mdi:add-bold"></span>
+        </button>
+        <button mat-mini-fab color="primary" matTooltip="Téléchargez pdf" *ngIf="settings.actions.pdf">
+          <span class="iconify" data-icon="mdi:file-download-outline">
+          </span>
+        </button>
+        <button mat-mini-fab color="primary" matTooltip="Téléchargez Excel" *ngIf="settings.actions.excel">
+          <span class="iconify" data-icon="mdi:microsoft-excel"
+            style="font-size: 24px !important; padding-bottom: 1px;">
+          </span>
+        </button>
+        <button mat-mini-fab color="primary" matTooltip="Téléchargez CSV"
+          style="font-size: 11px; font-weight: 600; padding-top: 1px;" *ngIf="settings.actions.csv">
+          CSV
+        </button>
+        <button mat-mini-fab color="primary" matTooltip="Importer Excel" *ngIf="settings.actions.import">
+          <span class="iconify" data-icon="material-symbols:convert-to-text-outline-rounded"></span>
+        </button>
+        <button mat-mini-fab color="primary" matTooltip="Paramètre tableau" (click)="openDialog(dialogTemplate)"
+          *ngIf="settings.actions.settings">
+          <span class="iconify" data-icon="material-symbols:settings"></span>
+        </button>
+      </div>
     </div>
 
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" [(ngModel)]="selectAll" (change)="toggleAllRows()" /></th>
 
-    <div class="table-actions">
-      <button mat-mini-fab color="primary" (click)="addRow()" matTooltip="Ajoutez une ligne"
-        *ngIf="settings.actions.add">
-        <span class="iconify" data-icon="mdi:add-bold"></span>
-      </button>
-      <button mat-mini-fab color="primary" matTooltip="Téléchargez pdf" *ngIf="settings.actions.pdf">
-        <span class="iconify" data-icon="mdi:file-download-outline">
-        </span>
-      </button>
-      <button mat-mini-fab color="primary" matTooltip="Téléchargez Excel" *ngIf="settings.actions.excel">
-        <span class="iconify" data-icon="mdi:microsoft-excel" style="font-size: 24px !important; padding-bottom: 1px;">
-        </span>
-      </button>
-      <button mat-mini-fab color="primary" matTooltip="Téléchargez CSV"
-        style="font-size: 11px; font-weight: 600; padding-top: 1px;" *ngIf="settings.actions.csv">
-        CSV
-      </button>
-      <button mat-mini-fab color="primary" matTooltip="Importer Excel" *ngIf="settings.actions.import">
-        <span class="iconify" data-icon="material-symbols:convert-to-text-outline-rounded"></span>
-      </button>
-      <button mat-mini-fab color="primary" matTooltip="Paramètre tableau" (click)="openDialog(dialogTemplate)"
-        *ngIf="settings.actions.settings">
-        <span class="iconify" data-icon="material-symbols:settings"></span>
-      </button>
-    </div>
-  </div>
+          <ng-container *ngFor="let col of settings.columns | keyvalue: keepOrder">
+            <th *ngIf="col.value.show">
+              <span class="input-container">
+                <button mat-icon-button *ngIf="!col.value.filter" matTooltip="Filtrez par {{ col.value.title }}"
+                  (click)="toggleFilter(col.key)">
+                  <span class="iconify" data-icon="mdi:filter-plus-outline"></span>
+                </button>
+                <button mat-icon-button *ngIf="col.value.filter" (click)="toggleFilter(col.key)">
+                  <span class="iconify" data-icon="mdi:filter-remove"></span>
+                </button>
+                <span *ngIf="!col.value.filter">{{ col.value.title }}</span>
+                <span *ngIf="col.value.filter"><input [(ngModel)]="col.value.filterText" (input)="applyColumnFilter()"
+                    placeholder="Filtrer..." style="width: 120px; font-weight: 500; border: 1px solid #a0a0a0;"></span>
+              </span>
+            </th>
+          </ng-container>
 
-  <table>
-    <thead>
-      <tr>
-        <th><input type="checkbox" [(ngModel)]="selectAll" (change)="toggleAllRows()" /></th>
+          <ng-container *ngIf="settings.actions.active">
+            <th>Actions</th>
+          </ng-container>
+        </tr>
+      </thead>
 
-        <ng-container *ngFor="let col of settings.columns | keyvalue: keepOrder">
-          <th *ngIf="col.value.show">
-            <span class="input-container">
-              <button mat-icon-button *ngIf="!col.value.filter" matTooltip="Filtrez par {{ col.value.title }}"
-                (click)="toggleFilter(col.key)">
-                <span class="iconify" data-icon="mdi:filter-plus-outline"></span>
+      <tbody *ngIf="paginatedData.length > 0; else emptyTable">
+        <tr *ngFor="let element of paginatedData">
+          <td> <input type="checkbox" [(ngModel)]="element.selected" /></td>
+
+          <ng-container *ngFor="let col of settings.columns | keyvalue: keepOrder">
+            <td *ngIf="col.value.show">
+              <ng-container *ngIf="col.value.type === 'component'">
+                <ng-container *ngComponentOutlet="col.value.component"></ng-container>
+              </ng-container>
+
+              <ng-container *ngIf="col.key !== 'custom'">
+                <div class="input-container">
+
+                  <input [(ngModel)]="element[col.key]" *ngIf="element.editing" [type]="col.value.type"
+                    placeholder="Saisissez {{ col.value.title }}" />
+                  <span *ngIf="!element.editing">{{ element[col.key] || 'N/A'}}</span>
+                </div>
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <td class="actions" *ngIf="settings.actions.active">
+            <div class="editing" *ngIf="!element.editing">
+              <button mat-mini-fab color="primary" (click)="openDialogDetails(dialogDetails, element)"
+                *ngIf="settings.actions.view" matTooltip="Profil">
+                <span class="iconify" data-icon="mdi:eye"></span>
               </button>
-              <button mat-icon-button *ngIf="col.value.filter" (click)="toggleFilter(col.key)">
-                <span class="iconify" data-icon="mdi:filter-remove"></span>
+              <button mat-mini-fab color="primary" (click)="editRow(element)" *ngIf="settings.actions.edit"
+                matTooltip="Editer">
+                <span class="iconify" data-icon="mdi:square-edit-outline"></span>
               </button>
-              <span *ngIf="!col.value.filter">{{ col.value.title }}</span>
-              <span *ngIf="col.value.filter"><input [(ngModel)]="col.value.filterText" (input)="applyColumnFilter()"
-                  placeholder="Filtrer..." style="width: 120px; font-weight: 500; border: 1px solid #a0a0a0;"></span>
-            </span>
-          </th>
-        </ng-container>
+              <button mat-mini-fab color="primary" (click)="deleteRow(element)" *ngIf="settings.actions.delete"
+                matTooltip="Supprimer">
+                <span class="iconify" data-icon="mdi:trash-can-empty"></span>
+              </button>
+            </div>
 
-        <ng-container *ngIf="settings.actions.active">
-          <th>Actions</th>
-        </ng-container>
-      </tr>
-    </thead>
-
-    <tbody *ngIf="paginatedData.length > 0; else emptyTable">
-      <tr *ngFor="let element of paginatedData">
-        <td> <input type="checkbox" [(ngModel)]="element.selected" /></td>
-
-        <ng-container *ngFor="let col of settings.columns | keyvalue: keepOrder">
-          <td *ngIf="col.value.show">
-            <ng-container *ngIf="col.value.type === 'component'">
-              <ng-container *ngComponentOutlet="col.value.component"></ng-container>
-            </ng-container>
-
-            <ng-container *ngIf="col.key !== 'custom'">
-              <div class="input-container">
-
-                <input [(ngModel)]="element[col.key]" *ngIf="element.editing" [type]="col.value.type"
-                  placeholder="Saisissez {{ col.value.title }}" />
-                <span *ngIf="!element.editing">{{ element[col.key] || 'N/A'}}</span>
-              </div>
-            </ng-container>
+            <div class="row-add" *ngIf="element.editing">
+              <button mat-mini-fab color="primary" (click)="confirmEdit(element)" [disabled]="!isRowFilled(element)"
+                matTooltip="Confirmer">
+                <span class="iconify" data-icon="ic:round-check"></span>
+              </button>
+              <button mat-mini-fab color="primary" (click)="cancelEdit(element)" matTooltip="Annuler">
+                <span class="iconify" data-icon="ic:round-close"></span>
+              </button>
+            </div>
           </td>
-        </ng-container>
 
-        <td class="actions" *ngIf="settings.actions.active">
-          <div class="editing" *ngIf="!element.editing">
-            <button mat-mini-fab color="primary" (click)="openDialogDetails(dialogDetails, element)"
-              *ngIf="settings.actions.view" matTooltip="Profil">
-              <span class="iconify" data-icon="mdi:eye"></span>
-            </button>
-            <button mat-mini-fab color="primary" (click)="editRow(element)" *ngIf="settings.actions.edit"
-              matTooltip="Editer">
-              <span class="iconify" data-icon="mdi:square-edit-outline"></span>
-            </button>
-            <button mat-mini-fab color="primary" (click)="deleteRow(element)" *ngIf="settings.actions.delete"
-              matTooltip="Supprimer">
-              <span class="iconify" data-icon="mdi:trash-can-empty"></span>
-            </button>
-          </div>
+          <td class="actions" *ngIf="addRowActive && !settings.actions.active">
+            <div class="row-add">
+              <button mat-mini-fab color="primary" (click)="confirmEdit(element)" [disabled]="!isRowFilled(element)">
+                <span class="iconify" data-icon="ic:round-check"></span>
+              </button>
+              <button mat-mini-fab color="primary" (click)="cancelEdit(element)">
+                <span class="iconify" data-icon="ic:round-close"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
 
-          <div class="row-add" *ngIf="element.editing">
-            <button mat-mini-fab color="primary" (click)="confirmEdit(element)" [disabled]="!isRowFilled(element)"
-              matTooltip="Confirmer">
-              <span class="iconify" data-icon="ic:round-check"></span>
-            </button>
-            <button mat-mini-fab color="primary" (click)="cancelEdit(element)" matTooltip="Annuler">
-              <span class="iconify" data-icon="ic:round-close"></span>
-            </button>
-          </div>
-        </td>
+      <!-- Message lorsque le tableau est vide -->
+      <ng-template #emptyTable>
+        <tr>
+          <td colspan="6" class="empty-message">Tableau vide</td>
+        </tr>
+      </ng-template>
+    </table>
 
-        <td class="actions" *ngIf="addRowActive && !settings.actions.active">
-          <div class="row-add">
-            <button mat-mini-fab color="primary" (click)="confirmEdit(element)" [disabled]="!isRowFilled(element)">
-              <span class="iconify" data-icon="ic:round-check"></span>
-            </button>
-            <button mat-mini-fab color="primary" (click)="cancelEdit(element)">
-              <span class="iconify" data-icon="ic:round-close"></span>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+    <!-- Pagination -->
+    <div class="pagination-container" *ngIf="originalData.length > 0">
+      <div class="items-page">
+        <label>Éléments par page : </label>
+        <select [(ngModel)]="itemsPerPage" (ngModelChange)="changeItemsPerPage()">
+          <option *ngFor="let size of [5, 10, 15, 20]" [value]="size">{{ size }}</option>
+        </select>
+      </div>
 
-    <!-- Message lorsque le tableau est vide -->
-    <ng-template #emptyTable>
-      <tr>
-        <td colspan="6" class="empty-message">Tableau vide</td>
-      </tr>
-    </ng-template>
-  </table>
-
-  <!-- Pagination -->
-  <div class="pagination-container" *ngIf="originalData.length > 0">
-    <div class="items-page">
-      <label>Éléments par page : </label>
-      <select [(ngModel)]="itemsPerPage" (ngModelChange)="changeItemsPerPage()">
-        <option *ngFor="let size of [5, 10, 15, 20]" [value]="size">{{ size }}</option>
-      </select>
-    </div>
-
-    <div class="pagination">
-      <span class="pages">{{ getDisplayedRange() }} of {{ originalData.length }}</span>
-      <button mat-button (click)="firstPage()" [disabled]="currentPage === 1">
-        <span class="iconify" data-icon="mdi:page-first"></span>
-      </button>
-      <button mat-button (click)="prevPage()" [disabled]="currentPage === 1">
-        <span class="iconify" data-icon="material-symbols:chevron-left"></span>
-      </button>
-      <button mat-button (click)="nextPage()" [disabled]="currentPage === totalPages">
-        <span class="iconify" data-icon="material-symbols:chevron-right"></span>
-      </button>
-      <button mat-button (click)="lastPage()" [disabled]="currentPage === totalPages">
-        <span class="iconify" data-icon="mdi:page-last"></span>
-      </button>
+      <div class="pagination">
+        <span class="pages">{{ getDisplayedRange() }} of {{ originalData.length }}</span>
+        <button mat-button (click)="firstPage()" [disabled]="currentPage === 1">
+          <span class="iconify" data-icon="mdi:page-first"></span>
+        </button>
+        <button mat-button (click)="prevPage()" [disabled]="currentPage === 1">
+          <span class="iconify" data-icon="material-symbols:chevron-left"></span>
+        </button>
+        <button mat-button (click)="nextPage()" [disabled]="currentPage === totalPages">
+          <span class="iconify" data-icon="material-symbols:chevron-right"></span>
+        </button>
+        <button mat-button (click)="lastPage()" [disabled]="currentPage === totalPages">
+          <span class="iconify" data-icon="mdi:page-last"></span>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Modal pour le paramétrage de tableau -->
-<ng-template #dialogTemplate let-data="data">
-  <h2 mat-dialog-title style="padding-bottom: 15px; border-bottom: 1px solid; font-weight: 600;"
-    class="d-flex justify-content-between align-items-center">
-    <span>Sélectionnez le(s) colonne(s) à affichée(s)</span>
-    <button mat-icon-button (click)="data.dialogRef.close()">
-      <span class="iconify" data-icon="material-symbols:close-small-outline-rounded"></span>
-    </button>
-  </h2>
+  <!-- Modal pour le paramétrage de tableau -->
+  <ng-template #dialogTemplate let-data="data">
+    <h2 mat-dialog-title style="padding-bottom: 15px; border-bottom: 1px solid; font-weight: 600;"
+      class="d-flex justify-content-between align-items-center">
+      <span>Sélectionnez le(s) colonne(s) à affichée(s)</span>
+      <button mat-icon-button (click)="data.dialogRef.close()">
+        <span class="iconify" data-icon="material-symbols:close-small-outline-rounded"></span>
+      </button>
+    </h2>
 
-  <mat-dialog-content style="overflow: unset !important; padding: 0 40px 10px;">
-    <section class="example-section" [formGroup]="toppings">
-      <div class="checkbox d-flex flex-column" style="gap: 6px;">
-        <mat-checkbox *ngFor="let col of settings.columns | keyvalue: keepOrder" [formControlName]="col.key"
-          (change)="updateColumnVisibility()">{{
-          col.value.title }}
-        </mat-checkbox>
+    <mat-dialog-content style="overflow: unset !important; padding: 0 40px 10px;">
+      <section class="example-section" [formGroup]="toppings">
+        <div class="checkbox d-flex flex-column" style="gap: 6px;">
+          <mat-checkbox *ngFor="let col of settings.columns | keyvalue: keepOrder" [formControlName]="col.key"
+            (change)="updateColumnVisibility()">{{
+            col.value.title }}
+          </mat-checkbox>
+        </div>
+      </section>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button class="w-100" mat-flat-button color="primary" (click)="dialogRef.close('Confirmé')">Confirmer</button>
+    </mat-dialog-actions>
+  </ng-template>
+
+  <!-- Modal pour l'affiche de détails d'une ligne -->
+  <ng-template #dialogDetails let-data="data">
+    <h2 mat-dialog-title style="padding-bottom: 15px; border-bottom: 1px solid; font-weight: 600;"
+      class="d-flex justify-content-between align-items-center">
+      <span>Détails</span>
+      <button mat-icon-button (click)="dialogRef.close()">
+        <span class="iconify" data-icon="material-symbols:close-small-outline-rounded"></span>
+      </button>
+    </h2>
+
+    <mat-dialog-content style="overflow: unset !important; padding: 0 40px 10px;">
+      <div *ngFor="let col of settings.columns | keyvalue: keepOrder">
+        <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
+          <span style="font-weight: bold;">{{ col.value.title }}</span>
+          <span>{{ eyeData[col.key] || 'N/A' }}</span> <!-- Affiche la donnée ou 'N/A' si vide -->
+        </div>
       </div>
-    </section>
-  </mat-dialog-content>
+    </mat-dialog-content>
 
-  <mat-dialog-actions>
-    <button class="w-100" mat-flat-button color="primary" (click)="dialogRef.close('Confirmé')">Confirmer</button>
-  </mat-dialog-actions>
-</ng-template>
-
-<!-- Modal pour l'affiche de détails d'une ligne -->
-<ng-template #dialogDetails let-data="data">
-  <h2 mat-dialog-title style="padding-bottom: 15px; border-bottom: 1px solid; font-weight: 600;"
-    class="d-flex justify-content-between align-items-center">
-    <span>Détails</span>
-    <button mat-icon-button (click)="dialogRef.close()">
-      <span class="iconify" data-icon="material-symbols:close-small-outline-rounded"></span>
-    </button>
-  </h2>
-
-  <mat-dialog-content style="overflow: unset !important; padding: 0 40px 10px;">
-    <div *ngFor="let col of settings.columns | keyvalue: keepOrder">
-      <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
-        <span style="font-weight: bold;">{{ col.value.title }}</span>
-        <span>{{ eyeData[col.key] || 'N/A' }}</span> <!-- Affiche la donnée ou 'N/A' si vide -->
-      </div>
-    </div>
-  </mat-dialog-content>
-
-  <mat-dialog-actions>
-    <button class="w-100" mat-flat-button color="primary" (click)="dialogRef.close('Confirmé')">Confirmer</button>
-  </mat-dialog-actions>
-</ng-template>
-
+    <mat-dialog-actions>
+      <button class="w-100" mat-flat-button color="primary" (click)="dialogRef.close('Confirmé')">Confirmer</button>
+    </mat-dialog-actions>
+  </ng-template>
 <div>
