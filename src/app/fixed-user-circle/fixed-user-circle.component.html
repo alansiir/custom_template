@@ -1,0 +1,18 @@
+<div class="user-circle-fixed" [ngClass]="{ 'collapsed': isSidenavCollapsed }">
+    <div class="user-avatar" (click)="toggleUserMenu()">
+        <img *ngIf="user.photo; else initials" [src]="user.photo" alt="User" class="user-image">
+
+        <ng-template #initials>
+        <div class="user-initials">{{ getInitials() }}</div>
+      </ng-template>
+    </div>
+  
+    <div class="user-menu" *ngIf="showMenu" @fadeInOut>
+      <div class="menu-item" (click)="navigateTo('/profile')">
+        <i class="fas fa-user"></i> Profil
+      </div>
+      <div class="menu-item" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </div>
+    </div>
+  </div>

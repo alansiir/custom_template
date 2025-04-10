@@ -1,26 +1,31 @@
-<div class="login-box">
-  <h2>Login</h2>
+<div class="container-fluid">
 
-<!-- Message d'erreur ici -->
-<div class="error-message" *ngIf="showError">
-  Nom d’utilisateur ou mot de passe incorrect
-</div>
 
-  <form (submit)="onLogin($event)">
-    <div class="user-box">
-      <input type="text" [(ngModel)]="username" name="username" required>
-      <label>Username</label>
+  <div class="login-box">
+    <div class="logo pb-5">
+      <img src="../../assets/logo/ProtoWeb_Logo.png" alt="">
     </div>
-    <div class="user-box">
-      <input type="password" [(ngModel)]="password" name="password" required>
-      <label>Password</label>
+
+    <div class="error-message" *ngIf="showError">
+      Nom d’utilisateur ou mot de passe incorrect
     </div>
-    <button type="submit" class="submit-button">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Submit
-    </button>
-  </form>
+
+    <form (submit)="onLogin($event)">
+      <div class="user-box">
+        <input type="text" [(ngModel)]="username" name="username" required>
+        <label>Identifiant</label>
+      </div>
+      <div class="user-box">
+        <input type="password" [(ngModel)]="password" name="password" required>
+        <label>Mot de passe</label>
+      </div>
+      <button type="submit" class="submit-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </button>
+    </form>
+  </div>
 </div>

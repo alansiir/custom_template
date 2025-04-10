@@ -17,13 +17,17 @@ body {
 }
 
 .login-box {
-  width: 400px;
-  padding: 40px;
-  background: rgba(0, 0, 0, 0.5);
+  width: 500px;
+  padding: 80px;
+  background: rgb(11 31 54);
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  position: relative; /* Changez ceci si vous voulez absolument utiliser le position: absolute */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 
   /* Supprimez les propriétés suivantes si vous utilisez flex sur le body */
   /* position: absolute;
@@ -38,8 +42,25 @@ body {
     text-align: center;
   }
 
+  .logo {
+    width: 70%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
   .user-box {
     position: relative;
+    width: 100%;
 
     input {
       width: 100%;
@@ -68,16 +89,16 @@ body {
     input:valid ~ label {
       top: -20px;
       left: 0;
-      color: #03e9f4;
+      color: #e8b146;
       font-size: 12px;
     }
   }
 
-  a, button {
+  button {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
-    color: #03e9f4;
+    color: #e8b146;
     font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
@@ -90,13 +111,13 @@ body {
     cursor: pointer;
 
     &:hover {
-      background: #03e9f4;
+      background: #e8b146;
       color: #fff;
       border-radius: 5px;
-      box-shadow: 0 0 5px #03e9f4,
-                  0 0 25px #03e9f4,
-                  0 0 50px #03e9f4,
-                  0 0 100px #03e9f4;
+      box-shadow: 0 0 5px #e8b146,
+                  0 0 25px #e8b146,
+                  0 0 50px #e8b146,
+                  0 0 100px #e8b146;
     }
 
     span {
@@ -109,7 +130,7 @@ body {
       left: -100%;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #03e9f4);
+      background: linear-gradient(90deg, transparent, #e8b146);
       animation: btn-anim1 1s linear infinite;
     }
 
@@ -118,7 +139,7 @@ body {
       right: 0;
       width: 2px;
       height: 100%;
-      background: linear-gradient(180deg, transparent, #03e9f4);
+      background: linear-gradient(180deg, transparent, #e8b146);
       animation: btn-anim2 1s linear infinite;
       animation-delay: 0.25s;
     }
@@ -128,7 +149,7 @@ body {
       right: -100%;
       width: 100%;
       height: 2px;
-      background: linear-gradient(270deg, transparent, #03e9f4);
+      background: linear-gradient(270deg, transparent, #e8b146);
       animation: btn-anim3 1s linear infinite;
       animation-delay: 0.5s;
     }
@@ -138,7 +159,7 @@ body {
       left: 0;
       width: 2px;
       height: 100%;
-      background: linear-gradient(360deg, transparent, #03e9f4);
+      background: linear-gradient(360deg, transparent, #e8b146);
       animation: btn-anim4 1s linear infinite;
       animation-delay: 0.75s;
     }
@@ -182,14 +203,27 @@ body {
 }
 
 .error-message {
-  color: #ff5555;
+  color: white;
   margin-bottom: 20px;
   text-align: center;
   animation: shake 0.5s;
+  background-color: red;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 13px;
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-5px); }
   40%, 80% { transform: translateX(5px); }
+}
+
+.container-fluid {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #243b55;
 }

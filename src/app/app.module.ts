@@ -43,11 +43,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NbThemeModule } from '@nebular/theme';
 import { NbCardModule, NbIconModule } from '@nebular/theme';  
-//import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageRenderComponent } from './image-render/image-render.component';
+import { FixedUserCircleComponent } from './fixed-user-circle/fixed-user-circle.component';
+
+//import { NbEvaIconsModule } from '@nebular/eva-icons';
 //import { NgChartsModule } from 'ng2-charts';
 //import { ChartsModule } from 'ng2-charts';
 // import { CompleterService } from 'ng2-completer';
+
+
 
 
 
@@ -80,7 +84,8 @@ import { ImageRenderComponent } from './image-render/image-render.component';
     CompBiblioComponent,
     CompSettingComponent,
     Test00Component,
-    ImageRenderComponent
+    ImageRenderComponent,
+    FixedUserCircleComponent
    
    
    
