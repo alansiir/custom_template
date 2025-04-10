@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HowtouserComponent } from './howtouser.component';
+import { ImageRenderComponent } from './image-render.component';
 
-describe('HowtouserComponent', () => {
-  let component: HowtouserComponent;
-  let fixture: ComponentFixture<HowtouserComponent>;
+describe('ImageRenderComponent', () => {
+  let component: ImageRenderComponent;
+  let fixture: ComponentFixture<ImageRenderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HowtouserComponent ]
+      declarations: [ ImageRenderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HowtouserComponent);
+    fixture = TestBed.createComponent(ImageRenderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

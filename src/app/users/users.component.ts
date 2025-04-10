@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ApiService } from '../services/api.service';
+import { ImageRenderComponent } from '../image-render/image-render.component';
+
 
 @Component({
   selector: 'app-users',
@@ -11,38 +13,65 @@ import { ApiService } from '../services/api.service';
 export class UsersComponent implements OnInit {
   settings = {
     add: {
-      addButtonContent: '<i class="nb-plus"></i> Ajouter',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
+      addButtonContent: '<i class="fas fa-plus"></i>',
+      createButtonContent: '<i class="fas fa-check"></i>',
+      cancelButtonContent: '<i class="fas fa-times"></i>',
       confirmCreate: true,
     },
     edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
+      editButtonContent: '<i class="fas fa-edit"></i>',
+      saveButtonContent: '<i class="fas fa-check"></i>',
+      cancelButtonContent: '<i class="fas fa-times"></i>',
       confirmSave: true,
     },
     delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
+      deleteButtonContent: '<i class="fas fa-trash"></i>',
       confirmDelete: true,
     },
     columns: {
+      photo: {
+        title: 'Image',
+        type: 'custom',
+        renderComponent: ImageRenderComponent,
+        filter: false,
+        editable: true,
+        addable: true,
+        valuePrepareFunction: (value: any) => {
+          return value ? value : 'assets/user.jpg'; 
+        }
+      },
+      
       nom: {
-        title: 'Nom',
+        title: 'Nom Complet',
         type: 'string',
       },
-      prenom: {
-        title: 'Prénom',
+      username: {
+        title: 'Username',
         type: 'string',
       },
+      password: {
+        title: 'Password',
+        type: 'string',
+      },
+          
       departement: {
         title: 'Département',
         type: 'string',
+        editor: {
+          type: 'list',
+          config: {
+            list: [
+              { value: 'IT', title: 'IT' },
+              { value: 'PRODUCTION', title: 'PRODUCTION' },
+            ],
+          },
+        },
       },
       poste: {
         title: 'Poste',
         type: 'string',
       },
+    
       role: {
         title: 'Rôle',
         type: 'string',
@@ -50,12 +79,19 @@ export class UsersComponent implements OnInit {
           type: 'list',
           config: {
             list: [
+              { value: 'ADMINISTRATEUR', title: 'Administrateur' },
+              { value: 'CHEF_DE_PROJET', title: 'Chef de projet' },
+              { value: 'DESIGNER', title: 'designer' },
               { value: 'DEVELOPPEUR', title: 'Développeur' },
-              { value: 'ADMINISTRATEUR', title: 'Administrateur' }
+              { value: 'CLIENT', title: 'client' },
+
             ],
           },
         },
+       
+
       }
+     
     }
   };
 
@@ -78,14 +114,21 @@ export class UsersComponent implements OnInit {
   }
 
   search() {
+    const query = this.searchQuery.toLowerCase();
+  
+    // Applique un filtre sur tous les champs disponibles
     this.source.setFilter([
-      { field: 'nom', search: this.searchQuery },
-      { field: 'prenom', search: this.searchQuery },
-      { field: 'departement', search: this.searchQuery },
-      { field: 'poste', search: this.searchQuery },
-      { field: 'role', search: this.searchQuery }
+      { field: 'nom', search: query },
+      { field: 'username', search: query },
+      { field: 'password', search: query },
+      { field: 'departement', search: query },
+      { field: 'poste', search: query },
+      { field: 'role', search: query },
+      { field: 'photo', search: query }
     ], false);
   }
+  
+  
 
   onCreateConfirm(event: any) {
     this.apiService.createUser(event.newData).subscribe({

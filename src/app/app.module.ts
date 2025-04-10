@@ -41,12 +41,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Test00Component } from './test00/test00.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-//import { NbIconModule } from '@nebular/theme';
+import { NbThemeModule } from '@nebular/theme';
+import { NbCardModule, NbIconModule } from '@nebular/theme';  
+//import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ImageRenderComponent } from './image-render/image-render.component';
+//import { NgChartsModule } from 'ng2-charts';
+//import { ChartsModule } from 'ng2-charts';
+// import { CompleterService } from 'ng2-completer';
 
 
-//import { IconModule } from '@iconifsy/angular';
 
-// import { MatDialogActions } from '@angular/material/dialog';
 
 
 
@@ -75,12 +79,14 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     ProjectLayoutComponent,
     CompBiblioComponent,
     CompSettingComponent,
-    Test00Component
+    Test00Component,
+    ImageRenderComponent
    
    
    
   ],
   imports: [
+    
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule, 
@@ -103,7 +109,14 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     // MatDialogActions,
     MatDialogModule,
     Ng2SmartTableModule,
-    //NbIconModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbCardModule,  // Utilisez NbCardModule au lieu de NbLayoutModule
+    // NbIconModule,
+    //NbEvaIconsModule,
+    //ChartsModule,
+    //NgChartsModule,
+
+   
 
   
   ],
