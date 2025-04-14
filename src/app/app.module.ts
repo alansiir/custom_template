@@ -51,7 +51,10 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 //import { NgChartsModule } from 'ng2-charts';
 //import { ChartsModule } from 'ng2-charts';
 // import { CompleterService } from 'ng2-completer';
-
+//import * as echarts from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { TestEchartsComponent } from './test-echarts/test-echarts.component';
+import * as echarts from 'echarts';
 
 
 
@@ -87,13 +90,14 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     Test00Component,
     ImageRenderComponent,
     FixedUserCircleComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    TestEchartsComponent
    
    
    
   ],
   imports: [
-    
+     
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule, 
@@ -122,7 +126,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     //NbEvaIconsModule,
     //ChartsModule,
     //NgChartsModule,
-
+    NgxEchartsModule,
    
 
   

@@ -45,7 +45,9 @@
               "node_modules/@iconify/iconify/dist/iconify.min.js"
 
 
-            ]
+            ],
+            "allowedCommonJsDependencies": ["echarts"] 
+
           },
           "configurations": {
             "production": {
