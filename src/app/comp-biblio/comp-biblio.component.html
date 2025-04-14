@@ -168,17 +168,17 @@
 
 <nav class="setting">
   <div class="modal-header">
-    Setting
+    Configuration
   </div>
 
   <div *ngIf="selectedComponent; else noSelection">
     <div *ngIf="selectedComponent.type === 'Text'">
 
       <div class="design-buttons">
-        <button (click)="moveForward()">Forward</button>
-        <button (click)="moveToFront()">To Front</button>
-        <button (click)="moveBackward()">Backward</button>
-        <button (click)="moveToBack()">To Back</button>
+        <button (click)="moveForward()">Vers l’avant</button>
+        <button (click)="moveToFront()">Premier plan</button>
+        <button (click)="moveBackward()">Vers l’arrière</button>
+        <button (click)="moveToBack()">Arrière-plan</button>
       </div>
       <div class="layout-options">
         <label>Align:</label>
@@ -214,10 +214,10 @@
 
     <div *ngIf="selectedComponent.type === 'Shape'" class="design-panel">
       <div class="design-buttons">
-        <button (click)="moveForward()">Forward</button>
-        <button (click)="moveToFront()">To Front</button>
-        <button (click)="moveBackward()">Backward</button>
-        <button (click)="moveToBack()">To Back</button>
+        <button (click)="moveForward()">Vers l’avant</button>
+        <button (click)="moveToFront()">Premier plan</button>
+        <button (click)="moveBackward()">Vers l’arrière</button>
+        <button (click)="moveToBack()">Arrière-plan</button>
       </div>
 
       <div class="design-section">
@@ -265,10 +265,10 @@
     </div>
     <div *ngIf="selectedComponent.type === 'Image'">
       <div class="design-buttons">
-        <button (click)="moveForward()">Forward</button>
-        <button (click)="moveToFront()">To Front</button>
-        <button (click)="moveBackward()">Backward</button>
-        <button (click)="moveToBack()">To Back</button>
+        <button (click)="moveForward()">Vers l’avant</button>
+        <button (click)="moveToFront()">Premier plan</button>
+        <button (click)="moveBackward()">Vers l’arrière</button>
+        <button (click)="moveToBack()">Arrière-plan</button>
       </div>
       <!-- Prévisualisation de l'image -->
       <div class="image-preview">
@@ -322,10 +322,10 @@
 
     <div *ngIf="selectedComponent.type === 'Icon'" class="design-panel">
       <div class="design-buttons">
-        <button (click)="moveForward()">Forward</button>
-        <button (click)="moveToFront()">To Front</button>
-        <button (click)="moveBackward()">Backward</button>
-        <button (click)="moveToBack()">To Back</button>
+        <button (click)="moveForward()">Vers l’avant</button>
+        <button (click)="moveToFront()">Premier plan</button>
+        <button (click)="moveBackward()">Vers l’arrière</button>
+        <button (click)="moveToBack()">Arrière-plan</button>
       </div>
       <div class="opacity-control">
         <label>Opacity: {{opacityValue}}%</label>
@@ -352,10 +352,10 @@
     </div>
     <div *ngIf="selectedComponent.type === 'Button'" class="design-panel">
       <div class="design-buttons">
-        <button (click)="moveForward()">Forward</button>
-        <button (click)="moveToFront()">To Front</button>
-        <button (click)="moveBackward()">Backward</button>
-        <button (click)="moveToBack()">To Back</button>
+        <button (click)="moveForward()">Vers l’avant</button>
+        <button (click)="moveToFront()">Premier plan</button>
+        <button (click)="moveBackward()">Vers l’arrière</button>
+        <button (click)="moveToBack()">Arrière-plan</button>
       </div>
       <div class="opacity-control">
         <label>Opacity: {{opacityValue}}%</label>
@@ -458,10 +458,10 @@
     </div>
     <div *ngIf="selectedComponent.type === 'Form'" class="design-panel">
       <div class="design-buttons">
-        <button (click)="moveForward()">Forward</button>
-        <button (click)="moveToFront()">To Front</button>
-        <button (click)="moveBackward()">Backward</button>
-        <button (click)="moveToBack()">To Back</button>
+        <button (click)="moveForward()">Vers l’avant</button>
+        <button (click)="moveToFront()">Premier plan</button>
+        <button (click)="moveBackward()">Vers l’arrière</button>
+        <button (click)="moveToBack()">Arrière-plan</button>
       </div>
       <div class="opacity-control">
         <label>Opacity: {{opacityValue}}%</label>

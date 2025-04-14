@@ -1,11 +1,10 @@
 .sidenav {
-
   width: 15rem; /* Largeur étendue */
   height: 100vh;
- 
   background-color: rgb(18, 18, 18);
   z-index: 10; /* Assurez-vous que le side nav reste au premier plan */
   transition: all 0.3s ease;
+  border-right: 1px solid #ffffff21;
 
   &-collapsed {
     width: 5rem; // Largeur réduite
@@ -28,26 +27,41 @@
   .logo-container {
     display: flex;
     align-items: center;
-    padding: 0.938rem;
+    padding: 32px 16px 10px;
     width: 100%;
 
     .logo {
-      background: #fff;
       text-align: center;
-      width: 3rem;
+      width: 60px;
       min-width: 3rem;
       border-radius: 0.313rem;
       font-size: 24px;
       font-weight: 900;
       cursor: pointer;
       border: none;
+      background-color: unset !important;
+
+      img {
+        width: 100%;
+      }
     }
 
     .logo-text {
-      margin-left: 1.5rem;
+      margin-left: 10px;
       font-size: 24px;
       font-weight: 700;
       color: #fff;
+      display: flex;
+      flex-direction: column;
+
+      span:first-child {
+        font-size: 26px;
+      }
+
+      span:last-child {
+        font-size: 8px;
+        font-weight: 300;
+      }
     }
 
     .btn-close {
@@ -68,17 +82,17 @@
 
   .sidenav-nav {
     list-style: none;
-    padding: 0.938rem;
+    padding: 32px 16px 24px;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: calc(100% - 3.65rem);
-    gap: 10px;
+    gap: 5px;
 
     .sidenav-nav-item {
       width: 100%;
-      height: 42px;
+      height: 38px;
       display: flex;
       align-items: center;
 
@@ -95,28 +109,34 @@
         padding: 8px 15px;
 
         .sidenav-link-icon {
-          font-size: 18px;
+          font-size: 17px;
           width: 2rem;
           min-width: 2rem;
           text-align: center;
         }
 
         .sidenav-link-text {
-          font-weight: 600;
+          font-weight: 400;
+          font-size: 15px;
         }
 
         &:hover {
-          background-color: #fff;
-          color: #000;
+          background-color: #ffffff11;
+
+          &.active {
+            background-color: #EAB347;
+            
+          }
         }
       }
     }
   }
-
+  
   .active{
-    background-color: #fff;
+    background-color: #EAB347;
+    
     .sidenav-link-icon,.sidenav-link-text{
-     color: #000
+     color: #ffffff
     }
   }
 

@@ -34,4 +34,23 @@ export class ApiService {
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
-}
+
+    // Récupérer la photo d'un utilisateur
+    getUserPhoto(id: number): Observable<Blob> {
+      return this.http.get(`${this.apiUrl}/${id}/photo`, { responseType: 'blob' });
+    }
+  
+    updateUserProfile(id: number, profileData: any): Observable<any> {
+      const formData = new FormData();
+      
+      // Ajoutez toutes les données au FormData
+      formData.append('nom', profileData.nom);
+      
+      if (profileData.photo) {
+        formData.append('photo', profileData.photo);
+      }
+    
+      return this.http.put(`${this.apiUrl}/${id}`, formData);
+    }
+  
+  }

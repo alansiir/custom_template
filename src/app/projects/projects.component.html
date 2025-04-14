@@ -1,5 +1,5 @@
 <div class="conteneur-projects">
-    <div class="titre-style mb-4">Start creating</div>
+    <div class="titre-style mb-4">Commencer à créer</div>
 
     <div class="project-start row mb-5">
         <div class="col-md-3">
@@ -7,7 +7,7 @@
                 <div class="card-body d-flex flex-column align-items-center justify-content-center"
                     style="cursor: pointer;">
                     <span class="iconify icon-card" data-icon="mdi:plus-circle"></span>
-                    <h5 class="text-card mt-3">New Project</h5>
+                    <h5 class="text-card mt-3">Nouveau projet</h5>
                 </div>
 
                 <div class="overlay"></div>
@@ -16,10 +16,10 @@
 
         <div class="col-md-3">
 
-            <div class="card card-gradient-blue">
+            <div class="card card-gradient-blue" (click)="navigateToNewTemplates()">
                 <div class="card-body  d-flex flex-column align-items-center justify-content-center">
                     <span class="iconify icon-card" data-icon="mdi:folder-file"></span>
-                    <h5 class=" text-card mt-3">Start from template</h5>
+                    <h5 class=" text-card mt-3">Commencer à partir d’un modèle</h5>
                 </div>
                 <div class="overlay"></div>
             </div>
@@ -29,22 +29,22 @@
 
     <div class="top-bar d-flex align-items-center justify-content-between mb-4">
         <div class="title d-flex align-items-center">
-            <span class="titre-style">Projects</span>
-            <span class="badge titre-style">2</span>
+            <span class="titre-style">Projets</span>
+            <span class="badge titre-style">1   </span>
         </div>
 
         <div class="d-flex align-items-center gap-3">
             <!-- Barre de recherche -->
             <div class="search-container">
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Rechercher">
                 <button><i class="iconify" data-icon="mdi:magnify"></i></button>
             </div>
 
             <!-- Menu déroulant -->
             <div class="sort-container">
                 <select>
-                    <option>Oldest first</option>
-                    <option>Newest first</option>
+                    <option>Les plus anciens</option>
+                    <option>Les plus récents</option>
                 </select>
             </div>
         </div>

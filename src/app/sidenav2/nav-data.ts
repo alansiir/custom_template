@@ -4,28 +4,28 @@ export const navbarData = [
 
      {
       routelink: 'projects',
-      icon: 'fal fa-folders', // Pas de virgule, juste un espace
-      label: 'Projects'
+      icon: 'fal fa-folders', 
+      label: 'Projets'
      },
      {
       routelink: 'templates',
-      icon: 'fal fa-cabinet-filing', // Pas de virgule, juste un espace
-      label: 'Templates'
+      icon: 'fal fa-cabinet-filing', 
+      label: 'Modèles'
      },
      {
       routelink: 'how-to-use',
-      icon: 'fal fa-question',  // Pas de virgule, juste un espace
-      label: 'How To Use'
+      icon: 'fal fa-question',  
+      label: 'Mode d’emploi'
      },
      {
       routelink: 'dashbord',
-      icon: 'fal fa-chart-line', // Pas de virgule, juste un espace
-      label: 'Dashbord'
+      icon: 'fal fa-chart-line',
+      label: 'Tableau de bord' 
      },
      {
         routelink: 'users',
-        icon: 'fal fa-users', // Pas de virgule, juste un espace
-        label: 'Users'
+        icon: 'fal fa-users', 
+        label: 'Utilisateurs'
        },
      
      

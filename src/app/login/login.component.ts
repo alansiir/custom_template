@@ -23,16 +23,16 @@ export class LoginComponent {
       this.router.navigate(['/projects']);
     } else {
       // Si c'est une tentative incorrecte, essaie l'API
-      this.authService.login(this.username, this.password).subscribe(
-        (response) => {
-          // Si la réponse est valide, rediriger l'utilisateur
-          this.router.navigate(['/projects']);
+      this.authService.login(this.username, this.password).subscribe({
+        next: (user) => {
+          console.log('Utilisateur connecté:', user);
+          this.router.navigate(['/projects']); // Redirection après succès
         },
-        (error) => {
-          // Si l'authentification échoue, afficher l'erreur
+        error: (err) => {
+          console.error('Erreur d’authentification :', err);
           this.showError = true;
         }
-      );
+      }) 
     }
   }
 }

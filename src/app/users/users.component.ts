@@ -12,6 +12,16 @@ import { ImageRenderComponent } from '../image-render/image-render.component';
 })
 export class UsersComponent implements OnInit {
   settings = {
+    noDataMessage: 'Liste des utilisateurs est vide',
+    //actions: false,
+
+    actions: {
+      add: true,
+      edit: true,
+      delete: true,
+      position: 'right'
+    },
+
     add: {
       addButtonContent: '<i class="fas fa-plus"></i>',
       createButtonContent: '<i class="fas fa-check"></i>',
@@ -30,7 +40,7 @@ export class UsersComponent implements OnInit {
     },
     columns: {
       photo: {
-        title: 'Image',
+        title: 'Image', 
         type: 'custom',
         renderComponent: ImageRenderComponent,
         filter: false,

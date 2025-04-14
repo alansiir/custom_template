@@ -45,6 +45,7 @@ import { NbThemeModule } from '@nebular/theme';
 import { NbCardModule, NbIconModule } from '@nebular/theme';  
 import { ImageRenderComponent } from './image-render/image-render.component';
 import { FixedUserCircleComponent } from './fixed-user-circle/fixed-user-circle.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 //import { NbEvaIconsModule } from '@nebular/eva-icons';
 //import { NgChartsModule } from 'ng2-charts';
@@ -85,7 +86,8 @@ import { FixedUserCircleComponent } from './fixed-user-circle/fixed-user-circle.
     CompSettingComponent,
     Test00Component,
     ImageRenderComponent,
-    FixedUserCircleComponent
+    FixedUserCircleComponent,
+    AccountSettingsComponent
    
    
    

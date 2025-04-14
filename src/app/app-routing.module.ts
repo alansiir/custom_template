@@ -15,6 +15,7 @@ import { ProjectLayoutComponent } from './project-layout/project-layout.componen
 import { DragdropComponent } from './dragdrop/dragdrop.component';
 import { TableCompComponent } from './composant/table-comp/table-comp.component';
 import { Test00Component } from './test00/test00.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,8 @@ const routes: Routes = [
       { path: 'projects', component: ProjectsComponent },
       { path: 'templates', component: TemplatesComponent },
       { path: 'how-to-use', component: HowtouserComponent },
+      { path: 'account-settings', component: AccountSettingsComponent },
+
     ]
   },
 

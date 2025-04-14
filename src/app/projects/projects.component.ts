@@ -13,7 +13,11 @@ export class ProjectsComponent implements OnInit {
   constructor(private router: Router) {}
 
   navigateToNewProject(): void {
-    this.router.navigate(['/projet']); // Naviguez vers /prototype-ui
+    this.router.navigate(['/projet']); 
+  }
+
+  navigateToNewTemplates(): void {
+    this.router.navigate(['/templates']); 
   }
 
 

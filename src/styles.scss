@@ -75,27 +75,108 @@ body {
 }
 
 .draggable:hover {
-    .remove-btn {
-        display: block !important;
-    }
+  .remove-btn {
+    display: block !important;
+  }
 }
 
 
-.clone-container{
+.clone-container {
 
   margin: 0 !important;
   padding: 0 !important;
-  
+
 
   .selected-component {
-   
+
     outline: 0.5px solid #000000 !important;
     // box-shadow: 0 0 10px  rgb(23, 176, 236) !important;
     // outline-offset: 5px;
-    
-}
+
+  }
 
 
 }
 
+default-table-filter input-filter input {
+  background: #414141 !important;
+  border: 1px solid #d3d3d3 !important;
+  color: #d3d3d3 !important;
+  text-align: center !important;
+  height: 32px !important;
 
+  &::placeholder {
+    color: rgb(184, 184, 184) !important;
+  }
+
+  &:focus {
+    box-shadow: unset !important;
+  }
+}
+
+.ng2-smart-titles {
+  display: none !important;
+}
+
+ng2-smart-table {
+
+  tr {
+
+    td {
+      color: #d3d3d3 !important;
+      text-align: center !important;
+    }
+  }
+}
+
+.ng2-smart-actions-title {
+
+  a {
+    height: 33px !important;
+    width: 60px!important;
+    display: block !important;
+    background-color: #EAB347 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 5px !important;
+
+    i {
+      color: #ffffff !important;
+    }
+  }
+}
+
+.ng2-smart-actions {
+  width: 60px !important;
+
+  ng2-st-actions {
+    display: flex;
+    justify-content: space-around !important;
+
+    .ng2-smart-action i {
+      color: white !important;
+    }
+  }
+}
+
+input-editor {
+
+  input,
+  select {
+    height: 35px !important;
+    background-color: #dcdcdc !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+
+    &:focus {
+      box-shadow: unset !important;
+      border: unset !important;
+      outline: unset !important;
+      transition: unset !important;
+    }
+  }
+  
+
+}
