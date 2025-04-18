@@ -1,34 +1,34 @@
 <div class="user-circle-fixed" [ngClass]="{ 'collapsed': isSidenavCollapsed }">
-    <div class="user-avatar" (click)="toggleUserMenu()">
-      <img *ngIf="user.photo; else initials" 
-           [src]="user.photo" 
-           alt="Photo profil" 
-           class="user-image"
-           (error)="handleImageError($event)">
-      
-      <ng-template #initials>
-        <div class="user-initials">
-          {{ getInitials() }}
-        </div>
-      </ng-template>
+  <div class="user-avatar" (click)="toggleUserMenu()">
+    <img *ngIf="user.photo; else initials" 
+         [src]="user.photo" 
+         alt="Photo profil" 
+         class="user-image"
+         (error)="handleImageError($event)">
+    
+    <ng-template #initials>
+      <div class="user-initials">
+        {{ getInitials() }}
+      </div>
+    </ng-template>
+  </div>
+  
+  <div class="user-menu" *ngIf="showMenu" @fadeInOut>
+    <div class="menu-header">
+      <div class="user-name">{{ user.name }}</div>
+      <div class="user-role">{{ user.role }}</div>
     </div>
     
-    <div class="user-menu" *ngIf="showMenu" @fadeInOut>
-      <div class="menu-header">
-        <div class="user-name">{{ user.name }}</div>
-        <div class="user-role">{{ user.role }}</div>
-      </div>
-      
-      <div class="menu-divider"></div>
-      
-      <div class="menu-item" (click)="navigateTo('/account-settings')">
-        <i class="fas fa-user"></i>
-        <span>Paramètres</span>
-      </div>
-      
-      <div class="menu-item" (click)="logout()">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Déconnexion</span>
-      </div>
+    <div class="menu-divider"></div>
+    
+    <div class="menu-item" (click)="navigateTo('/account-settings')">
+      <i class="fas fa-user"></i>
+      <span>Paramètres</span>
+    </div>
+    
+    <div class="menu-item" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Déconnexion</span>
     </div>
   </div>
+</div>

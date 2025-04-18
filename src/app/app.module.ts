@@ -55,6 +55,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { NgxEchartsModule } from 'ngx-echarts';
 import { TestEchartsComponent } from './test-echarts/test-echarts.component';
 import * as echarts from 'echarts';
+import { KonvaTestComponent } from './konva-test/konva-test.component';
 
 
 
@@ -91,7 +92,8 @@ import * as echarts from 'echarts';
     ImageRenderComponent,
     FixedUserCircleComponent,
     AccountSettingsComponent,
-    TestEchartsComponent
+    TestEchartsComponent,
+    KonvaTestComponent
    
    
    

@@ -19,9 +19,16 @@ export class AuthService {
     }
   }
 
-  public updateCurrentUser(user: any): void {
-    this.currentUserSubject.next(user);
-    localStorage.setItem('currentUser', JSON.stringify(user));
+  // public updateCurrentUser(user: any): void {
+  //   this.currentUserSubject.next(user);
+  //   //localStorage.setItem('currentUser', JSON.stringify(user));
+  // }
+  updateCurrentUser(userData: any): void {
+    // Mettre à jour le BehaviorSubject ou le stockage local
+    this.currentUserSubject.next(userData);
+    
+    // Optionnel: sauvegarder dans le localStorage
+    localStorage.setItem('currentUser', JSON.stringify(userData));
   }
     login(username: string, password: string): Observable<any> {
       const formData = new FormData();
