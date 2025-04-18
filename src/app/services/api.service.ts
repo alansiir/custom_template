@@ -40,17 +40,20 @@ export class ApiService {
       return this.http.get(`${this.apiUrl}/${id}/photo`, { responseType: 'blob' });
     }
   
-    updateUserProfile(id: number, profileData: any): Observable<any> {
-      const formData = new FormData();
+    // updateUserProfile(id: number, profileData: any): Observable<any> {
+    //   const formData = new FormData();
       
-      // Ajoutez toutes les données au FormData
-      formData.append('nom', profileData.nom);
+    //   // Ajoutez toutes les données au FormData
+    //   formData.append('nom', profileData.nom);
       
-      if (profileData.photo) {
-        formData.append('photo', profileData.photo);
-      }
+    //   if (profileData.photo) {
+    //     formData.append('photo', profileData.photo);
+    //   }
     
-      return this.http.put(`${this.apiUrl}/${id}`, formData);
-    }
+    //   return this.http.put(`${this.apiUrl}/${id}`, formData);
+    // }
+    updateUserProfile(id: number, profileData: FormData): Observable<any> {
+      return this.http.put(`${this.apiUrl}/${id}/profile`, profileData);
+  }
   
   }

@@ -8,41 +8,35 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth';
-  private currentUserSubject = new BehaviorSubject<any>(null);
-  public currentUser = this.currentUserSubject.asObservable();
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
     // Récupérer l'utilisateur depuis le localStorage au démarrage
-    const user = localStorage.getItem('currentUser');
-    if (user) {
-      this.currentUserSubject.next(JSON.parse(user));
-    }
+    this.currentUserSubject = new BehaviorSubject<any>(
+      JSON.parse(localStorage.getItem('currentUser') || 'null')
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  // public updateCurrentUser(user: any): void {
-  //   this.currentUserSubject.next(user);
-  //   //localStorage.setItem('currentUser', JSON.stringify(user));
-  // }
   updateCurrentUser(userData: any): void {
-    // Mettre à jour le BehaviorSubject ou le stockage local
     this.currentUserSubject.next(userData);
-    
-    // Optionnel: sauvegarder dans le localStorage
     localStorage.setItem('currentUser', JSON.stringify(userData));
   }
-    login(username: string, password: string): Observable<any> {
-      const formData = new FormData();
-      formData.append('username', username);
-      formData.append('password', password);
+
+  login(username: string, password: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
     
-      return this.http.post<any>(`${this.apiUrl}/login`, formData).pipe(
-        tap((user) => {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        })
-      );
-    }
-    
+    return this.http.post<any>(`${this.apiUrl}/login`, formData).pipe(
+      tap((user) => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+      })
+    );
+  }
+
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}).pipe(
       tap(() => {
@@ -56,11 +50,9 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-
   changePassword(userId: number, newPassword: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/change-password`, { 
-      userId, 
-      newPassword 
+    return this.http.post(`${this.apiUrl}/change-password`, null, {
+        params: { userId: userId.toString(), newPassword }
     });
-  }
+}
 }

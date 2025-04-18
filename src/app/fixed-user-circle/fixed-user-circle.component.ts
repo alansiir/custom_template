@@ -37,49 +37,33 @@ export class FixedUserCircleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadCurrentUser();
-    
+    // Abonne-toi aux changements d'utilisateur
     this.authService.currentUser.subscribe(user => {
-      if (user) {
-        this.updateUserData(user);
-      } else {
-        this.resetUser();
-      }
+      this.updateUserData(user);
     });
   }
 
-  private loadCurrentUser(): void {
-    const currentUser = this.authService.getCurrentUser();
-    if (currentUser) {
-      this.updateUserData(currentUser);
-    }
-  }
-
   private updateUserData(userData: any): void {
-    this.user = {
-      id: userData.id,
-      name: userData.nom || userData.username || 'Utilisateur',
-      photo: this.getUserPhotoUrl(userData),
-      role: userData.role || 'Utilisateur'
-    };
+    if (userData) {
+      this.user = {
+        id: userData.id,
+        name: userData.nom || 'Utilisateur',
+        photo: this.getUserPhotoUrl(userData), // Utilise la méthode pour obtenir l'URL de la photo
+        role: userData.role || 'Utilisateur'
+      };
+    }
   }
 
   private getUserPhotoUrl(user: any): string | null {
-    if (!user?.photo) return null;
-    
+    if (!user?.photo) return 'default-photo.png'; // Photo par défaut si aucune photo n'est fournie
+
+    // Vérifie si la photo est une URL valide
     if (user.photo.startsWith('http') || user.photo.startsWith('data:')) {
       return user.photo;
     }
-    
-    if (user.id) {
-      return `http://localhost:8080/api/users/${user.id}/photo?t=${Date.now()}`;
-    }
-    
-    return null;
-  }
 
-  private resetUser(): void {
-    this.user = { name: 'Invité', photo: null, role: 'Visiteur' };
+    // Génère l'URL à partir de l'ID de l'utilisateur
+    return `http://localhost:8080/api/users/${user.id}/photo?t=${Date.now()}`;
   }
 
   getInitials(): string {
@@ -94,7 +78,7 @@ export class FixedUserCircleComponent implements OnInit {
 
   handleImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.style.display = 'none';
+    img.src = 'default-photo.png'; // Remplace par une image par défaut en cas d'erreur
   }
 
   toggleUserMenu(): void {
