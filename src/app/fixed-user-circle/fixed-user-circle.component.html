@@ -14,9 +14,19 @@
   </div>
   
   <div class="user-menu" *ngIf="showMenu" @fadeInOut>
-    <div class="menu-header">
-      <div class="user-name">{{ user.name }}</div>
-      <div class="user-role">{{ user.role }}</div>
+    <div class="menu-header d-flex align-items-center">
+      <div class="user-image">
+        <img *ngIf="user.photo;" 
+         [src]="user.photo" 
+         alt="Photo profil" 
+         class="user-image"
+         (error)="handleImageError($event)">
+      </div>
+
+      <div class="user-info">
+        <div class="user-name">{{ user.name }}</div>
+        <div class="user-role">{{ user.role }}</div>
+      </div>
     </div>
     
     <div class="menu-divider"></div>

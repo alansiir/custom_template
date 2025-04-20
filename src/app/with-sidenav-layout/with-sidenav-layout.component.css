@@ -5,3 +5,9 @@
         flex: 1;
     }
 }
+
+app-body {
+    height: 100%;
+    overflow-y: auto;
+    background: #212121;
+}
